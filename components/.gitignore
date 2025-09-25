@@ -1,0 +1,7 @@
+# Dependencies
+node_modules/
+./claude
+
+## Panda
+styled-system
+styled-system-studio

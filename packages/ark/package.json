@@ -1,0 +1,98 @@
+{
+  "name": "@ousia-ui/ark",
+  "version": "0.0.1",
+  "description": "Forked Ark UI for Ousia UI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OusiaX/ousia-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OusiaX/ousia-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@zag-js/anatomy": "1.23.0",
+    "@zag-js/collapsible": "1.23.0",
+    "@zag-js/collection": "1.23.0",
+    "@zag-js/core": "1.23.0",
+    "@zag-js/dom-query": "1.23.0",
+    "@zag-js/i18n-utils": "1.23.0",
+    "@zag-js/presence": "1.23.0",
+    "@zag-js/react": "1.23.0"
+  },
+  "devDependencies": {
+    "@release-it/keep-a-changelog": "5.0.0",
+    "clean-package": "2.2.0",
+    "release-it": "17.10.0",
+    "tsup": "8.3.5",
+    "typescript": "^5.9.2",
+    "@types/react": "19.1.2",
+    "react": "19.1.0"
+  },
+  "peerDependencies": {
+    "@pandacss/dev": ">0.22.0"
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./utils": {
+      "import": {
+        "types": "./dist/utils/index.d.ts",
+        "default": "./dist/utils/index.js"
+      },
+      "require": {
+        "types": "./dist/utils/index.d.cts",
+        "default": "./dist/utils/index.cjs"
+      }
+    },
+    "./providers": {
+      "import": {
+        "types": "./dist/providers/index.d.ts",
+        "default": "./dist/providers/index.js"
+      },
+      "require": {
+        "types": "./dist/providers/index.d.cts",
+        "default": "./dist/providers/index.cjs"
+      }
+    }
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts",
+      "src/utils/index.ts",
+      "src/providers/index.ts"
+    ],
+    "clean": true,
+    "dts": true,
+    "sourcemap": true,
+    "format": [
+      "esm",
+      "cjs"
+    ]
+  },
+  "scripts": {
+    "build": "tsup",
+    "release-it": "release-it",
+    "lint": "biome lint ./src",
+    "typecheck": "tsc"
+  }
+}

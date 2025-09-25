@@ -1,0 +1,17 @@
+import { mergeProps } from '@zag-js/react'
+import { forwardRef } from 'react'
+import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { ark } from '@ousia-ui/ark'
+import { useComboboxContext } from './use-combobox-context'
+
+export interface ComboboxControlBaseProps extends PolymorphicProps {}
+export interface ComboboxControlProps extends HTMLProps<'div'>, ComboboxControlBaseProps {}
+
+export const ComboboxControl = forwardRef<HTMLDivElement, ComboboxControlProps>((props, ref) => {
+  const combobox = useComboboxContext()
+  const mergedProps = mergeProps(combobox.getControlProps(), props)
+
+  return <ark.div {...mergedProps} ref={ref} />
+})
+
+ComboboxControl.displayName = 'ComboboxControl'

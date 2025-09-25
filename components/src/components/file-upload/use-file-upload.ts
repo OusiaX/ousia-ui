@@ -1,0 +1,34 @@
+import * as fileUpload from '@zag-js/file-upload'
+import { type PropTypes, normalizeProps, useMachine } from '@zag-js/react'
+import { useId } from 'react'
+import { useEnvironmentContext, useLocaleContext } from '@ousia-ui/ark/providers'
+import type { Optional } from '@ousia-ui/ark'
+import { useFieldContext } from '@ousia-ui/ark/utils'
+
+export interface UseFileUploadProps extends Optional<Omit<fileUpload.Props, 'dir' | 'getRootNode'>, 'id'> {}
+export interface UseFileUploadReturn extends fileUpload.Api<PropTypes> {}
+
+export const useFileUpload = (props?: UseFileUploadProps): UseFileUploadReturn => {
+  const id = useId()
+  const { getRootNode } = useEnvironmentContext()
+  const { dir, locale } = useLocaleContext()
+  const field = useFieldContext()
+
+  const machineProps: fileUpload.Props = {
+    id,
+    ids: {
+      label: field?.ids.label,
+      hiddenInput: field?.ids.control,
+    },
+    dir,
+    disabled: field?.disabled,
+    locale,
+    required: field?.required,
+    invalid: field?.invalid,
+    getRootNode,
+    ...props,
+  }
+
+  const service = useMachine(fileUpload.machine, machineProps)
+  return fileUpload.connect(service, normalizeProps)
+}
