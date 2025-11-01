@@ -1,6 +1,6 @@
 import { callAll } from '@zag-js/utils'
 
-type MergeableProps = Record<string, unknown>
+type MergeableProps = Record<string, any>
 
 const clsx = (...args: (string | undefined)[]): string => {
   let result = ''
