@@ -4,7 +4,7 @@
     "": {
       "name": "@ousia-ui/boilerplate",
       "dependencies": {
-        "@ousia-ui/ark": "0.0.1",
+        "@ousia-ui/ark": "0.0.2",
         "@ousia-ui/preset": "0.0.1",
         "@types/react": "19.1.2",
         "@vitejs/plugin-react": "4.4.1",
@@ -68,7 +68,6 @@
         "@zag-js/types": "1.23.0",
         "@zag-js/utils": "1.23.0",
         "lucide-react": "0.503.0",
-        "react": "19.1.0",
         "react-dom": "19.1.0",
         "vite": "6.0.1",
         "vite-tsconfig-paths": "5.1.3",
@@ -81,6 +80,9 @@
         "@storybook/react": "8.6.14",
         "@storybook/react-vite": "8.6.14",
         "storybook": "8.6.14",
+      },
+      "peerDependencies": {
+        "react": "^19.1.0",
       },
     },
   },
@@ -223,7 +225,7 @@
 
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
-    "@ousia-ui/ark": ["@ousia-ui/ark@0.0.1", "", { "dependencies": { "@zag-js/anatomy": "1.23.0", "@zag-js/collapsible": "1.23.0", "@zag-js/collection": "1.23.0", "@zag-js/core": "1.23.0", "@zag-js/dom-query": "1.23.0", "@zag-js/i18n-utils": "1.23.0", "@zag-js/presence": "1.23.0", "@zag-js/react": "1.23.0" }, "peerDependencies": { "@pandacss/dev": ">0.22.0" } }, "sha512-sGZXNfbLvZt3sgAs8/Cy/itzux/1RgN6WV5UKpwrSdG7Z79W7Z2sUgVRVyP4PyEZf+MNvqP9UiVJOyc8HvMyEA=="],
+    "@ousia-ui/ark": ["@ousia-ui/ark@0.0.2", "", { "dependencies": { "@zag-js/anatomy": "1.23.0", "@zag-js/collapsible": "1.23.0", "@zag-js/collection": "1.23.0", "@zag-js/core": "1.23.0", "@zag-js/dom-query": "1.23.0", "@zag-js/i18n-utils": "1.23.0", "@zag-js/presence": "1.23.0", "@zag-js/react": "1.23.0" }, "peerDependencies": { "@pandacss/dev": ">0.22.0", "react": "^19.1.0" } }, "sha512-t7sTiV1OswuHv0uXeCHkmj5yZO+9HLj1KpdXDVQhrPgDn+PrSGjAVhKBaf7Z9y3yWceOAh1on2ToUTLwWJnKLg=="],
 
     "@ousia-ui/preset": ["@ousia-ui/preset@0.0.1", "", { "dependencies": { "effect": "3.10.19" }, "peerDependencies": { "@pandacss/dev": ">0.22.0" } }, "sha512-gAXmb8s03NVMGTQ4DozOomK5RJw2hnr2bEok4dIaec/AVwMSD8Lf9T4WN/B+a0OywV21vlHD+wFBkwBnWKqI9w=="],
 
