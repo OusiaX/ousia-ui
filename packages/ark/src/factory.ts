@@ -19,7 +19,7 @@ export interface PolymorphicProps {
 
 type JsxElements = { [E in keyof JSX.IntrinsicElements]: ArkComponent<E> }
 type ArkComponent<T extends keyof JSX.IntrinsicElements> = React.FC<
-  JSX.IntrinsicElements[T] & PolymorphicProps & { ref?: React.Ref<unknown> }
+  JSX.IntrinsicElements[T] & PolymorphicProps
 >
 type ArkPropsWithRef<E extends React.ElementType> = React.ComponentPropsWithRef<E> &
   PolymorphicProps
@@ -59,7 +59,6 @@ const withAsChild = (Component: React.ElementType) => {
 }
 
 export type HTMLProps<T extends keyof JSX.IntrinsicElements> = ComponentPropsWithoutRef<T>
-export type HTMLArkProps<T extends keyof JSX.IntrinsicElements> = HTMLProps<T> & PolymorphicProps
 
 export const jsxFactory = () => {
   const cache = new Map()

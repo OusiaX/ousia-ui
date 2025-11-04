@@ -1,6 +1,16 @@
-import { callAll } from '@zag-js/utils'
+import { callAll } from "@zag-js/utils";
 
-type MergeableProps = Record<string, any>
+interface Props {
+  [key: string]: any;
+}
+
+type TupleTypes<T extends any[]> = T[number];
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
+  k: infer I
+) => void
+  ? I
+  : never;
 
 const clsx = (...args: (string | undefined)[]): string => {
   let result = ''
@@ -14,58 +24,58 @@ const clsx = (...args: (string | undefined)[]): string => {
 }
 
 /**
- * Merges two prop objects with special handling for event handlers, className, and style.
+ * Merges multiple prop objects with special handling for event handlers, className, and style.
  *
- * @param slotProps - Base props from component
- * @param childProps - Override props from user
+ * @param args - Variable number of prop objects to merge
  */
-export function mergeProps<T extends MergeableProps, U extends MergeableProps>(
-  slotProps: T | undefined,
-  childProps: U | undefined,
-): T & U {
-  if (!slotProps) return (childProps ?? {}) as T & U
-  if (!childProps) return slotProps as T & U
+export function mergeProps<T extends Props>(
+  ...args: Array<T | undefined>
+): UnionToIntersection<TupleTypes<T[]>> {
+  let result: Props = {};
 
-  const result: MergeableProps = { ...slotProps }
+  for (const props of args) {
+    if (!props) continue;
 
-  for (const propName in childProps) {
-    const baseValue = slotProps[propName]
-    const overrideValue = childProps[propName]
+    for (const propName in props) {
+      const resultValue = result[propName];
+      const propsValue = props[propName];
 
-    // Event handlers: chain both (on[A-Z] pattern)
-    if (
-      propName.length > 2 &&
-      propName[0] === 'o' &&
-      propName[1] === 'n' &&
-      propName.charCodeAt(2) >= 65 &&
-      propName.charCodeAt(2) <= 90 &&
-      typeof baseValue === 'function' &&
-      typeof overrideValue === 'function'
-    ) {
-      result[propName] = callAll(overrideValue, baseValue)
-    }
-    // className: concatenate
-    else if (propName === 'className') {
-      result[propName] = clsx(baseValue, overrideValue)
-    }
-    // style: shallow merge if both are objects
-    else if (propName === 'style') {
+      // Event handlers: chain both (on[A-Z] pattern)
       if (
-        baseValue &&
-        overrideValue &&
-        typeof baseValue === 'object' &&
-        typeof overrideValue === 'object'
+        propName.length > 2 &&
+        propName[0] === "o" &&
+        propName[1] === "n" &&
+        propName.charCodeAt(2) >= 65 &&
+        propName.charCodeAt(2) <= 90 &&
+        typeof resultValue === "function" &&
+        typeof propsValue === "function"
       ) {
-        result[propName] = { ...baseValue, ...overrideValue }
-      } else {
-        result[propName] = overrideValue !== undefined ? overrideValue : baseValue
+        result[propName] = callAll(propsValue, resultValue);
       }
-    }
-    // Other props: override wins, preserve base if override is undefined
-    else {
-      result[propName] = overrideValue !== undefined ? overrideValue : baseValue
+      // className: concatenate
+      else if (propName === "className") {
+        result[propName] = clsx(resultValue, propsValue);
+      }
+      // style: shallow merge if both are objects
+      else if (propName === "style") {
+        if (
+          resultValue &&
+          propsValue &&
+          typeof resultValue === "object" &&
+          typeof propsValue === "object"
+        ) {
+          result[propName] = { ...resultValue, ...propsValue };
+        } else {
+          result[propName] =
+            propsValue !== undefined ? propsValue : resultValue;
+        }
+      }
+      // Other props: override wins, preserve result if props value is undefined
+      else {
+        result[propName] = propsValue !== undefined ? propsValue : resultValue;
+      }
     }
   }
 
-  return result as T & U
+  return result as any;
 }
