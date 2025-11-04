@@ -43,4 +43,4 @@ export type TreeViewRootProviderComponent<P = Record<string, unknown>> = <T exte
   props: Assign<TreeViewRootProviderProps<T>, P>,
 ) => JSX.Element
 
-export const TreeViewRootProvider = TreeViewImpl as TreeViewRootProviderComponent
+export const TreeViewRootProvider = TreeViewImpl as unknown as TreeViewRootProviderComponent

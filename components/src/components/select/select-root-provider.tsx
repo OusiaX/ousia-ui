@@ -44,4 +44,4 @@ export type SelectRootProviderComponent<P = Record<string, unknown>> = <T extend
   props: Assign<SelectRootProviderProps<T>, P>,
 ) => JSX.Element
 
-export const SelectRootProvider = SelectImpl as SelectRootProviderComponent
+export const SelectRootProvider = SelectImpl as unknown as SelectRootProviderComponent
