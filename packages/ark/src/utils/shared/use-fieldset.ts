@@ -1,8 +1,7 @@
-import { dataAttr } from '@zag-js/dom-query'
-import { useId, useMemo, useRef } from 'react'
 import { useEnvironmentContext } from '@/providers/use-environment-context'
 import { useSafeLayoutEffect } from '@/utils/use-safe-layout-effect'
-import type { HTMLProps } from '@/factory'
+import { dataAttr } from '@zag-js/dom-query'
+import { type ComponentProps, useId, useMemo, useRef } from 'react'
 
 export interface UseFieldsetProps {
   /**
@@ -72,7 +71,7 @@ export const useFieldset = (props: UseFieldsetProps = {}) => {
         'data-invalid': dataAttr(invalid),
         'aria-labelledby': legendId,
         'aria-describedby': labelIds,
-      }) as HTMLProps<'fieldset'>,
+      }) as ComponentProps<'fieldset'>,
     [disabled, invalid, legendId, labelIds],
   )
 
@@ -82,7 +81,7 @@ export const useFieldset = (props: UseFieldsetProps = {}) => {
         id: legendId,
         'data-disabled': dataAttr(disabled),
         'data-invalid': dataAttr(invalid),
-      }) as HTMLProps<'legend'>,
+      }) as ComponentProps<'legend'>,
     [legendId, disabled, invalid],
   )
 
@@ -90,7 +89,7 @@ export const useFieldset = (props: UseFieldsetProps = {}) => {
     () => () =>
       ({
         id: helperTextId,
-      }) as HTMLProps<'span'>,
+      }) as ComponentProps<'span'>,
     [helperTextId],
   )
 
@@ -99,7 +98,7 @@ export const useFieldset = (props: UseFieldsetProps = {}) => {
       ({
         id: errorTextId,
         'aria-live': 'polite',
-      }) as HTMLProps<'span'>,
+      }) as ComponentProps<'span'>,
     [errorTextId],
   )
 

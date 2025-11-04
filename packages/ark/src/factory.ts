@@ -1,12 +1,5 @@
 import type React from 'react'
-import {
-  Children,
-  type ComponentPropsWithoutRef,
-  type JSX,
-  cloneElement,
-  createElement,
-  isValidElement,
-} from 'react'
+import { Children, type JSX, cloneElement, createElement, isValidElement } from 'react'
 import { mergeProps } from './merge-props'
 import { composeRefs } from './utils/compose-refs'
 
@@ -57,8 +50,6 @@ const withAsChild = (Component: React.ElementType) => {
 
   return Comp
 }
-
-export type HTMLProps<T extends keyof JSX.IntrinsicElements> = ComponentPropsWithoutRef<T>
 
 export const jsxFactory = () => {
   const cache = new Map()

@@ -1,10 +1,9 @@
-import { ariaAttr, dataAttr } from '@zag-js/dom-query'
-import { useId, useMemo, useRef, useState } from 'react'
 import { useEnvironmentContext } from '@/providers/use-environment-context'
 import { useSafeLayoutEffect } from '@/utils/use-safe-layout-effect'
-import type { HTMLProps } from '@/factory'
+import { createAnatomy } from '@zag-js/anatomy'
+import { ariaAttr, dataAttr } from '@zag-js/dom-query'
+import { type ComponentProps, useId, useMemo, useRef, useState } from 'react'
 import { useFieldsetContext } from './use-fieldset-context'
-import { createAnatomy } from "@zag-js/anatomy";
 
 export interface ElementIds {
   root?: string | undefined
@@ -43,23 +42,29 @@ export interface UseFieldProps {
 
 export type UseFieldReturn = ReturnType<typeof useField>
 
-export const fieldAnatomy = createAnatomy("field").parts(
-  "root",
-  "errorText",
-  "helperText",
-  "input",
-  "label",
-  "select",
-  "textarea",
-  "requiredIndicator"
-);
-export const parts = fieldAnatomy.build();
+export const fieldAnatomy = createAnatomy('field').parts(
+  'root',
+  'errorText',
+  'helperText',
+  'input',
+  'label',
+  'select',
+  'textarea',
+  'requiredIndicator',
+)
+export const parts = fieldAnatomy.build()
 
 export const useField = (props: UseFieldProps = {}) => {
   const fieldset = useFieldsetContext()
   const env = useEnvironmentContext()
 
-  const { ids, disabled = Boolean(fieldset?.disabled), invalid = false, readOnly = false, required = false } = props
+  const {
+    ids,
+    disabled = Boolean(fieldset?.disabled),
+    invalid = false,
+    readOnly = false,
+    required = false,
+  } = props
 
   const [hasErrorText, setHasErrorText] = useState(false)
   const [hasHelperText, setHasHelperText] = useState(false)
@@ -109,7 +114,7 @@ export const useField = (props: UseFieldProps = {}) => {
         'data-disabled': dataAttr(disabled),
         'data-invalid': dataAttr(invalid),
         'data-readonly': dataAttr(readOnly),
-      }) as HTMLProps<'div'>,
+      }) as ComponentProps<'div'>,
     [disabled, invalid, readOnly, rootId],
   )
 
@@ -123,7 +128,7 @@ export const useField = (props: UseFieldProps = {}) => {
         'data-readonly': dataAttr(readOnly),
         'data-required': dataAttr(required),
         htmlFor: id,
-      }) as HTMLProps<'label'>,
+      }) as ComponentProps<'label'>,
     [disabled, invalid, readOnly, required, id, labelId],
   )
 
@@ -139,7 +144,7 @@ export const useField = (props: UseFieldProps = {}) => {
         required,
         disabled,
         readOnly,
-      }) as HTMLProps<'input'>,
+      }) as ComponentProps<'input'>,
     [labelIds, invalid, required, readOnly, id, disabled],
   )
 
@@ -148,7 +153,7 @@ export const useField = (props: UseFieldProps = {}) => {
       ({
         ...getControlProps(),
         ...parts.input.attrs,
-      }) as HTMLProps<'input'>,
+      }) as ComponentProps<'input'>,
     [getControlProps],
   )
 
@@ -157,7 +162,7 @@ export const useField = (props: UseFieldProps = {}) => {
       ({
         ...getControlProps(),
         ...parts.textarea.attrs,
-      }) as HTMLProps<'textarea'>,
+      }) as ComponentProps<'textarea'>,
     [getControlProps],
   )
 
@@ -166,7 +171,7 @@ export const useField = (props: UseFieldProps = {}) => {
       ({
         ...getControlProps(),
         ...parts.select.attrs,
-      }) as HTMLProps<'select'>,
+      }) as ComponentProps<'select'>,
     [getControlProps],
   )
 
@@ -176,7 +181,7 @@ export const useField = (props: UseFieldProps = {}) => {
         id: helperTextId,
         ...parts.helperText.attrs,
         'data-disabled': dataAttr(disabled),
-      }) as HTMLProps<'span'>,
+      }) as ComponentProps<'span'>,
     [disabled, helperTextId],
   )
 
@@ -186,7 +191,7 @@ export const useField = (props: UseFieldProps = {}) => {
         id: errorTextId,
         ...parts.errorText.attrs,
         'aria-live': 'polite',
-      }) as HTMLProps<'span'>,
+      }) as ComponentProps<'span'>,
     [errorTextId],
   )
 
@@ -195,7 +200,7 @@ export const useField = (props: UseFieldProps = {}) => {
       ({
         'aria-hidden': true,
         ...parts.requiredIndicator.attrs,
-      }) as HTMLProps<'span'>,
+      }) as ComponentProps<'span'>,
     [],
   )
 

@@ -1,5 +1,5 @@
 export type { Assign, Optional } from './types'
-export type { HTMLProps, PolymorphicProps } from './factory'
+export type { PolymorphicProps } from './factory'
 
 export { ark } from './factory'
 export { mergeProps } from './merge-props'
