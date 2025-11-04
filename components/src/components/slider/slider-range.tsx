@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
-export interface SliderRangeBaseProps extends PolymorphicProps {}
-export interface SliderRangeProps extends ComponentProps<'div'>, SliderRangeBaseProps {}
+export interface SliderRangeProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const SliderRange = (props: SliderRangeProps) => {
   const { ref, ...restProps } = props

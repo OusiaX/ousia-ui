@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { useFileUploadItemPropsContext } from './use-file-upload-item-props-context'
 
-export interface FileUploadItemSizeTextBaseProps extends PolymorphicProps {}
-export interface FileUploadItemSizeTextProps
-  extends ComponentProps<'div'>,
-    FileUploadItemSizeTextBaseProps {}
+export interface FileUploadItemSizeTextProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const FileUploadItemSizeText = (props: FileUploadItemSizeTextProps) => {
   const { ref, ...restProps } = props

@@ -3,8 +3,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
-export interface DialogPositionerBaseProps extends PolymorphicProps {}
-export interface DialogPositionerProps extends ComponentProps<'div'>, DialogPositionerBaseProps {}
+export interface DialogPositionerProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const DialogPositioner = (props: DialogPositionerProps) => {
   const { ref, ...restProps } = props

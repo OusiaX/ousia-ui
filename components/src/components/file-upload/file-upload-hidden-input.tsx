@@ -3,10 +3,7 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 
-export interface FileUploadHiddenInputBaseProps extends PolymorphicProps {}
-export interface FileUploadHiddenInputProps
-  extends ComponentProps<'input'>,
-    FileUploadHiddenInputBaseProps {}
+export interface FileUploadHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
 
 export const FileUploadHiddenInput = (props: FileUploadHiddenInputProps) => {
   const { ref, ...restProps } = props

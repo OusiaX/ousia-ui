@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useToastContext } from './use-toast-context'
 
-export interface ToastRootBaseProps extends PolymorphicProps {}
-export interface ToastRootProps extends ComponentProps<'div'>, ToastRootBaseProps {}
+export interface ToastRootProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ToastRoot = (props: ToastRootProps) => {
   const { ref, ...restProps } = props

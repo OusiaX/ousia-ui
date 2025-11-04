@@ -3,8 +3,7 @@ import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 import { useSelectItemPropsContext } from './use-select-item-props-context'
 
-export interface SelectItemTextBaseProps extends PolymorphicProps {}
-export interface SelectItemTextProps extends ComponentProps<'span'>, SelectItemTextBaseProps {}
+export interface SelectItemTextProps extends ComponentProps<'span'>, PolymorphicProps {}
 
 export const SelectItemText = (props: SelectItemTextProps) => {
   const { ref, ...restProps } = props

@@ -3,10 +3,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerPositionerBaseProps extends PolymorphicProps {}
-export interface DatePickerPositionerProps
-  extends ComponentProps<'div'>,
-    DatePickerPositionerBaseProps {}
+export interface DatePickerPositionerProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const DatePickerPositioner = (props: DatePickerPositionerProps) => {
   const { ref, ...restProps } = props

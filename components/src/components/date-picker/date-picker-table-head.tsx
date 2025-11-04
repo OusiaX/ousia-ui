@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 import { useDatePickerTablePropsContext } from './use-date-picker-table-props-context'
 
-export interface DatePickerTableHeadBaseProps extends PolymorphicProps {}
-export interface DatePickerTableHeadProps
-  extends ComponentProps<'thead'>,
-    DatePickerTableHeadBaseProps {}
+export interface DatePickerTableHeadProps extends ComponentProps<'thead'>, PolymorphicProps {}
 
 export const DatePickerTableHead = (props: DatePickerTableHeadProps) => {
   const { ref, ...restProps } = props

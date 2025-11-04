@@ -3,10 +3,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxPositionerBaseProps extends PolymorphicProps {}
-export interface ComboboxPositionerProps
-  extends ComponentProps<'div'>,
-    ComboboxPositionerBaseProps {}
+export interface ComboboxPositionerProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ComboboxPositioner = (props: ComboboxPositionerProps) => {
   const { ref, ...restProps } = props

@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerSwatchGroupBaseProps extends PolymorphicProps {}
-export interface ColorPickerSwatchGroupProps
-  extends ComponentProps<'div'>,
-    ColorPickerSwatchGroupBaseProps {}
+export interface ColorPickerSwatchGroupProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ColorPickerSwatchGroup = (props: ColorPickerSwatchGroupProps) => {
   const { ref, ...restProps } = props

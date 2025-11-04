@@ -4,10 +4,9 @@ import { useColorPickerChannelPropsContext } from './use-color-picker-channel-pr
 import { useColorPickerContext } from './use-color-picker-context'
 import { useColorPickerFormatPropsContext } from './use-color-picker-format-context'
 
-export interface ColorPickerChannelSliderThumbBaseProps extends PolymorphicProps {}
 export interface ColorPickerChannelSliderThumbProps
   extends ComponentProps<'div'>,
-    ColorPickerChannelSliderThumbBaseProps {}
+    PolymorphicProps {}
 
 export const ColorPickerChannelSliderThumb = (props: ColorPickerChannelSliderThumbProps) => {
   const { ref, ...restProps } = props

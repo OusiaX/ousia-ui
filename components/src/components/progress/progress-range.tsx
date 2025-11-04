@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
-export interface ProgressRangeBaseProps extends PolymorphicProps {}
-export interface ProgressRangeProps extends ComponentProps<'div'>, ProgressRangeBaseProps {}
+export interface ProgressRangeProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ProgressRange = (props: ProgressRangeProps) => {
   const { ref, ...restProps } = props

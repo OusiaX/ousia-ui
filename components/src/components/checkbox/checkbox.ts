@@ -1,14 +1,14 @@
 'use client'
-import type { Assign } from '@ousia-ui/ark'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
 import { type CheckboxVariantProps, checkbox } from 'styled-system/recipes'
 import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { CheckboxRootProvider, type CheckboxRootProviderBaseProps } from './checkbox-root-provider'
-import { CheckboxRoot, type CheckboxRootBaseProps } from './checkbox-root'
-import { CheckboxControl, type CheckboxControlBaseProps } from './checkbox-control'
+import { CheckboxControl } from './checkbox-control'
 import { CheckboxGroup, type CheckboxGroupBaseProps } from './checkbox-group'
 import { CheckboxIndicator, type CheckboxIndicatorBaseProps } from './checkbox-indicator'
-import { CheckboxLabel, type CheckboxLabelBaseProps } from './checkbox-label'
+import { CheckboxLabel } from './checkbox-label'
+import { CheckboxRoot, type CheckboxRootBaseProps } from './checkbox-root'
+import { CheckboxRootProvider, type CheckboxRootProviderBaseProps } from './checkbox-root-provider'
 
 const { withProvider, withContext } = createStyleContext(checkbox)
 
@@ -26,7 +26,7 @@ export const Root = withProvider<
 
 export const Control = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, CheckboxControlBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(CheckboxControl, 'control')
 
 export const Group = withContext<
@@ -41,11 +41,9 @@ export const Indicator = withContext<
 
 export const Label = withContext<
   HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, CheckboxLabelBaseProps>
+  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
 >(CheckboxLabel, 'label')
 
-export {
-  CheckboxContext as Context,
-} from "./checkbox-context";
+export { CheckboxContext as Context } from './checkbox-context'
 
-export { CheckboxHiddenInput as HiddenInput } from "./checkbox-hidden-input";
+export { CheckboxHiddenInput as HiddenInput } from './checkbox-hidden-input'

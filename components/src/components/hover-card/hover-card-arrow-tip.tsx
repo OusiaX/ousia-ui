@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useHoverCardContext } from './use-hover-card-context'
 
-export interface HoverCardArrowTipBaseProps extends PolymorphicProps {}
-export interface HoverCardArrowTipProps extends ComponentProps<'div'>, HoverCardArrowTipBaseProps {}
+export interface HoverCardArrowTipProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const HoverCardArrowTip = (props: HoverCardArrowTipProps) => {
   const { ref, ...restProps } = props

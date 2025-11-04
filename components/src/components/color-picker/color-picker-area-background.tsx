@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useColorPickerAreaPropsContext } from './use-color-picker-area-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerAreaBackgroundBaseProps extends PolymorphicProps {}
-export interface ColorPickerAreaBackgroundProps
-  extends ComponentProps<'div'>,
-    ColorPickerAreaBackgroundBaseProps {}
+export interface ColorPickerAreaBackgroundProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ColorPickerAreaBackground = (props: ColorPickerAreaBackgroundProps) => {
   const { ref, ...restProps } = props

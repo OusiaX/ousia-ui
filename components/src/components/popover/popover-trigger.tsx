@@ -3,8 +3,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
-export interface PopoverTriggerBaseProps extends PolymorphicProps {}
-export interface PopoverTriggerProps extends ComponentProps<'button'>, PopoverTriggerBaseProps {}
+export interface PopoverTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const PopoverTrigger = (props: PopoverTriggerProps) => {
   const { ref, ...restProps } = props

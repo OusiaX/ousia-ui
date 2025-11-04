@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 import { useSliderThumbPropsContext } from './use-slider-thumb-props-context'
 
-export interface SliderDraggingIndicatorBaseProps extends PolymorphicProps {}
-export interface SliderDraggingIndicatorProps
-  extends ComponentProps<'span'>,
-    SliderDraggingIndicatorBaseProps {}
+export interface SliderDraggingIndicatorProps extends ComponentProps<'span'>, PolymorphicProps {}
 
 export const SliderDraggingIndicator = (props: SliderDraggingIndicatorProps) => {
   const { ref, ...restProps } = props

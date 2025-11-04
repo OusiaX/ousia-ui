@@ -3,10 +3,7 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { usePinInputContext } from './use-pin-input-context'
 
-export interface PinInputHiddenInputBaseProps extends PolymorphicProps {}
-export interface PinInputHiddenInputProps
-  extends ComponentProps<'input'>,
-    PinInputHiddenInputBaseProps {}
+export interface PinInputHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
 
 export const PinInputHiddenInput = (props: PinInputHiddenInputProps) => {
   const { ref, ...restProps } = props

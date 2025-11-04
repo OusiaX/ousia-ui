@@ -3,10 +3,7 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 
-export interface TagsInputHiddenInputBaseProps extends PolymorphicProps {}
-export interface TagsInputHiddenInputProps
-  extends ComponentProps<'input'>,
-    TagsInputHiddenInputBaseProps {}
+export interface TagsInputHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
 
 export const TagsInputHiddenInput = (props: TagsInputHiddenInputProps) => {
   const { ref, ...restProps } = props

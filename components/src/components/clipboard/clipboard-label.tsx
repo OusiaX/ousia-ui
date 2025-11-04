@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
-export interface ClipboardLabelBaseProps extends PolymorphicProps {}
-export interface ClipboardLabelProps extends ComponentProps<'label'>, ClipboardLabelBaseProps {}
+export interface ClipboardLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
 
 export const ClipboardLabel = (props: ClipboardLabelProps) => {
   const { ref, ...restProps } = props

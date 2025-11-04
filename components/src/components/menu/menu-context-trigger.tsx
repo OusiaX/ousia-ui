@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuContextTriggerBaseProps extends PolymorphicProps {}
-export interface MenuContextTriggerProps
-  extends ComponentProps<'button'>,
-    MenuContextTriggerBaseProps {}
+export interface MenuContextTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const MenuContextTrigger = (props: MenuContextTriggerProps) => {
   const { ref, ...restProps } = props

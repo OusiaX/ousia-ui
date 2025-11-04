@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldsetContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldsetLegendBaseProps extends PolymorphicProps {}
-export interface FieldsetLegendProps extends ComponentProps<'legend'>, FieldsetLegendBaseProps {}
+export interface FieldsetLegendProps extends ComponentProps<'legend'>, PolymorphicProps {}
 
 export const FieldsetLegend = (props: FieldsetLegendProps) => {
   const { ref, ...restProps } = props

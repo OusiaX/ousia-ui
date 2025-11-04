@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerYearSelectBaseProps extends PolymorphicProps {}
-export interface DatePickerYearSelectProps
-  extends ComponentProps<'select'>,
-    DatePickerYearSelectBaseProps {}
+export interface DatePickerYearSelectProps extends ComponentProps<'select'>, PolymorphicProps {}
 
 export const DatePickerYearSelect = (props: DatePickerYearSelectProps) => {
   const { ref, ...restProps } = props

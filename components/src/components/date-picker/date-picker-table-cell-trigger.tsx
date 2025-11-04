@@ -4,10 +4,7 @@ import { useDatePickerContext } from './use-date-picker-context'
 import { useDatePickerTableCellPropsContext } from './use-date-picker-table-cell-props-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
-export interface DatePickerTableCellTriggerBaseProps extends PolymorphicProps {}
-export interface DatePickerTableCellTriggerProps
-  extends ComponentProps<'div'>,
-    DatePickerTableCellTriggerBaseProps {}
+export interface DatePickerTableCellTriggerProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const DatePickerTableCellTrigger = (props: DatePickerTableCellTriggerProps) => {
   const { ref, ...restProps } = props

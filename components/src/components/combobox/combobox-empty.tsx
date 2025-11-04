@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxEmptyBaseProps extends PolymorphicProps {}
-export interface ComboboxEmptyProps extends ComponentProps<'div'>, ComboboxEmptyBaseProps {}
+export interface ComboboxEmptyProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ComboboxEmpty = (props: ComboboxEmptyProps) => {
   const { ref, ...restProps } = props

@@ -1,61 +1,63 @@
 'use client'
-import { type PolymorphicProps, ark, type Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark } from '@ousia-ui/ark'
 import { type DrawerVariantProps, drawer } from 'styled-system/recipes'
 import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import { DialogBackdrop } from '~/components/dialog/dialog-backdrop'
+import { DialogCloseTrigger } from '~/components/dialog/dialog-close-trigger'
+import { DialogContent } from '~/components/dialog/dialog-content'
+import { DialogDescription } from '~/components/dialog/dialog-description'
+import { DialogPositioner } from '~/components/dialog/dialog-positioner'
+import { DialogRoot, type DialogRootProps } from '~/components/dialog/dialog-root'
+import {
+  DialogRootProvider,
+  type DialogRootProviderBaseProps,
+} from '~/components/dialog/dialog-root-provider'
+import { DialogTitle } from '~/components/dialog/dialog-title'
+import { DialogTrigger } from '~/components/dialog/dialog-trigger'
 import { createStyleContext } from '~/utils/create-style-context'
-import { DialogRootProvider, type DialogRootProviderBaseProps } from "~/components/dialog/dialog-root-provider";
-import { DialogRoot, type DialogRootProps } from "~/components/dialog/dialog-root";
-import { DialogBackdrop, type DialogBackdropBaseProps } from "~/components/dialog/dialog-backdrop";
-import { DialogCloseTrigger, type DialogCloseTriggerBaseProps } from "~/components/dialog/dialog-close-trigger";
-import { DialogContent, type DialogContentBaseProps } from "~/components/dialog/dialog-content";
-import { DialogDescription, type DialogDescriptionBaseProps } from "~/components/dialog/dialog-description";
-import { DialogPositioner, type DialogPositionerBaseProps } from "~/components/dialog/dialog-positioner";
-import { DialogTitle, type DialogTitleBaseProps } from "~/components/dialog/dialog-title";
-import { DialogTrigger, type DialogTriggerBaseProps } from "~/components/dialog/dialog-trigger";
 
 const { withRootProvider, withContext } = createStyleContext(drawer)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
-export const RootProvider = withRootProvider<
-  Assign<DialogRootProviderBaseProps, DrawerVariantProps>
->(DialogRootProvider)
+export const RootProvider =
+  withRootProvider<Assign<DialogRootProviderBaseProps, DrawerVariantProps>>(DialogRootProvider)
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withRootProvider<Assign<DialogRootProps, DrawerVariantProps>>(DialogRoot)
 
 export const Backdrop = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, DialogBackdropBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(DialogBackdrop, 'backdrop')
 
 export const CloseTrigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, DialogCloseTriggerBaseProps>
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
 >(DialogCloseTrigger, 'closeTrigger')
 
 export const Content = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, DialogContentBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(DialogContent, 'content')
 
 export const Description = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, DialogDescriptionBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(DialogDescription, 'description')
 
 export const Positioner = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, DialogPositionerBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(DialogPositioner, 'positioner')
 
 export const Title = withContext<
   HTMLHeadingElement,
-  Assign<HTMLStyledProps<'h2'>, DialogTitleBaseProps>
+  Assign<HTMLStyledProps<'h2'>, PolymorphicProps>
 >(DialogTitle, 'title')
 
 export const Trigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, DialogTriggerBaseProps>
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
 >(DialogTrigger, 'trigger')
 
 export const Header = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>, PolymorphicProps>>(
@@ -76,4 +78,4 @@ export const Footer = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>,
 export {
   DialogContext as Context,
   type DialogContextProps as ContextProps,
-} from "~/components/dialog/dialog-context"
+} from '~/components/dialog/dialog-context'

@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useToastContext } from './use-toast-context'
 
-export interface ToastActionTriggerBaseProps extends PolymorphicProps {}
-export interface ToastActionTriggerProps
-  extends ComponentProps<'button'>,
-    ToastActionTriggerBaseProps {}
+export interface ToastActionTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const ToastActionTrigger = (props: ToastActionTriggerProps) => {
   const { ref, ...restProps } = props

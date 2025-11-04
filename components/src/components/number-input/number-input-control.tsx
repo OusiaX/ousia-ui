@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
-export interface NumberInputControlBaseProps extends PolymorphicProps {}
-export interface NumberInputControlProps
-  extends ComponentProps<'div'>,
-    NumberInputControlBaseProps {}
+export interface NumberInputControlProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const NumberInputControl = (props: NumberInputControlProps) => {
   const { ref, ...restProps } = props

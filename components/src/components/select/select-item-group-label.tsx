@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 import { useSelectItemGroupPropsContext } from './use-select-item-group-props'
 
-export interface SelectItemGroupLabelBaseProps extends PolymorphicProps {}
-export interface SelectItemGroupLabelProps
-  extends ComponentProps<'div'>,
-    SelectItemGroupLabelBaseProps {}
+export interface SelectItemGroupLabelProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const SelectItemGroupLabel = (props: SelectItemGroupLabelProps) => {
   const { ref, ...restProps } = props

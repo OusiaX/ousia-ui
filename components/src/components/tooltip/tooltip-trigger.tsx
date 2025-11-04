@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useTooltipContext } from './use-tooltip-context'
 
-export interface TooltipTriggerBaseProps extends PolymorphicProps {}
-export interface TooltipTriggerProps extends ComponentProps<'button'>, TooltipTriggerBaseProps {}
+export interface TooltipTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const TooltipTrigger = (props: TooltipTriggerProps) => {
   const { ref, ...restProps } = props

@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSegmentGroupContext } from './use-segment-group-context'
 
-export interface SegmentGroupLabelBaseProps extends PolymorphicProps {}
-export interface SegmentGroupLabelProps
-  extends ComponentProps<'label'>,
-    SegmentGroupLabelBaseProps {}
+export interface SegmentGroupLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
 
 export const SegmentGroupLabel = (props: SegmentGroupLabelProps) => {
   const { ref, ...restProps } = props

@@ -3,8 +3,7 @@ import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { useComboboxItemPropsContext } from './use-combobox-item-props-context'
 
-export interface ComboboxItemTextBaseProps extends PolymorphicProps {}
-export interface ComboboxItemTextProps extends ComponentProps<'span'>, ComboboxItemTextBaseProps {}
+export interface ComboboxItemTextProps extends ComponentProps<'span'>, PolymorphicProps {}
 
 export const ComboboxItemText = (props: ComboboxItemTextProps) => {
   const { ref, ...restProps } = props

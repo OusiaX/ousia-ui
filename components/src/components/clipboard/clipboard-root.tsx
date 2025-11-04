@@ -1,10 +1,10 @@
-import { type Assign, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseClipboardProps, useClipboard } from './use-clipboard'
 import { ClipboardProvider } from './use-clipboard-context'
 
-export interface ClipboardRootBaseProps extends UseClipboardProps {}
+export interface ClipboardRootBaseProps extends UseClipboardProps, PolymorphicProps {}
 export interface ClipboardRootProps extends Assign<ComponentProps<'div'>, ClipboardRootBaseProps> {}
 
 export const ClipboardRoot = (props: ClipboardRootProps) => {

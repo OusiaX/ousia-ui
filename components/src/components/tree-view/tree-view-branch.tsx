@@ -6,9 +6,7 @@ import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodeContext } from './use-tree-view-node-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
-export interface TreeViewBranchBaseProps extends PolymorphicProps {}
-export interface TreeViewBranchProps
-  extends Assign<ComponentProps<'div'>, TreeViewBranchBaseProps> {}
+export interface TreeViewBranchProps extends Assign<ComponentProps<'div'>, PolymorphicProps> {}
 
 export const TreeViewBranch = (props: TreeViewBranchProps) => {
   const { ref, ...restProps } = props

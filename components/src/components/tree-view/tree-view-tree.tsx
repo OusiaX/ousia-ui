@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 
-export interface TreeViewTreeBaseProps extends PolymorphicProps {}
-export interface TreeViewTreeProps extends ComponentProps<'div'>, TreeViewTreeBaseProps {}
+export interface TreeViewTreeProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const TreeViewTree = (props: TreeViewTreeProps) => {
   const { ref, ...restProps } = props

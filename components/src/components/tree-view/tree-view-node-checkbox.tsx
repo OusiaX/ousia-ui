@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
-export interface TreeViewNodeCheckboxBaseProps extends PolymorphicProps {}
-export interface TreeViewNodeCheckboxProps
-  extends ComponentProps<'span'>,
-    TreeViewNodeCheckboxBaseProps {}
+export interface TreeViewNodeCheckboxProps extends ComponentProps<'span'>, PolymorphicProps {}
 
 export const TreeViewNodeCheckbox = (props: TreeViewNodeCheckboxProps) => {
   const { ref, ...restProps } = props

@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
-export interface ProgressValueTextBaseProps extends PolymorphicProps {}
-export interface ProgressValueTextProps
-  extends ComponentProps<'span'>,
-    ProgressValueTextBaseProps {}
+export interface ProgressValueTextProps extends ComponentProps<'span'>, PolymorphicProps {}
 
 export const ProgressValueText = (props: ProgressValueTextProps) => {
   const { ref, children, ...restProps } = props

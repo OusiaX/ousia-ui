@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 
-export interface FileUploadTriggerBaseProps extends PolymorphicProps {}
-export interface FileUploadTriggerProps
-  extends ComponentProps<'button'>,
-    FileUploadTriggerBaseProps {}
+export interface FileUploadTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const FileUploadTrigger = (props: FileUploadTriggerProps) => {
   const { ref, ...restProps } = props

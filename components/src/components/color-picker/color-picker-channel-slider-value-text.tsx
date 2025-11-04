@@ -4,10 +4,9 @@ import type { ComponentProps } from 'react'
 import { useColorPickerChannelPropsContext } from './use-color-picker-channel-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerChannelSliderValueTextBaseProps extends PolymorphicProps {}
 export interface ColorPickerChannelSliderValueTextProps
   extends ComponentProps<'span'>,
-    ColorPickerChannelSliderValueTextBaseProps {}
+    PolymorphicProps {}
 
 export const ColorPickerChannelSliderValueText = (
   props: ColorPickerChannelSliderValueTextProps,

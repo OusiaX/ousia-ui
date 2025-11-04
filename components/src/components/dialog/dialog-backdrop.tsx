@@ -3,8 +3,7 @@ import { composeRefs, usePresence, useRenderStrategyPropsContext } from '@ousia-
 import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
-export interface DialogBackdropBaseProps extends PolymorphicProps {}
-export interface DialogBackdropProps extends ComponentProps<'div'>, DialogBackdropBaseProps {}
+export interface DialogBackdropProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const DialogBackdrop = (props: DialogBackdropProps) => {
   const { ref, ...restProps } = props

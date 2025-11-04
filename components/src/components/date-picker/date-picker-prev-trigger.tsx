@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
-export interface DatePickerPrevTriggerBaseProps extends PolymorphicProps {}
-export interface DatePickerPrevTriggerProps
-  extends ComponentProps<'button'>,
-    DatePickerPrevTriggerBaseProps {}
+export interface DatePickerPrevTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const DatePickerPrevTrigger = (props: DatePickerPrevTriggerProps) => {
   const { ref, ...restProps } = props

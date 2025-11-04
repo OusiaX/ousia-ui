@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 import { useMenuItemGroupContext } from './use-menu-item-group-context'
 
-export interface MenuItemGroupLabelBaseProps extends PolymorphicProps {}
-export interface MenuItemGroupLabelProps
-  extends ComponentProps<'div'>,
-    MenuItemGroupLabelBaseProps {}
+export interface MenuItemGroupLabelProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const MenuItemGroupLabel = (props: MenuItemGroupLabelProps) => {
   const { ref, ...restProps } = props

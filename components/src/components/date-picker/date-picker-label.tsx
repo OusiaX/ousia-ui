@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerLabelBaseProps extends PolymorphicProps {}
-export interface DatePickerLabelProps extends ComponentProps<'label'>, DatePickerLabelBaseProps {}
+export interface DatePickerLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
 
 export const DatePickerLabel = (props: DatePickerLabelProps) => {
   const { ref, ...restProps } = props

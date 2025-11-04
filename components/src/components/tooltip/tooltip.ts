@@ -1,51 +1,48 @@
-"use client";
-import type { Assign } from "@ousia-ui/ark";
-import { type TooltipVariantProps, tooltip } from "styled-system/recipes";
-import type { ComponentProps, HTMLStyledProps } from "styled-system/types";
-import { createStyleContext } from "~/utils/create-style-context";
-import { TooltipRootProvider, type TooltipRootProviderBaseProps } from './tooltip-root-provider';
-import { TooltipRoot, type TooltipRootBaseProps } from './tooltip-root';
-import { TooltipArrow, type TooltipArrowBaseProps } from './tooltip-arrow';
-import { TooltipArrowTip, type TooltipArrowTipBaseProps } from './tooltip-arrow-tip';
-import { TooltipContent, type TooltipContentBaseProps } from './tooltip-content';
-import { TooltipPositioner, type TooltipPositionerBaseProps } from './tooltip-positioner';
-import { TooltipTrigger, type TooltipTriggerBaseProps } from './tooltip-trigger';
+'use client'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import { type TooltipVariantProps, tooltip } from 'styled-system/recipes'
+import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import { createStyleContext } from '~/utils/create-style-context'
+import { TooltipArrow } from './tooltip-arrow'
+import { TooltipArrowTip } from './tooltip-arrow-tip'
+import { TooltipContent } from './tooltip-content'
+import { TooltipPositioner } from './tooltip-positioner'
+import { TooltipRoot, type TooltipRootBaseProps } from './tooltip-root'
+import { TooltipRootProvider, type TooltipRootProviderBaseProps } from './tooltip-root-provider'
+import { TooltipTrigger } from './tooltip-trigger'
 
-const { withRootProvider, withContext } = createStyleContext(tooltip);
+const { withRootProvider, withContext } = createStyleContext(tooltip)
 
-export type RootProviderProps = ComponentProps<typeof RootProvider>;
-export const RootProvider = withRootProvider<
-  Assign<TooltipRootProviderBaseProps, TooltipVariantProps>
->(TooltipRootProvider);
+export type RootProviderProps = ComponentProps<typeof RootProvider>
+export const RootProvider =
+  withRootProvider<Assign<TooltipRootProviderBaseProps, TooltipVariantProps>>(TooltipRootProvider)
 
-export type RootProps = ComponentProps<typeof Root>;
-export const Root = withRootProvider<
-  Assign<TooltipRootBaseProps, TooltipVariantProps>
->(TooltipRoot);
+export type RootProps = ComponentProps<typeof Root>
+export const Root = withRootProvider<Assign<TooltipRootBaseProps, TooltipVariantProps>>(TooltipRoot)
 
-export const Arrow = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, TooltipArrowBaseProps>
->(TooltipArrow, "arrow");
+export const Arrow = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>, PolymorphicProps>>(
+  TooltipArrow,
+  'arrow',
+)
 
 export const ArrowTip = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, TooltipArrowTipBaseProps>
->(TooltipArrowTip, "arrowTip");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(TooltipArrowTip, 'arrowTip')
 
 export const Content = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, TooltipContentBaseProps>
->(TooltipContent, "content");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(TooltipContent, 'content')
 
 export const Positioner = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, TooltipPositionerBaseProps>
->(TooltipPositioner, "positioner");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(TooltipPositioner, 'positioner')
 
 export const Trigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<"button">, TooltipTriggerBaseProps>
->(TooltipTrigger, "trigger");
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+>(TooltipTrigger, 'trigger')
 
-export { TooltipContext as Context } from "./tooltip-context";
+export { TooltipContext as Context } from './tooltip-context'

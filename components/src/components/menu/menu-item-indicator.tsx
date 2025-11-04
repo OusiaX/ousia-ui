@@ -3,8 +3,7 @@ import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 import { useMenuItemPropsContext } from './use-menu-option-item-props-context'
 
-export interface MenuItemIndicatorBaseProps extends PolymorphicProps {}
-export interface MenuItemIndicatorProps extends ComponentProps<'div'>, MenuItemIndicatorBaseProps {}
+export interface MenuItemIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const MenuItemIndicator = (props: MenuItemIndicatorProps) => {
   const { ref, ...restProps } = props

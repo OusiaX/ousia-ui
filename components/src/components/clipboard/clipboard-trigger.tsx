@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
-export interface ClipboardTriggerBaseProps extends PolymorphicProps {}
-export interface ClipboardTriggerProps
-  extends ComponentProps<'button'>,
-    ClipboardTriggerBaseProps {}
+export interface ClipboardTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const ClipboardTrigger = (props: ClipboardTriggerProps) => {
   const { ref, ...restProps } = props

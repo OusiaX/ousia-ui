@@ -3,10 +3,9 @@ import type { ComponentProps } from 'react'
 import { useColorPickerChannelPropsContext } from './use-color-picker-channel-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerChannelSliderLabelBaseProps extends PolymorphicProps {}
 export interface ColorPickerChannelSliderLabelProps
   extends ComponentProps<'label'>,
-    ColorPickerChannelSliderLabelBaseProps {}
+    PolymorphicProps {}
 
 export const ColorPickerChannelSliderLabel = (props: ColorPickerChannelSliderLabelProps) => {
   const { ref, ...restProps } = props

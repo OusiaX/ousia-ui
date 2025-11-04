@@ -1,14 +1,17 @@
 'use client'
-import type { Assign } from '@ousia-ui/ark'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
 import { type AccordionVariantProps, accordion } from 'styled-system/recipes'
 import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { AccordionRootProvider, type AccordionRootProviderBaseProps } from './accordion-root-provider'
-import { AccordionRoot, type AccordionRootBaseProps } from './accordion-root'
-import { AccordionItemContent, type AccordionItemContentBaseProps } from './accordion-item-content'
-import { AccordionItemIndicator, type AccordionItemIndicatorBaseProps } from './accordion-item-indicator'
 import { AccordionItem, type AccordionItemBaseProps } from './accordion-item'
-import { AccordionItemTrigger, type AccordionItemTriggerBaseProps } from './accordion-item-trigger'
+import { AccordionItemContent } from './accordion-item-content'
+import { AccordionItemIndicator } from './accordion-item-indicator'
+import { AccordionItemTrigger } from './accordion-item-trigger'
+import { AccordionRoot, type AccordionRootBaseProps } from './accordion-root'
+import {
+  AccordionRootProvider,
+  type AccordionRootProviderBaseProps,
+} from './accordion-root-provider'
 
 const { withProvider, withContext } = createStyleContext(accordion)
 
@@ -26,12 +29,12 @@ export const Root = withProvider<
 
 export const ItemContent = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, AccordionItemContentBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(AccordionItemContent, 'itemContent')
 
 export const ItemIndicator = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, AccordionItemIndicatorBaseProps>
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
 >(AccordionItemIndicator, 'itemIndicator')
 
 export const Item = withContext<
@@ -41,16 +44,12 @@ export const Item = withContext<
 
 export const ItemTrigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, AccordionItemTriggerBaseProps>
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
 >(AccordionItemTrigger, 'itemTrigger')
 
-export {
-  AccordionContext as Context,
-} from './accordion-context'
+export { AccordionContext as Context } from './accordion-context'
 
-export {
-  AccordionItemContext as ItemContext,
-} from './accordion-item-context'
+export { AccordionItemContext as ItemContext } from './accordion-item-context'
 
 export type {
   FocusChangeDetails,

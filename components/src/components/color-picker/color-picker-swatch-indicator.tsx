@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 import { useColorPickerSwatchPropsContext } from './use-color-picker-swatch-props-context'
 
-export interface ColorPickerSwatchIndicatorBaseProps extends PolymorphicProps {}
-export interface ColorPickerSwatchIndicatorProps
-  extends ComponentProps<'div'>,
-    ColorPickerSwatchIndicatorBaseProps {}
+export interface ColorPickerSwatchIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ColorPickerSwatchIndicator = (props: ColorPickerSwatchIndicatorProps) => {
   const { ref, ...restProps } = props

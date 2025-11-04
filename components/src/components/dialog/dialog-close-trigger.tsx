@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
-export interface DialogCloseTriggerBaseProps extends PolymorphicProps {}
-export interface DialogCloseTriggerProps
-  extends ComponentProps<'button'>,
-    DialogCloseTriggerBaseProps {}
+export interface DialogCloseTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const DialogCloseTrigger = (props: DialogCloseTriggerProps) => {
   const { ref, ...restProps } = props

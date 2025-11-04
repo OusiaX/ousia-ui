@@ -1,4 +1,4 @@
-import { ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import type { UseClipboardReturn } from './use-clipboard'
@@ -8,7 +8,7 @@ interface RootProviderProps {
   value: UseClipboardReturn
 }
 
-export interface ClipboardRootProviderBaseProps extends RootProviderProps {}
+export interface ClipboardRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
 export interface ClipboardRootProviderProps
   extends ComponentProps<'div'>,
     ClipboardRootProviderBaseProps {}

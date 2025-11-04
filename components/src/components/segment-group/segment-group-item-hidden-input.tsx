@@ -3,10 +3,9 @@ import type { ComponentProps } from 'react'
 import { useSegmentGroupContext } from './use-segment-group-context'
 import { useSegmentGroupItemPropsContext } from './use-segment-group-item-props-context'
 
-export interface SegmentGroupItemHiddenInputBaseProps extends PolymorphicProps {}
 export interface SegmentGroupItemHiddenInputProps
   extends ComponentProps<'input'>,
-    SegmentGroupItemHiddenInputBaseProps {}
+    PolymorphicProps {}
 
 export const SegmentGroupItemHiddenInput = (props: SegmentGroupItemHiddenInputProps) => {
   const { ref, ...restProps } = props

@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useRatingGroupContext } from './use-rating-group-context'
 
-export interface RatingGroupLabelBaseProps extends PolymorphicProps {}
-export interface RatingGroupLabelProps extends ComponentProps<'label'>, RatingGroupLabelBaseProps {}
+export interface RatingGroupLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
 
 export const RatingGroupLabel = (props: RatingGroupLabelProps) => {
   const { ref, ...restProps } = props

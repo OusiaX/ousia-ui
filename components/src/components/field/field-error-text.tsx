@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldErrorTextBaseProps extends PolymorphicProps {}
-export interface FieldErrorTextProps extends ComponentProps<'span'>, FieldErrorTextBaseProps {}
+export interface FieldErrorTextProps extends ComponentProps<'span'>, PolymorphicProps {}
 
 export const FieldErrorText = (props: FieldErrorTextProps) => {
   const { ref, ...restProps } = props

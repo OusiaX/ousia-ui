@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useAvatarContext } from './use-avatar-context'
 
-export interface AvatarImageBaseProps extends PolymorphicProps {}
-export interface AvatarImageProps extends ComponentProps<'img'>, AvatarImageBaseProps {}
+export interface AvatarImageProps extends ComponentProps<'img'>, PolymorphicProps {}
 
 export const AvatarImage = (props: AvatarImageProps) => {
   const { ref, ...restProps } = props

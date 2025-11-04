@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 import { useTagsInputItemPropsContext } from './use-tags-input-item-props-context'
 
-export interface TagsInputItemInputBaseProps extends PolymorphicProps {}
-export interface TagsInputItemInputProps
-  extends ComponentProps<'input'>,
-    TagsInputItemInputBaseProps {}
+export interface TagsInputItemInputProps extends ComponentProps<'input'>, PolymorphicProps {}
 
 export const TagsInputItemInput = (props: TagsInputItemInputProps) => {
   const { ref, ...restProps } = props

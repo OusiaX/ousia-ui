@@ -3,8 +3,7 @@ import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useTooltipContext } from './use-tooltip-context'
 
-export interface TooltipContentBaseProps extends PolymorphicProps {}
-export interface TooltipContentProps extends ComponentProps<'div'>, TooltipContentBaseProps {}
+export interface TooltipContentProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const TooltipContent = (props: TooltipContentProps) => {
   const { ref, ...restProps } = props

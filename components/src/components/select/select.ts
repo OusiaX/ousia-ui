@@ -1,123 +1,113 @@
-"use client";
-import type { Assign } from "@ousia-ui/ark";
-import { type SelectVariantProps, select } from "styled-system/recipes";
-import type { ComponentProps, HTMLStyledProps } from "styled-system/types";
-import { createStyleContext } from "~/utils/create-style-context";
-import { SelectRootProvider, type SelectRootProviderBaseProps } from './select-root-provider';
-import { SelectRoot, type SelectRootBaseProps } from './select-root';
-import { SelectClearTrigger, type SelectClearTriggerBaseProps } from './select-clear-trigger';
-import { SelectContent, type SelectContentBaseProps } from './select-content';
-import { SelectControl, type SelectControlBaseProps } from './select-control';
-import { SelectIndicator, type SelectIndicatorBaseProps } from './select-indicator';
-import { SelectItemGroupLabel, type SelectItemGroupLabelBaseProps } from './select-item-group-label';
-import { SelectItemGroup, type SelectItemGroupBaseProps } from './select-item-group';
-import { SelectItemIndicator, type SelectItemIndicatorBaseProps } from './select-item-indicator';
-import { SelectItem, type SelectItemBaseProps } from './select-item';
-import { SelectItemText, type SelectItemTextBaseProps } from './select-item-text';
-import { SelectLabel, type SelectLabelBaseProps } from './select-label';
-import { SelectList, type SelectListBaseProps } from './select-list';
-import { SelectPositioner, type SelectPositionerBaseProps } from './select-positioner';
-import { SelectTrigger, type SelectTriggerBaseProps } from './select-trigger';
-import { SelectValueText, type SelectValueTextBaseProps } from './select-value-text';
-import { SelectContext } from './select-context';
-import { SelectHiddenSelect } from './select-hidden-select';
-import type { CollectionItem } from '@zag-js/collection';
+'use client'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { CollectionItem } from '@zag-js/collection'
+import { type SelectVariantProps, select } from 'styled-system/recipes'
+import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import { createStyleContext } from '~/utils/create-style-context'
+import { SelectClearTrigger } from './select-clear-trigger'
+import { SelectContent } from './select-content'
+import { SelectContext } from './select-context'
+import { SelectControl } from './select-control'
+import { SelectHiddenSelect } from './select-hidden-select'
+import { SelectIndicator } from './select-indicator'
+import { SelectItem } from './select-item'
+import { SelectItemGroup } from './select-item-group'
+import { SelectItemGroupLabel } from './select-item-group-label'
+import { SelectItemIndicator } from './select-item-indicator'
+import { SelectItemText } from './select-item-text'
+import { SelectLabel } from './select-label'
+import { SelectList } from './select-list'
+import { SelectPositioner } from './select-positioner'
+import { SelectRoot, type SelectRootBaseProps } from './select-root'
+import { SelectRootProvider, type SelectRootProviderBaseProps } from './select-root-provider'
+import { SelectTrigger } from './select-trigger'
+import { SelectValueText } from './select-value-text'
 
-const { withProvider, withContext } = createStyleContext(select);
+const { withProvider, withContext } = createStyleContext(select)
 
-export type RootProviderProps = ComponentProps<typeof RootProvider>;
+export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
   HTMLDivElement,
   Assign<
-    Assign<
-      HTMLStyledProps<"div">,
-      SelectRootProviderBaseProps<CollectionItem>
-    >,
+    Assign<HTMLStyledProps<'div'>, SelectRootProviderBaseProps<CollectionItem>>,
     SelectVariantProps
   >
->(SelectRootProvider, "root");
+>(SelectRootProvider, 'root')
 
-export type RootProps = ComponentProps<typeof Root>;
+export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
   HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, SelectRootBaseProps<CollectionItem>>,
-    SelectVariantProps
-  >
->(SelectRoot, "root");
+  Assign<Assign<HTMLStyledProps<'div'>, SelectRootBaseProps<CollectionItem>>, SelectVariantProps>
+>(SelectRoot, 'root')
 
 export const ClearTrigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<"button">, SelectClearTriggerBaseProps>
->(SelectClearTrigger, "clearTrigger");
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+>(SelectClearTrigger, 'clearTrigger')
 
 export const Content = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectContentBaseProps>
->(SelectContent, "content");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectContent, 'content')
 
 export const Control = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectControlBaseProps>
->(SelectControl, "control");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectControl, 'control')
 
 export const Indicator = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectIndicatorBaseProps>
->(SelectIndicator, "indicator");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectIndicator, 'indicator')
 
 export const ItemGroupLabel = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectItemGroupLabelBaseProps>
->(SelectItemGroupLabel, "itemGroupLabel");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectItemGroupLabel, 'itemGroupLabel')
 
 export const ItemGroup = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectItemGroupBaseProps>
->(SelectItemGroup, "itemGroup");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectItemGroup, 'itemGroup')
 
 export const ItemIndicator = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectItemIndicatorBaseProps>
->(SelectItemIndicator, "itemIndicator");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectItemIndicator, 'itemIndicator')
 
-export const Item = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectItemBaseProps>
->(SelectItem, "item");
+export const Item = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>, PolymorphicProps>>(
+  SelectItem,
+  'item',
+)
 
 export const ItemText = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"span">, SelectItemTextBaseProps>
->(SelectItemText, "itemText");
+  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
+>(SelectItemText, 'itemText')
 
 export const Label = withContext<
   HTMLLabelElement,
-  Assign<HTMLStyledProps<"label">, SelectLabelBaseProps>
->(SelectLabel, "label");
+  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
+>(SelectLabel, 'label')
 
-export const List = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectListBaseProps>
->(SelectList, "list");
+export const List = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>, PolymorphicProps>>(
+  SelectList,
+  'list',
+)
 
 export const Positioner = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, SelectPositionerBaseProps>
->(SelectPositioner, "positioner");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(SelectPositioner, 'positioner')
 
 export const Trigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<"button">, SelectTriggerBaseProps>
->(SelectTrigger, "trigger");
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+>(SelectTrigger, 'trigger')
 
 export const ValueText = withContext<
   HTMLSpanElement,
-  Assign<HTMLStyledProps<"span">, SelectValueTextBaseProps>
->(SelectValueText, "valueText");
+  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
+>(SelectValueText, 'valueText')
 
-export {
-  SelectContext as Context,
-  SelectHiddenSelect as HiddenSelect,
-};
-
+export { SelectContext as Context, SelectHiddenSelect as HiddenSelect }

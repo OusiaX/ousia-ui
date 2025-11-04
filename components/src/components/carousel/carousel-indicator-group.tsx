@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useCarouselContext } from './use-carousel-context'
 
-export interface CarouselIndicatorGroupBaseProps extends PolymorphicProps {}
-export interface CarouselIndicatorGroupProps
-  extends ComponentProps<'div'>,
-    CarouselIndicatorGroupBaseProps {}
+export interface CarouselIndicatorGroupProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const CarouselIndicatorGroup = (props: CarouselIndicatorGroupProps) => {
   const { ref, ...restProps } = props

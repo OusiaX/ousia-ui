@@ -3,10 +3,7 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useRatingGroupContext } from './use-rating-group-context'
 
-export interface RatingGroupHiddenInputBaseProps extends PolymorphicProps {}
-export interface RatingGroupHiddenInputProps
-  extends ComponentProps<'input'>,
-    RatingGroupHiddenInputBaseProps {}
+export interface RatingGroupHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
 
 export const RatingGroupHiddenInput = (props: RatingGroupHiddenInputProps) => {
   const { ref, ...restProps } = props

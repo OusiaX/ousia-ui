@@ -6,8 +6,7 @@ import { useId } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { ComboboxItemGroupPropsProvider } from './use-combobox-item-group-props-context'
 
-export interface ComboboxItemGroupBaseProps extends PolymorphicProps {}
-export interface ComboboxItemGroupProps extends ComponentProps<'div'>, ComboboxItemGroupBaseProps {}
+export interface ComboboxItemGroupProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ComboboxItemGroup = (props: ComboboxItemGroupProps) => {
   const { ref, ...restProps } = props

@@ -3,10 +3,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useHoverCardContext } from './use-hover-card-context'
 
-export interface HoverCardPositionerBaseProps extends PolymorphicProps {}
-export interface HoverCardPositionerProps
-  extends ComponentProps<'div'>,
-    HoverCardPositionerBaseProps {}
+export interface HoverCardPositionerProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const HoverCardPositioner = (props: HoverCardPositionerProps) => {
   const { ref, ...restProps } = props

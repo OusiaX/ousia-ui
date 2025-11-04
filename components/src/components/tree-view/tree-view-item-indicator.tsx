@@ -3,10 +3,7 @@ import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
-export interface TreeViewItemIndicatorBaseProps extends PolymorphicProps {}
-export interface TreeViewItemIndicatorProps
-  extends ComponentProps<'div'>,
-    TreeViewItemIndicatorBaseProps {}
+export interface TreeViewItemIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const TreeViewItemIndicator = (props: TreeViewItemIndicatorProps) => {
   const { ref, ...restProps } = props

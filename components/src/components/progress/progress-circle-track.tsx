@@ -2,10 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
-export interface ProgressCircleTrackBaseProps extends PolymorphicProps {}
-export interface ProgressCircleTrackProps
-  extends ComponentProps<'circle'>,
-    ProgressCircleTrackBaseProps {}
+export interface ProgressCircleTrackProps extends ComponentProps<'circle'>, PolymorphicProps {}
 
 export const ProgressCircleTrack = (props: ProgressCircleTrackProps) => {
   const { ref, ...restProps } = props

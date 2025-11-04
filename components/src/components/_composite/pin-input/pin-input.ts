@@ -1,48 +1,42 @@
-"use client";
-import type { Assign } from "@ousia-ui/ark";
-import { type PinInputVariantProps, pinInput } from "styled-system/recipes";
-import type { ComponentProps, HTMLStyledProps } from "styled-system/types";
-import { createStyleContext } from "~/utils/create-style-context";
-import { PinInputRootProvider, type PinInputRootProviderBaseProps } from './pin-input-root-provider';
-import { PinInputRoot, type PinInputRootBaseProps } from './pin-input-root';
-import { PinInputControl, type PinInputControlBaseProps } from './pin-input-control';
-import { PinInputInput, type PinInputInputBaseProps } from './pin-input-input';
-import { PinInputLabel, type PinInputLabelBaseProps } from './pin-input-label';
+'use client'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import { type PinInputVariantProps, pinInput } from 'styled-system/recipes'
+import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import { createStyleContext } from '~/utils/create-style-context'
+import { PinInputControl } from './pin-input-control'
+import { PinInputInput } from './pin-input-input'
+import { PinInputLabel } from './pin-input-label'
+import { PinInputRoot } from './pin-input-root'
+import { PinInputRootProvider } from './pin-input-root-provider'
 
-const { withProvider, withContext } = createStyleContext(pinInput);
+const { withProvider, withContext } = createStyleContext(pinInput)
 
-export type RootProviderProps = ComponentProps<typeof RootProvider>;
+export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
   HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, PinInputRootProviderBaseProps>,
-    PinInputVariantProps
-  >
->(PinInputRootProvider, "root");
+  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, PinInputVariantProps>
+>(PinInputRootProvider, 'root')
 
-export type RootProps = ComponentProps<typeof Root>;
+export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
   HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, PinInputRootBaseProps>,
-    PinInputVariantProps
-  >
->(PinInputRoot, "root", { forwardProps: ["mask"] });
+  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, PinInputVariantProps>
+>(PinInputRoot, 'root', { forwardProps: ['mask'] })
 
 export const Control = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, PinInputControlBaseProps>
->(PinInputControl, "control");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(PinInputControl, 'control')
 
 export const Input = withContext<
   HTMLInputElement,
-  Assign<HTMLStyledProps<"input">, PinInputInputBaseProps>
->(PinInputInput, "input");
+  Assign<HTMLStyledProps<'input'>, PolymorphicProps>
+>(PinInputInput, 'input')
 
 export const Label = withContext<
   HTMLLabelElement,
-  Assign<HTMLStyledProps<"label">, PinInputLabelBaseProps>
->(PinInputLabel, "label");
+  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
+>(PinInputLabel, 'label')
 
-export { PinInputContext as Context } from "./pin-input-context";
-export { PinInputHiddenInput as HiddenInput } from "./pin-input-hidden-input";
+export { PinInputContext as Context } from './pin-input-context'
+export { PinInputHiddenInput as HiddenInput } from './pin-input-hidden-input'

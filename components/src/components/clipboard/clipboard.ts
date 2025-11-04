@@ -1,59 +1,56 @@
-"use client";
-import type { Assign } from "@ousia-ui/ark";
-import { type ClipboardVariantProps, clipboard } from "styled-system/recipes";
-import type { ComponentProps, HTMLStyledProps } from "styled-system/types";
-import { createStyleContext } from "~/utils/create-style-context";
-import { ClipboardRootProvider, type ClipboardRootProviderBaseProps } from './clipboard-root-provider';
-import { ClipboardRoot, type ClipboardRootBaseProps } from './clipboard-root';
-import { ClipboardControl, type ClipboardControlBaseProps } from './clipboard-control';
-import { ClipboardIndicator, type ClipboardIndicatorBaseProps } from './clipboard-indicator';
-import { ClipboardInput, type ClipboardInputBaseProps } from './clipboard-input';
-import { ClipboardLabel, type ClipboardLabelBaseProps } from './clipboard-label';
-import { ClipboardTrigger, type ClipboardTriggerBaseProps } from './clipboard-trigger';
+'use client'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import { type ClipboardVariantProps, clipboard } from 'styled-system/recipes'
+import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import { createStyleContext } from '~/utils/create-style-context'
+import { ClipboardControl } from './clipboard-control'
+import { ClipboardIndicator } from './clipboard-indicator'
+import { ClipboardInput } from './clipboard-input'
+import { ClipboardLabel } from './clipboard-label'
+import { ClipboardRoot, type ClipboardRootBaseProps } from './clipboard-root'
+import {
+  ClipboardRootProvider,
+  type ClipboardRootProviderBaseProps,
+} from './clipboard-root-provider'
+import { ClipboardTrigger } from './clipboard-trigger'
 
-const { withProvider, withContext } = createStyleContext(clipboard);
+const { withProvider, withContext } = createStyleContext(clipboard)
 
-export type RootProviderProps = ComponentProps<typeof RootProvider>;
+export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
   HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, ClipboardRootProviderBaseProps>,
-    ClipboardVariantProps
-  >
->(ClipboardRootProvider, "root");
+  Assign<Assign<HTMLStyledProps<'div'>, ClipboardRootProviderBaseProps>, ClipboardVariantProps>
+>(ClipboardRootProvider, 'root')
 
-export type RootProps = ComponentProps<typeof Root>;
+export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
   HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, ClipboardRootBaseProps>,
-    ClipboardVariantProps
-  >
->(ClipboardRoot, "root");
+  Assign<Assign<HTMLStyledProps<'div'>, ClipboardRootBaseProps>, ClipboardVariantProps>
+>(ClipboardRoot, 'root')
 
 export const Control = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, ClipboardControlBaseProps>
->(ClipboardControl, "control");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(ClipboardControl, 'control')
 
 export const Indicator = withContext<
   HTMLDivElement,
-  Assign<HTMLStyledProps<"div">, ClipboardIndicatorBaseProps>
->(ClipboardIndicator, "indicator");
+  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+>(ClipboardIndicator, 'indicator')
 
 export const Input = withContext<
   HTMLInputElement,
-  Assign<HTMLStyledProps<"input">, ClipboardInputBaseProps>
->(ClipboardInput, "input");
+  Assign<HTMLStyledProps<'input'>, PolymorphicProps>
+>(ClipboardInput, 'input')
 
 export const Label = withContext<
   HTMLLabelElement,
-  Assign<HTMLStyledProps<"label">, ClipboardLabelBaseProps>
->(ClipboardLabel, "label");
+  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
+>(ClipboardLabel, 'label')
 
 export const Trigger = withContext<
   HTMLButtonElement,
-  Assign<HTMLStyledProps<"button">, ClipboardTriggerBaseProps>
->(ClipboardTrigger, "trigger");
+  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+>(ClipboardTrigger, 'trigger')
 
-export { ClipboardContext as Context } from "./clipboard-context";
+export { ClipboardContext as Context } from './clipboard-context'

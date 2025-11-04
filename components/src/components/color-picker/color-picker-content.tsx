@@ -4,10 +4,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerContentBaseProps extends PolymorphicProps {}
-export interface ColorPickerContentProps
-  extends ComponentProps<'div'>,
-    ColorPickerContentBaseProps {}
+export interface ColorPickerContentProps extends ComponentProps<'div'>, PolymorphicProps {}
 
 export const ColorPickerContent = (props: ColorPickerContentProps) => {
   const { ref, ...restProps } = props

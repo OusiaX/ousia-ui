@@ -3,8 +3,7 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuTriggerBaseProps extends PolymorphicProps {}
-export interface MenuTriggerProps extends ComponentProps<'button'>, MenuTriggerBaseProps {}
+export interface MenuTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
 
 export const MenuTrigger = (props: MenuTriggerProps) => {
   const { ref, ...restProps } = props

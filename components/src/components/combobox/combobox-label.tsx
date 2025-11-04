@@ -2,8 +2,7 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxLabelBaseProps extends PolymorphicProps {}
-export interface ComboboxLabelProps extends ComponentProps<'label'>, ComboboxLabelBaseProps {}
+export interface ComboboxLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
 
 export const ComboboxLabel = (props: ComboboxLabelProps) => {
   const { ref, ...restProps } = props

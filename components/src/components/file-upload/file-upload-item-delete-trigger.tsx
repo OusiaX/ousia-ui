@@ -3,10 +3,9 @@ import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { useFileUploadItemPropsContext } from './use-file-upload-item-props-context'
 
-export interface FileUploadItemDeleteTriggerBaseProps extends PolymorphicProps {}
 export interface FileUploadItemDeleteTriggerProps
   extends ComponentProps<'button'>,
-    FileUploadItemDeleteTriggerBaseProps {}
+    PolymorphicProps {}
 
 export const FileUploadItemDeleteTrigger = (props: FileUploadItemDeleteTriggerProps) => {
   const { ref, ...restProps } = props

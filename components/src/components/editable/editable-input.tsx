@@ -3,8 +3,7 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
-export interface EditableInputBaseProps extends PolymorphicProps {}
-export interface EditableInputProps extends ComponentProps<'input'>, EditableInputBaseProps {}
+export interface EditableInputProps extends ComponentProps<'input'>, PolymorphicProps {}
 
 export const EditableInput = (props: EditableInputProps) => {
   const { ref, ...restProps } = props
