@@ -1,12 +1,12 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
 export interface MenuContentBaseProps extends PolymorphicProps {}
-export interface MenuContentProps extends HTMLProps<'div'>, MenuContentBaseProps {}
+export interface MenuContentProps extends ComponentProps<'div'>, MenuContentBaseProps {}
 
-export const MenuContent = (props: MenuContentProps & { ref?: Ref<HTMLDivElement> }) => {
+export const MenuContent = (props: MenuContentProps) => {
   const { ref, ...restProps } = props
   const menu = useMenuContext()
   const presence = usePresenceContext()

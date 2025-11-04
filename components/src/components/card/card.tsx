@@ -1,5 +1,5 @@
 'use client'
-import { type Assign, type HTMLArkProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark } from '@ousia-ui/ark'
 import { type CardVariantProps, card } from 'styled-system/recipes'
 import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
@@ -34,5 +34,5 @@ export const Header = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>,
 
 export const Title = withContext<
   HTMLHeadingElement,
-  Assign<HTMLStyledProps<'h3'>, HTMLArkProps<'h3'>>
+  Assign<HTMLStyledProps<'h3'>, PolymorphicProps>
 >(ark.h3, 'title')

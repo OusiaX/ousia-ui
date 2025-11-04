@@ -1,15 +1,15 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { TableProps } from '@zag-js/date-picker'
-import { type Ref, useId } from 'react'
+import { type ComponentProps, useId } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 import { DatePickerTablePropsProvider } from './use-date-picker-table-props-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
 export interface DatePickerTableBaseProps extends Pick<TableProps, 'columns'>, PolymorphicProps {}
-export interface DatePickerTableProps extends HTMLProps<'table'>, DatePickerTableBaseProps {}
+export interface DatePickerTableProps extends ComponentProps<'table'>, DatePickerTableBaseProps {}
 
-export const DatePickerTable = (props: DatePickerTableProps & { ref?: Ref<HTMLTableElement> }) => {
+export const DatePickerTable = (props: DatePickerTableProps) => {
   const { ref, ...restProps } = props
   const [{ columns }, localProps] = createSplitProps<Pick<TableProps, 'columns'>>()(restProps, [
     'columns',

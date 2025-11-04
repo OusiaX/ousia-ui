@@ -1,12 +1,12 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { useTooltipContext } from './use-tooltip-context'
 
 export interface TooltipContentBaseProps extends PolymorphicProps {}
-export interface TooltipContentProps extends HTMLProps<'div'>, TooltipContentBaseProps {}
+export interface TooltipContentProps extends ComponentProps<'div'>, TooltipContentBaseProps {}
 
-export const TooltipContent = (props: TooltipContentProps & { ref?: Ref<HTMLDivElement> }) => {
+export const TooltipContent = (props: TooltipContentProps) => {
   const { ref, ...restProps } = props
   const tooltip = useTooltipContext()
   const presence = usePresenceContext()

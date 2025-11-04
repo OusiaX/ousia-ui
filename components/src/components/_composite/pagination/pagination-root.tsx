@@ -1,13 +1,13 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { type UsePaginationProps, usePagination } from './use-pagination'
 import { PaginationProvider } from './use-pagination-context'
 
 export interface PaginationRootBaseProps extends UsePaginationProps, PolymorphicProps {}
-export interface PaginationRootProps extends HTMLProps<'nav'>, PaginationRootBaseProps {}
+export interface PaginationRootProps extends ComponentProps<'nav'>, PaginationRootBaseProps {}
 
-export const PaginationRoot = (props: PaginationRootProps & { ref?: Ref<HTMLElement> }) => {
+export const PaginationRoot = (props: PaginationRootProps) => {
   const { ref, ...restProps } = props
   const [paginationProps, localProps] = createSplitProps<UsePaginationProps>()(restProps, [
     'count',

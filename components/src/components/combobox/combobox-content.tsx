@@ -1,12 +1,12 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
 export interface ComboboxContentBaseProps extends PolymorphicProps {}
-export interface ComboboxContentProps extends HTMLProps<'div'>, ComboboxContentBaseProps {}
+export interface ComboboxContentProps extends ComponentProps<'div'>, ComboboxContentBaseProps {}
 
-export const ComboboxContent = (props: ComboboxContentProps & { ref?: Ref<HTMLDivElement> }) => {
+export const ComboboxContent = (props: ComboboxContentProps) => {
   const { ref, ...restProps } = props
   const combobox = useComboboxContext()
   const presence = usePresenceContext()

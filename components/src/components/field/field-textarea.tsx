@@ -1,7 +1,7 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, useFieldContext } from '@ousia-ui/ark/utils'
 import { autoresizeTextarea } from '@zag-js/auto-resize'
-import { type Ref, useEffect, useRef } from 'react'
+import { type ComponentProps, useEffect, useRef } from 'react'
 
 export interface FieldTextareaBaseProps extends PolymorphicProps {
   /**
@@ -10,13 +10,13 @@ export interface FieldTextareaBaseProps extends PolymorphicProps {
    */
   autoresize?: boolean | undefined
 }
-export interface FieldTextareaProps extends HTMLProps<'textarea'>, FieldTextareaBaseProps {}
+export interface FieldTextareaProps extends ComponentProps<'textarea'>, FieldTextareaBaseProps {}
 
-export const FieldTextarea = (props: FieldTextareaProps & { ref?: Ref<HTMLTextAreaElement> }) => {
+export const FieldTextarea = (props: FieldTextareaProps) => {
   const { ref, autoresize, ...restProps } = props
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'textarea'>>(
+  const mergedProps = mergeProps<ComponentProps<'textarea'>>(
     field?.getTextareaProps(),
     { style: { resize: autoresize ? 'none' : undefined } },
     restProps,

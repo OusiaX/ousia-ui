@@ -1,12 +1,12 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
 export interface PopoverContentBaseProps extends PolymorphicProps {}
-export interface PopoverContentProps extends HTMLProps<'div'>, PopoverContentBaseProps {}
+export interface PopoverContentProps extends ComponentProps<'div'>, PopoverContentBaseProps {}
 
-export const PopoverContent = (props: PopoverContentProps & { ref?: Ref<HTMLDivElement> }) => {
+export const PopoverContent = (props: PopoverContentProps) => {
   const { ref, ...restProps } = props
   const popover = usePopoverContext()
   const presence = usePresenceContext()

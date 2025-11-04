@@ -1,6 +1,6 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 import {
   DatePickerTableCellPropsProvider,
@@ -11,11 +11,11 @@ import { useDatePickerViewPropsContext } from './use-date-picker-view-props-cont
 export interface DatePickerTableCellBaseProps
   extends UseDatePickerTableCellPropsContext,
     PolymorphicProps {}
-export interface DatePickerTableCellProps extends HTMLProps<'td'>, DatePickerTableCellBaseProps {}
+export interface DatePickerTableCellProps
+  extends ComponentProps<'td'>,
+    DatePickerTableCellBaseProps {}
 
-export const DatePickerTableCell = (
-  props: DatePickerTableCellProps & { ref?: Ref<HTMLTableCellElement> },
-) => {
+export const DatePickerTableCell = (props: DatePickerTableCellProps) => {
   const { ref, ...restProps } = props
   const [cellProps, localProps] = createSplitProps<UseDatePickerTableCellPropsContext>()(
     restProps,

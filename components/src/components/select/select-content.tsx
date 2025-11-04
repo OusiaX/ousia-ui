@@ -1,12 +1,12 @@
-import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
-import type { Ref } from 'react'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectContentBaseProps extends PolymorphicProps {}
-export interface SelectContentProps extends HTMLProps<'div'>, SelectContentBaseProps {}
+export interface SelectContentProps extends ComponentProps<'div'>, SelectContentBaseProps {}
 
-export const SelectContent = (props: SelectContentProps & { ref?: Ref<HTMLDivElement> }) => {
+export const SelectContent = (props: SelectContentProps) => {
   const { ref, ...restProps } = props
   const select = useSelectContext()
   const presence = usePresenceContext()
