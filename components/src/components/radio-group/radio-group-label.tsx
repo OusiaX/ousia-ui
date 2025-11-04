@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useRadioGroupContext } from './use-radio-group-context'
 
 export interface RadioGroupLabelBaseProps extends PolymorphicProps {}
-export interface RadioGroupLabelProps extends HTMLProps<'label'>, RadioGroupLabelBaseProps {}
+export interface RadioGroupLabelProps extends ComponentProps<'label'>, RadioGroupLabelBaseProps {}
 
-export const RadioGroupLabel = forwardRef<HTMLLabelElement, RadioGroupLabelProps>((props, ref) => {
+export const RadioGroupLabel = (props: RadioGroupLabelProps) => {
+  const { ref, ...restProps } = props
   const radioGroup = useRadioGroupContext()
-  const mergedProps = mergeProps(radioGroup.getLabelProps(), props)
+  const mergedProps = mergeProps(radioGroup.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-RadioGroupLabel.displayName = 'RadioGroupLabel'
+}

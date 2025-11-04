@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
 export interface ClipboardLabelBaseProps extends PolymorphicProps {}
-export interface ClipboardLabelProps extends HTMLProps<'label'>, ClipboardLabelBaseProps {}
+export interface ClipboardLabelProps extends ComponentProps<'label'>, ClipboardLabelBaseProps {}
 
-export const ClipboardLabel = forwardRef<HTMLLabelElement, ClipboardLabelProps>((props, ref) => {
+export const ClipboardLabel = (props: ClipboardLabelProps) => {
+  const { ref, ...restProps } = props
   const clipboard = useClipboardContext()
-  const mergedProps = mergeProps(clipboard.getLabelProps(), props)
+  const mergedProps = mergeProps(clipboard.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-ClipboardLabel.displayName = 'ClipboardLabel'
+}

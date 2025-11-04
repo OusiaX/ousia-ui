@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 
 export interface FileUploadLabelBaseProps extends PolymorphicProps {}
-export interface FileUploadLabelProps extends HTMLProps<'label'>, FileUploadLabelBaseProps {}
+export interface FileUploadLabelProps extends ComponentProps<'label'>, FileUploadLabelBaseProps {}
 
-export const FileUploadLabel = forwardRef<HTMLLabelElement, FileUploadLabelProps>((props, ref) => {
+export const FileUploadLabel = (props: FileUploadLabelProps) => {
+  const { ref, ...restProps } = props
   const fileUpload = useFileUploadContext()
-  const mergedProps = mergeProps(fileUpload.getLabelProps(), props)
+  const mergedProps = mergeProps(fileUpload.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-FileUploadLabel.displayName = 'FileUploadLabel'
+}

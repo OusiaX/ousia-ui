@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerLabelBaseProps {}
-export interface DatePickerLabelProps extends HTMLProps<'label'>, DatePickerLabelBaseProps {}
+export interface DatePickerLabelBaseProps extends PolymorphicProps {}
+export interface DatePickerLabelProps extends ComponentProps<'label'>, DatePickerLabelBaseProps {}
 
-export const DatePickerLabel = forwardRef<HTMLLabelElement, DatePickerLabelProps>((props, ref) => {
+export const DatePickerLabel = (props: DatePickerLabelProps) => {
+  const { ref, ...restProps } = props
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getLabelProps(), props)
+  const mergedProps = mergeProps(datePicker.getLabelProps(), restProps)
 
-  return <arkSimple.label {...mergedProps} ref={ref} />
-})
-
-DatePickerLabel.displayName = 'DatePickerLabel'
+  return <ark.label {...mergedProps} ref={ref} />
+}

@@ -1,17 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark } from '@ousia-ui/ark'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
 export interface EditableLabelBaseProps extends PolymorphicProps {}
-export interface EditableLabelProps extends HTMLProps<'label'>, EditableLabelBaseProps {}
+export interface EditableLabelProps extends ComponentProps<'label'>, EditableLabelBaseProps {}
 
-export const EditableLabel = forwardRef<HTMLLabelElement, EditableLabelProps>((props, ref) => {
+export const EditableLabel = (props: EditableLabelProps) => {
+  const { ref, ...restProps } = props
   const editable = useEditableContext()
-  const mergedProps = mergeProps(editable.getLabelProps(), props)
+  const mergedProps = mergeProps(editable.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-EditableLabel.displayName = 'EditableLabel'
+}

@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseSwitchReturn } from './use-switch'
 import { SwitchProvider } from './use-switch-context'
 
@@ -10,17 +9,18 @@ interface RootProviderProps {
 }
 
 export interface SwitchRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface SwitchRootProviderProps extends HTMLProps<'label'>, SwitchRootProviderBaseProps {}
+export interface SwitchRootProviderProps
+  extends ComponentProps<'label'>,
+    SwitchRootProviderBaseProps {}
 
-export const SwitchRootProvider = forwardRef<HTMLLabelElement, SwitchRootProviderProps>((props, ref) => {
-  const [{ value: api }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const SwitchRootProvider = (props: SwitchRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: api }, localProps] = createSplitProps<RootProviderProps>()(restProps, ['value'])
   const mergedProps = mergeProps(api.getRootProps(), localProps)
 
   return (
     <SwitchProvider value={api}>
-      <arkSimple.label {...mergedProps} ref={ref} />
+      <ark.label {...mergedProps} ref={ref} />
     </SwitchProvider>
   )
-})
-
-SwitchRootProvider.displayName = 'SwitchRootProvider'
+}

@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
 export interface NumberInputLabelBaseProps extends PolymorphicProps {}
-export interface NumberInputLabelProps extends HTMLProps<'label'>, NumberInputLabelBaseProps {}
+export interface NumberInputLabelProps extends ComponentProps<'label'>, NumberInputLabelBaseProps {}
 
-export const NumberInputLabel = forwardRef<HTMLLabelElement, NumberInputLabelProps>((props, ref) => {
+export const NumberInputLabel = (props: NumberInputLabelProps) => {
+  const { ref, ...restProps } = props
   const numberInput = useNumberInputContext()
-  const mergedProps = mergeProps(numberInput.getLabelProps(), props)
+  const mergedProps = mergeProps(numberInput.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-NumberInputLabel.displayName = 'NumberInputLabel'
+}

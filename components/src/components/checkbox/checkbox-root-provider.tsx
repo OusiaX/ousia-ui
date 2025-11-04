@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseCheckboxReturn } from './use-checkbox'
 import { CheckboxProvider } from './use-checkbox-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface CheckboxRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface CheckboxRootProviderProps extends HTMLProps<'label'>, CheckboxRootProviderBaseProps {}
+export interface CheckboxRootProviderProps
+  extends ComponentProps<'label'>,
+    CheckboxRootProviderBaseProps {}
 
-export const CheckboxRootProvider = forwardRef<HTMLLabelElement, CheckboxRootProviderProps>((props, ref) => {
-  const [{ value: checkbox }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const CheckboxRootProvider = (props: CheckboxRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: checkbox }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(checkbox.getRootProps(), localProps)
 
   return (
     <CheckboxProvider value={checkbox}>
-      <arkMemo.label {...mergedProps} ref={ref} />
+      <ark.label {...mergedProps} ref={ref} />
     </CheckboxProvider>
   )
-})
-
-CheckboxRootProvider.displayName = 'CheckboxRootProvider'
+}

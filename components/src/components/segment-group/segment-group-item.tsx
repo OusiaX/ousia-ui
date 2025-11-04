@@ -1,31 +1,30 @@
-import type { ItemProps } from '@zag-js/radio-group'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ItemProps } from '@zag-js/radio-group'
+import type { ComponentProps } from 'react'
 import { useSegmentGroupContext } from './use-segment-group-context'
 import { SegmentGroupItemProvider } from './use-segment-group-item-context'
 import { SegmentGroupItemPropsProvider } from './use-segment-group-item-props-context'
 
 export interface SegmentGroupItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface SegmentGroupItemProps extends HTMLProps<'label'>, SegmentGroupItemBaseProps {}
+export interface SegmentGroupItemProps extends ComponentProps<'label'>, SegmentGroupItemBaseProps {}
 
-export const SegmentGroupItem = forwardRef<HTMLLabelElement, SegmentGroupItemProps>((props, ref) => {
-  const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['value', 'disabled', 'invalid'])
+export const SegmentGroupItem = (props: SegmentGroupItemProps) => {
+  const { ref, ...restProps } = props
+  const [itemProps, localProps] = createSplitProps<ItemProps>()(restProps, [
+    'value',
+    'disabled',
+    'invalid',
+  ])
   const segmentGroup = useSegmentGroupContext()
-  const mergedProps = mergeProps(
-    segmentGroup.getItemProps(itemProps),
-    localProps,
-  )
+  const mergedProps = mergeProps(segmentGroup.getItemProps(itemProps), localProps)
   const itemState = segmentGroup.getItemState(itemProps)
 
   return (
     <SegmentGroupItemPropsProvider value={itemProps}>
       <SegmentGroupItemProvider value={itemState}>
-        <arkMemo.label {...mergedProps} ref={ref} />
+        <ark.label {...mergedProps} ref={ref} />
       </SegmentGroupItemProvider>
     </SegmentGroupItemPropsProvider>
   )
-})
-
-SegmentGroupItem.displayName = 'SegmentGroupItem'
+}

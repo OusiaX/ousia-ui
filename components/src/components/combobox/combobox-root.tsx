@@ -7,9 +7,7 @@ import {
   usePresence,
 } from '@ousia-ui/ark/utils'
 import type { CollectionItem } from '@zag-js/collection'
-import type { ComponentProps } from 'react'
-import type { JSX } from 'react'
-import type { RefAttributes } from 'react'
+import type { ComponentProps, JSX } from 'react'
 import type { UseComboboxProps } from './use-combobox'
 import { useCombobox } from './use-combobox'
 import { ComboboxProvider } from './use-combobox-context'
@@ -82,7 +80,7 @@ const ComboboxImpl = <T extends CollectionItem>(props: ComboboxRootProps<T>) => 
 }
 
 export type ComboboxRootComponent<P = Record<string, unknown>> = <T extends CollectionItem>(
-  props: Assign<ComboboxRootProps<T>, P> & RefAttributes<HTMLDivElement>,
+  props: Assign<ComboboxRootProps<T>, P>,
 ) => JSX.Element
 
-export const ComboboxRoot = ComboboxImpl as ComboboxRootComponent
+export const ComboboxRoot = ComboboxImpl as unknown as ComboboxRootComponent

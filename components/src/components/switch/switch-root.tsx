@@ -1,15 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UseSwitchProps, useSwitch } from './use-switch'
 import { SwitchProvider } from './use-switch-context'
 
 export interface SwitchRootBaseProps extends UseSwitchProps, PolymorphicProps {}
-export interface SwitchRootProps extends HTMLProps<'label'>, SwitchRootBaseProps {}
+export interface SwitchRootProps extends ComponentProps<'label'>, SwitchRootBaseProps {}
 
-export const SwitchRoot = forwardRef<HTMLLabelElement, SwitchRootProps>((props, ref) => {
-  const [switchProps, localProps] = createSplitProps<UseSwitchProps>()(props, [
+export const SwitchRoot = (props: SwitchRootProps) => {
+  const { ref, ...restProps } = props
+  const [switchProps, localProps] = createSplitProps<UseSwitchProps>()(restProps, [
     'checked',
     'defaultChecked',
     'disabled',
@@ -30,9 +30,7 @@ export const SwitchRoot = forwardRef<HTMLLabelElement, SwitchRootProps>((props, 
 
   return (
     <SwitchProvider value={switchContext}>
-      <arkSimple.label {...mergedProps} ref={ref} />
+      <ark.label {...mergedProps} ref={ref} />
     </SwitchProvider>
   )
-})
-
-SwitchRoot.displayName = 'SwitchRoot'
+}

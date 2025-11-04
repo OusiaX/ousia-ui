@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerLabelBaseProps {}
-export interface ColorPickerLabelProps extends HTMLProps<'label'>, ColorPickerLabelBaseProps {}
+export interface ColorPickerLabelBaseProps extends PolymorphicProps {}
+export interface ColorPickerLabelProps extends ComponentProps<'label'>, ColorPickerLabelBaseProps {}
 
-export const ColorPickerLabel = forwardRef<HTMLLabelElement, ColorPickerLabelProps>((props, ref) => {
+export const ColorPickerLabel = (props: ColorPickerLabelProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(colorPicker.getLabelProps(), props)
+  const mergedProps = mergeProps(colorPicker.getLabelProps(), restProps)
 
-  return <arkSimple.label {...mergedProps} ref={ref} />
-})
-
-ColorPickerLabel.displayName = 'ColorPickerLabel'
+  return <ark.label {...mergedProps} ref={ref} />
+}

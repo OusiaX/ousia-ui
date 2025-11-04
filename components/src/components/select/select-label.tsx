@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectLabelBaseProps extends PolymorphicProps {}
-export interface SelectLabelProps extends HTMLProps<'label'>, SelectLabelBaseProps {}
+export interface SelectLabelProps extends ComponentProps<'label'>, SelectLabelBaseProps {}
 
-export const SelectLabel = forwardRef<HTMLLabelElement, SelectLabelProps>((props, ref) => {
+export const SelectLabel = (props: SelectLabelProps) => {
+  const { ref, ...restProps } = props
   const select = useSelectContext()
-  const mergedProps = mergeProps(select.getLabelProps(), props)
+  const mergedProps = mergeProps(select.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-SelectLabel.displayName = 'SelectLabel'
+}

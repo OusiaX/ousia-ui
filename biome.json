@@ -30,6 +30,9 @@
       },
       "security": {
         "noDangerouslySetInnerHtml": "off"
+      },
+      "a11y": {
+        "noLabelWithoutControl": "off"
       }
     }
   }

@@ -1,22 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerChannelPropsContext } from './use-color-picker-channel-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerChannelSliderLabelBaseProps {}
+export interface ColorPickerChannelSliderLabelBaseProps extends PolymorphicProps {}
 export interface ColorPickerChannelSliderLabelProps
-  extends HTMLProps<'label'>,
+  extends ComponentProps<'label'>,
     ColorPickerChannelSliderLabelBaseProps {}
 
-export const ColorPickerChannelSliderLabel = forwardRef<HTMLLabelElement, ColorPickerChannelSliderLabelProps>(
-  (props, ref) => {
-    const colorPicker = useColorPickerContext()
-    const channelProps = useColorPickerChannelPropsContext()
-    const mergedProps = mergeProps(colorPicker.getChannelSliderLabelProps(channelProps), props)
+export const ColorPickerChannelSliderLabel = (props: ColorPickerChannelSliderLabelProps) => {
+  const { ref, ...restProps } = props
+  const colorPicker = useColorPickerContext()
+  const channelProps = useColorPickerChannelPropsContext()
+  const mergedProps = mergeProps(colorPicker.getChannelSliderLabelProps(channelProps), restProps)
 
-    return <arkSimple.label {...mergedProps} ref={ref} />
-  },
-)
-
-ColorPickerChannelSliderLabel.displayName = 'ColorPickerChannelSliderLabel'
+  return <ark.label {...mergedProps} ref={ref} />
+}

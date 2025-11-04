@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSegmentGroupContext } from './use-segment-group-context'
 
 export interface SegmentGroupLabelBaseProps extends PolymorphicProps {}
-export interface SegmentGroupLabelProps extends HTMLProps<'label'>, SegmentGroupLabelBaseProps {}
+export interface SegmentGroupLabelProps
+  extends ComponentProps<'label'>,
+    SegmentGroupLabelBaseProps {}
 
-export const SegmentGroupLabel = forwardRef<HTMLLabelElement, SegmentGroupLabelProps>((props, ref) => {
+export const SegmentGroupLabel = (props: SegmentGroupLabelProps) => {
+  const { ref, ...restProps } = props
   const segmentGroup = useSegmentGroupContext()
-  const mergedProps = mergeProps(segmentGroup.getLabelProps(), props)
+  const mergedProps = mergeProps(segmentGroup.getLabelProps(), restProps)
 
   return <ark.label {...mergedProps} ref={ref} />
-})
-
-SegmentGroupLabel.displayName = 'SegmentGroupLabel'
+}
