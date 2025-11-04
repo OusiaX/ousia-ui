@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { arkMemo, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseFileUploadProps } from './use-file-upload'
 import { useFileUpload } from './use-file-upload'
 import { FileUploadProvider } from './use-file-upload-context'
 
 export interface FileUploadRootBaseProps extends UseFileUploadProps, PolymorphicProps {}
-export interface FileUploadRootProps extends HTMLProps<'div'>, FileUploadRootBaseProps {}
+export interface FileUploadRootProps extends ComponentProps<'div'>, FileUploadRootBaseProps {}
 
-export const FileUploadRoot = forwardRef<HTMLDivElement, FileUploadRootProps>((props, ref) => {
-  const [useFileUploadProps, localProps] = createSplitProps<UseFileUploadProps>()(props, [
+export const FileUploadRoot = (props: FileUploadRootProps) => {
+  const { ref, ...restProps } = props
+  const [useFileUploadProps, localProps] = createSplitProps<UseFileUploadProps>()(restProps, [
     'accept',
     'acceptedFiles',
     'allowDrop',
@@ -40,9 +40,7 @@ export const FileUploadRoot = forwardRef<HTMLDivElement, FileUploadRootProps>((p
 
   return (
     <FileUploadProvider value={fileUpload}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </FileUploadProvider>
   )
-})
-
-FileUploadRoot.displayName = 'FileUploadRoot'
+}

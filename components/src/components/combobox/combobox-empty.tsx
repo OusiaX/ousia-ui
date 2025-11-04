@@ -1,19 +1,19 @@
-import { forwardRef } from 'react'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
 export interface ComboboxEmptyBaseProps extends PolymorphicProps {}
-export interface ComboboxEmptyProps extends HTMLProps<'div'>, ComboboxEmptyBaseProps {}
+export interface ComboboxEmptyProps extends ComponentProps<'div'>, ComboboxEmptyBaseProps {}
 
-export const ComboboxEmpty = forwardRef<HTMLDivElement, ComboboxEmptyProps>((props, ref) => {
+export const ComboboxEmpty = (props: ComboboxEmptyProps) => {
+  const { ref, ...restProps } = props
   const combobox = useComboboxContext()
 
   if (combobox.collection.size !== 0) {
     return null
   }
 
-  return <ark.div role="presentation" data-scope="combobox" data-part="empty" ref={ref} {...props} />
-})
-
-ComboboxEmpty.displayName = 'ComboboxEmpty'
+  return (
+    <ark.div role="presentation" data-scope="combobox" data-part="empty" ref={ref} {...restProps} />
+  )
+}

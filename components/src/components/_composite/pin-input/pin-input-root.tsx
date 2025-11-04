@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
 import type { Assign } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UsePinInputProps, usePinInput } from './use-pin-input'
 import { PinInputProvider } from './use-pin-input-context'
 
 export interface PinInputRootBaseProps extends UsePinInputProps, PolymorphicProps {}
-export interface PinInputRootProps extends Assign<HTMLProps<'div'>, PinInputRootBaseProps> {}
+export interface PinInputRootProps extends Assign<ComponentProps<'div'>, PinInputRootBaseProps> {}
 
-export const PinInputRoot = forwardRef<HTMLDivElement, PinInputRootProps>((props, ref) => {
-  const [usePinInputProps, localProps] = createSplitProps<UsePinInputProps>()(props, [
+export const PinInputRoot = (props: PinInputRootProps) => {
+  const { ref, ...restProps } = props
+  const [usePinInputProps, localProps] = createSplitProps<UsePinInputProps>()(restProps, [
     'autoFocus',
     'blurOnComplete',
     'count',
@@ -40,9 +40,7 @@ export const PinInputRoot = forwardRef<HTMLDivElement, PinInputRootProps>((props
 
   return (
     <PinInputProvider value={pinInput}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </PinInputProvider>
   )
-})
-
-PinInputRoot.displayName = 'PinInputRoot'
+}

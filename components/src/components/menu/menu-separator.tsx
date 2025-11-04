@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuSeparatorBaseProps {}
-export interface MenuSeparatorProps extends HTMLProps<'hr'>, MenuSeparatorBaseProps {}
+export interface MenuSeparatorBaseProps extends PolymorphicProps {}
+export interface MenuSeparatorProps extends ComponentProps<'hr'>, MenuSeparatorBaseProps {}
 
-export const MenuSeparator = forwardRef<HTMLHRElement, MenuSeparatorProps>((props, ref) => {
+export const MenuSeparator = (props: MenuSeparatorProps) => {
+  const { ref, ...restProps } = props
   const menu = useMenuContext()
-  const mergedProps = mergeProps(menu.getSeparatorProps(), props)
+  const mergedProps = mergeProps(menu.getSeparatorProps(), restProps)
 
-  return <arkSimple.hr {...mergedProps} ref={ref} />
-})
-
-MenuSeparator.displayName = 'MenuSeparator'
+  return <ark.hr {...mergedProps} ref={ref} />
+}

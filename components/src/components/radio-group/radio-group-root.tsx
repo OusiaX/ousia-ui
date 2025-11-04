@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UseRadioGroupProps, useRadioGroup } from './use-radio-group'
 import { RadioGroupProvider } from './use-radio-group-context'
 
 export interface RadioGroupRootBaseProps extends UseRadioGroupProps, PolymorphicProps {}
-export interface RadioGroupRootProps extends Assign<HTMLProps<'div'>, RadioGroupRootBaseProps> {}
+export interface RadioGroupRootProps
+  extends Assign<ComponentProps<'div'>, RadioGroupRootBaseProps> {}
 
-export const RadioGroupRoot = forwardRef<HTMLDivElement, RadioGroupRootProps>((props, ref) => {
-  const [useRadioGroupProps, localProps] = createSplitProps<UseRadioGroupProps>()(props, [
+export const RadioGroupRoot = (props: RadioGroupRootProps) => {
+  const { ref, ...restProps } = props
+  const [useRadioGroupProps, localProps] = createSplitProps<UseRadioGroupProps>()(restProps, [
     'defaultValue',
     'disabled',
     'form',
@@ -27,9 +27,7 @@ export const RadioGroupRoot = forwardRef<HTMLDivElement, RadioGroupRootProps>((p
 
   return (
     <RadioGroupProvider value={radioGroup}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </RadioGroupProvider>
   )
-})
-
-RadioGroupRoot.displayName = 'RadioGroupRoot'
+}

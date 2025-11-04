@@ -1,14 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { useCollapsibleContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useAccordionContext } from './use-accordion-context'
 import { useAccordionItemPropsContext } from './use-accordion-item-props-context'
-import { useCollapsibleContext } from '@ousia-ui/ark/utils'
 
 export interface AccordionItemTriggerBaseProps extends PolymorphicProps {}
-export interface AccordionItemTriggerProps extends HTMLProps<'button'>, AccordionItemTriggerBaseProps {}
+export interface AccordionItemTriggerProps
+  extends ComponentProps<'button'>,
+    AccordionItemTriggerBaseProps {}
 
-export const AccordionItemTrigger = forwardRef<HTMLButtonElement, AccordionItemTriggerProps>((props, ref) => {
+export const AccordionItemTrigger = (props: AccordionItemTriggerProps) => {
+  const { ref, ...restProps } = props
   const accordion = useAccordionContext()
   const itemProps = useAccordionItemPropsContext()
   const collapsible = useCollapsibleContext()
@@ -18,10 +20,8 @@ export const AccordionItemTrigger = forwardRef<HTMLButtonElement, AccordionItemT
       ...triggerProps,
       'aria-controls': collapsible.isUnmounted ? undefined : triggerProps['aria-controls'],
     },
-    props,
+    restProps,
   )
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-AccordionItemTrigger.displayName = 'AccordionItemTrigger'
+}

@@ -1,19 +1,20 @@
-import type { ItemGroupProps } from '@zag-js/combobox'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { useId } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { ark } from '@ousia-ui/ark'
+import type { ItemGroupProps } from '@zag-js/combobox'
+import type { ComponentProps } from 'react'
+import { useId } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { ComboboxItemGroupPropsProvider } from './use-combobox-item-group-props-context'
 
 export interface ComboboxItemGroupBaseProps extends PolymorphicProps {}
-export interface ComboboxItemGroupProps extends HTMLProps<'div'>, ComboboxItemGroupBaseProps {}
+export interface ComboboxItemGroupProps extends ComponentProps<'div'>, ComboboxItemGroupBaseProps {}
 
-export const ComboboxItemGroup = forwardRef<HTMLDivElement, ComboboxItemGroupProps>((props, ref) => {
+export const ComboboxItemGroup = (props: ComboboxItemGroupProps) => {
+  const { ref, ...restProps } = props
   const id = useId()
-  const [_itemGroupProps, localProps] = createSplitProps<Partial<ItemGroupProps>>()(props, ['id'])
+  const [_itemGroupProps, localProps] = createSplitProps<Partial<ItemGroupProps>>()(restProps, [
+    'id',
+  ])
   const itemGroupProps = { id, ..._itemGroupProps }
 
   const combobox = useComboboxContext()
@@ -24,6 +25,4 @@ export const ComboboxItemGroup = forwardRef<HTMLDivElement, ComboboxItemGroupPro
       <ark.div {...mergedProps} ref={ref} />
     </ComboboxItemGroupPropsProvider>
   )
-})
-
-ComboboxItemGroup.displayName = 'ComboboxItemGroup'
+}

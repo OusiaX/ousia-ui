@@ -1,22 +1,22 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 import { useSliderThumbPropsContext } from './use-slider-thumb-props-context'
 
 export interface SliderDraggingIndicatorBaseProps extends PolymorphicProps {}
-export interface SliderDraggingIndicatorProps extends HTMLProps<'span'>, SliderDraggingIndicatorBaseProps {}
+export interface SliderDraggingIndicatorProps
+  extends ComponentProps<'span'>,
+    SliderDraggingIndicatorBaseProps {}
 
-export const SliderDraggingIndicator = forwardRef<HTMLSpanElement, SliderDraggingIndicatorProps>((props, ref) => {
+export const SliderDraggingIndicator = (props: SliderDraggingIndicatorProps) => {
+  const { ref, ...restProps } = props
   const slider = useSliderContext()
   const { index } = useSliderThumbPropsContext()
-  const mergedProps = mergeProps(slider.getDraggingIndicatorProps({ index }), props)
+  const mergedProps = mergeProps(slider.getDraggingIndicatorProps({ index }), restProps)
 
   return (
     <ark.span {...mergedProps} ref={ref}>
-      {props.children || slider.getThumbValue(index)}
+      {restProps.children || slider.getThumbValue(index)}
     </ark.span>
   )
-})
-
-SliderDraggingIndicator.displayName = 'SliderDraggingIndicator'
+}

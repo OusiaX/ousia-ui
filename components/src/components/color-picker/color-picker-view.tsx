@@ -1,7 +1,7 @@
-import type { ColorFormat } from '@zag-js/color-picker'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import type { ColorFormat } from '@zag-js/color-picker'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 import { ColorPickerFormatPropsProvider } from './use-color-picker-format-context'
 
@@ -10,11 +10,12 @@ interface FormatOptions {
 }
 
 export interface ColorPickerViewBaseProps extends FormatOptions, PolymorphicProps {}
-export interface ColorPickerViewProps extends HTMLProps<'div'>, ColorPickerViewBaseProps {}
+export interface ColorPickerViewProps extends ComponentProps<'div'>, ColorPickerViewBaseProps {}
 
-export const ColorPickerView = forwardRef<HTMLDivElement, ColorPickerViewProps>((props, ref) => {
+export const ColorPickerView = (props: ColorPickerViewProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const [formatProps, restProps] = createSplitProps<FormatOptions>()(props, ['format'])
+  const [formatProps, localProps] = createSplitProps<FormatOptions>()(restProps, ['format'])
 
   if (colorPicker.format !== formatProps.format) {
     return null
@@ -22,9 +23,13 @@ export const ColorPickerView = forwardRef<HTMLDivElement, ColorPickerViewProps>(
 
   return (
     <ColorPickerFormatPropsProvider value={formatProps}>
-      <ark.div ref={ref} data-scope="color-picker" data-part="view" data-format={props.format} {...restProps} />
+      <ark.div
+        ref={ref}
+        data-scope="color-picker"
+        data-part="view"
+        data-format={formatProps.format}
+        {...localProps}
+      />
     </ColorPickerFormatPropsProvider>
   )
-})
-
-ColorPickerView.displayName = 'ColorPickerView'
+}

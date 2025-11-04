@@ -1,9 +1,13 @@
-import { mergeProps } from '@zag-js/react'
-import { type JSX, forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import {
+  PresenceProvider,
+  type UsePresenceProps,
+  createSplitProps,
+  splitPresenceProps,
+  usePresence,
+} from '@ousia-ui/ark/utils'
 import type { CollectionItem } from '@zag-js/collection'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
-import { createSplitProps, PresenceProvider, type UsePresenceProps, usePresence, splitPresenceProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps, JSX } from 'react'
 import { type UseSelectProps, useSelect } from './use-select'
 import { SelectProvider } from './use-select-context'
 
@@ -11,10 +15,12 @@ export interface SelectRootBaseProps<T extends CollectionItem>
   extends UseSelectProps<T>,
     UsePresenceProps,
     PolymorphicProps {}
-export interface SelectRootProps<T extends CollectionItem> extends Assign<HTMLProps<'div'>, SelectRootBaseProps<T>> {}
+export interface SelectRootProps<T extends CollectionItem>
+  extends Assign<ComponentProps<'div'>, SelectRootBaseProps<T>> {}
 
-const SelectImpl = <T extends CollectionItem>(props: SelectRootProps<T>, ref: React.Ref<HTMLDivElement>) => {
-  const [presenceProps, selectProps] = splitPresenceProps(props)
+const SelectImpl = <T extends CollectionItem>(props: SelectRootProps<T>) => {
+  const { ref, ...restProps } = props
+  const [presenceProps, selectProps] = splitPresenceProps(restProps)
   const [useSelectProps, localProps] = createSplitProps<UseSelectProps<T>>()(selectProps, [
     'closeOnSelect',
     'collection',
@@ -53,14 +59,14 @@ const SelectImpl = <T extends CollectionItem>(props: SelectRootProps<T>, ref: Re
   return (
     <SelectProvider value={select}>
       <PresenceProvider value={presence}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </PresenceProvider>
     </SelectProvider>
   )
 }
 
-export type SelectRootComponent<P = {}> = <T extends CollectionItem>(
-  props: Assign<SelectRootProps<T>, P> & React.RefAttributes<HTMLDivElement>,
+export type SelectRootComponent<P = Record<string, unknown>> = <T extends CollectionItem>(
+  props: Assign<SelectRootProps<T>, P>,
 ) => JSX.Element
 
-export const SelectRoot = forwardRef(SelectImpl) as SelectRootComponent
+export const SelectRoot = SelectImpl as SelectRootComponent

@@ -1,14 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
 export interface DatePickerYearSelectBaseProps extends PolymorphicProps {}
-export interface DatePickerYearSelectProps extends HTMLProps<'select'>, DatePickerYearSelectBaseProps {}
+export interface DatePickerYearSelectProps
+  extends ComponentProps<'select'>,
+    DatePickerYearSelectBaseProps {}
 
-export const DatePickerYearSelect = forwardRef<HTMLSelectElement, DatePickerYearSelectProps>((props, ref) => {
+export const DatePickerYearSelect = (props: DatePickerYearSelectProps) => {
+  const { ref, ...restProps } = props
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getYearSelectProps(), props)
+  const mergedProps = mergeProps(datePicker.getYearSelectProps(), restProps)
 
   return (
     <ark.select {...mergedProps} ref={ref}>
@@ -19,6 +21,4 @@ export const DatePickerYearSelect = forwardRef<HTMLSelectElement, DatePickerYear
       ))}
     </ark.select>
   )
-})
-
-DatePickerYearSelect.displayName = 'DatePickerYearSelect'
+}

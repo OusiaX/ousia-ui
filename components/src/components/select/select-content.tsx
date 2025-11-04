@@ -1,22 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
+import type { Ref } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectContentBaseProps extends PolymorphicProps {}
 export interface SelectContentProps extends HTMLProps<'div'>, SelectContentBaseProps {}
 
-export const SelectContent = forwardRef<HTMLDivElement, SelectContentProps>((props, ref) => {
+export const SelectContent = (props: SelectContentProps & { ref?: Ref<HTMLDivElement> }) => {
+  const { ref, ...restProps } = props
   const select = useSelectContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(select.getContentProps(), presence.getPresenceProps(), props)
+  const mergedProps = mergeProps(select.getContentProps(), presence.getPresenceProps(), restProps)
 
   if (presence.unmounted) {
     return null
   }
 
   return <ark.div {...mergedProps} ref={composeRefs(presence.ref, ref)} />
-})
-
-SelectContent.displayName = 'SelectContent'
+}

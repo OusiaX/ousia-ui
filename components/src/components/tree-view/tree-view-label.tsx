@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 
 export interface TreeViewLabelBaseProps extends PolymorphicProps {}
-export interface TreeViewLabelProps extends HTMLProps<'h3'>, TreeViewLabelBaseProps {}
+export interface TreeViewLabelProps extends ComponentProps<'h3'>, TreeViewLabelBaseProps {}
 
-export const TreeViewLabel = forwardRef<HTMLHeadingElement, TreeViewLabelProps>((props, ref) => {
+export const TreeViewLabel = (props: TreeViewLabelProps) => {
+  const { ref, ...restProps } = props
   const treeView = useTreeViewContext()
-  const mergedProps = mergeProps(treeView.getLabelProps(), props)
+  const mergedProps = mergeProps(treeView.getLabelProps(), restProps)
 
   return <ark.h3 {...mergedProps} ref={ref} />
-})
-
-TreeViewLabel.displayName = 'TreeViewLabel'
+}

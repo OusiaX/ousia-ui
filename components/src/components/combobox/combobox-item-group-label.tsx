@@ -1,19 +1,21 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { HTMLProps } from '@ousia-ui/ark'
-import { arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { useComboboxItemGroupPropsContext } from './use-combobox-item-group-props-context'
 
-export interface ComboboxItemGroupLabelBaseProps {}
-export interface ComboboxItemGroupLabelProps extends HTMLProps<'div'>, ComboboxItemGroupLabelBaseProps {}
+export interface ComboboxItemGroupLabelBaseProps extends PolymorphicProps {}
+export interface ComboboxItemGroupLabelProps
+  extends ComponentProps<'div'>,
+    ComboboxItemGroupLabelBaseProps {}
 
-export const ComboboxItemGroupLabel = forwardRef<HTMLDivElement, ComboboxItemGroupLabelProps>((props, ref) => {
+export const ComboboxItemGroupLabel = (props: ComboboxItemGroupLabelProps) => {
+  const { ref, ...restProps } = props
   const combobox = useComboboxContext()
   const itemGroupProps = useComboboxItemGroupPropsContext()
-  const mergedProps = mergeProps(combobox.getItemGroupLabelProps({ htmlFor: itemGroupProps.id }), props)
+  const mergedProps = mergeProps(
+    combobox.getItemGroupLabelProps({ htmlFor: itemGroupProps.id }),
+    restProps,
+  )
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-ComboboxItemGroupLabel.displayName = 'ComboboxItemGroupLabel'
+  return <ark.div {...mergedProps} ref={ref} />
+}

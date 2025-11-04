@@ -1,15 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UseCarouselProps, useCarousel } from './use-carousel'
 import { CarouselProvider } from './use-carousel-context'
 
 export interface CarouselRootBaseProps extends UseCarouselProps, PolymorphicProps {}
-export interface CarouselRootProps extends HTMLProps<'div'>, CarouselRootBaseProps {}
+export interface CarouselRootProps extends ComponentProps<'div'>, CarouselRootBaseProps {}
 
-export const CarouselRoot = forwardRef<HTMLDivElement, CarouselRootProps>((props, ref) => {
-  const [useCarouselProps, localProps] = createSplitProps<UseCarouselProps>()(props, [
+export const CarouselRoot = (props: CarouselRootProps) => {
+  const { ref, ...restProps } = props
+  const [useCarouselProps, localProps] = createSplitProps<UseCarouselProps>()(restProps, [
     'allowMouseDrag',
     'autoplay',
     'defaultPage',
@@ -35,9 +35,7 @@ export const CarouselRoot = forwardRef<HTMLDivElement, CarouselRootProps>((props
 
   return (
     <CarouselProvider value={carousel}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </CarouselProvider>
   )
-})
-
-CarouselRoot.displayName = 'CarouselRoot'
+}

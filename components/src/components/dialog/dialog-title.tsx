@@ -1,17 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { HTMLProps } from '@ousia-ui/ark'
-import { arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
-export interface DialogTitleBaseProps {}
-export interface DialogTitleProps extends HTMLProps<'h2'>, DialogTitleBaseProps {}
+export interface DialogTitleBaseProps extends PolymorphicProps {}
+export interface DialogTitleProps extends ComponentProps<'h2'>, DialogTitleBaseProps {}
 
-export const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>((props, ref) => {
+export const DialogTitle = (props: DialogTitleProps) => {
+  const { ref, ...restProps } = props
   const dialog = useDialogContext()
-  const mergedProps = mergeProps(dialog.getTitleProps(), props)
+  const mergedProps = mergeProps(dialog.getTitleProps(), restProps)
 
-  return <arkSimple.h2 {...mergedProps} ref={ref} />
-})
-
-DialogTitle.displayName = 'DialogTitle'
+  return <ark.h2 {...mergedProps} ref={ref} />
+}

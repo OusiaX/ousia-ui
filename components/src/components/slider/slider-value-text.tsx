@@ -1,13 +1,13 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
 export interface SliderValueTextBaseProps extends PolymorphicProps {}
-export interface SliderValueTextProps extends HTMLProps<'span'>, SliderValueTextBaseProps {}
+export interface SliderValueTextProps extends ComponentProps<'span'>, SliderValueTextBaseProps {}
 
-export const SliderValueText = forwardRef<HTMLDivElement, SliderValueTextProps>((props, ref) => {
-  const { children, ...rest } = props
+export const SliderValueText = (props: SliderValueTextProps) => {
+  const { ref, ...restProps } = props
+  const { children, ...rest } = restProps
   const slider = useSliderContext()
   const mergedProps = mergeProps(slider.getValueTextProps(), rest)
 
@@ -16,6 +16,4 @@ export const SliderValueText = forwardRef<HTMLDivElement, SliderValueTextProps>(
       {children || slider.value.join(', ')}
     </ark.span>
   )
-})
-
-SliderValueText.displayName = 'SliderValueText'
+}

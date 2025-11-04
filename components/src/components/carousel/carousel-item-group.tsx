@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useCarouselContext } from './use-carousel-context'
 
 export interface CarouselItemGroupBaseProps extends PolymorphicProps {}
-export interface CarouselItemGroupProps extends HTMLProps<'div'>, CarouselItemGroupBaseProps {}
+export interface CarouselItemGroupProps extends ComponentProps<'div'>, CarouselItemGroupBaseProps {}
 
-export const CarouselItemGroup = forwardRef<HTMLDivElement, CarouselItemGroupProps>((props, ref) => {
+export const CarouselItemGroup = (props: CarouselItemGroupProps) => {
+  const { ref, ...restProps } = props
   const carousel = useCarouselContext()
-  const mergedProps = mergeProps(carousel.getItemGroupProps(), props)
+  const mergedProps = mergeProps(carousel.getItemGroupProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-CarouselItemGroup.displayName = 'CarouselItemGroup'
+}

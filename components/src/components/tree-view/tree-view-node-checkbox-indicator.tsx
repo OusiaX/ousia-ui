@@ -1,4 +1,4 @@
-import type { HTMLProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTreeViewNodeContext } from './use-tree-view-node-context'
 
 export interface TreeViewNodeCheckboxIndicatorBaseProps {
@@ -6,7 +6,9 @@ export interface TreeViewNodeCheckboxIndicatorBaseProps {
   indeterminate?: React.ReactNode | undefined
   fallback?: React.ReactNode | undefined
 }
-export interface TreeViewNodeCheckboxIndicatorProps extends HTMLProps<'span'>, TreeViewNodeCheckboxIndicatorBaseProps {}
+export interface TreeViewNodeCheckboxIndicatorProps
+  extends ComponentProps<'span'>,
+    TreeViewNodeCheckboxIndicatorBaseProps {}
 
 export const TreeViewNodeCheckboxIndicator = (props: TreeViewNodeCheckboxIndicatorProps) => {
   const { children, indeterminate, fallback } = props

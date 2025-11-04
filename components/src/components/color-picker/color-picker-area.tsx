@@ -1,24 +1,22 @@
-import type { AreaProps } from '@zag-js/color-picker'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { AreaProps } from '@zag-js/color-picker'
+import type { ComponentProps } from 'react'
 import { ColorPickerAreaPropsProvider } from './use-color-picker-area-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
 export interface ColorPickerAreaBaseProps extends AreaProps, PolymorphicProps {}
-export interface ColorPickerAreaProps extends HTMLProps<'div'>, ColorPickerAreaBaseProps {}
+export interface ColorPickerAreaProps extends ComponentProps<'div'>, ColorPickerAreaBaseProps {}
 
-export const ColorPickerArea = forwardRef<HTMLDivElement, ColorPickerAreaProps>((props, ref) => {
-  const [areaProps, localProps] = createSplitProps<AreaProps>()(props, ['xChannel', 'yChannel'])
+export const ColorPickerArea = (props: ColorPickerAreaProps) => {
+  const { ref, ...restProps } = props
+  const [areaProps, localProps] = createSplitProps<AreaProps>()(restProps, ['xChannel', 'yChannel'])
   const colorPicker = useColorPickerContext()
   const mergedProps = mergeProps(colorPicker.getAreaProps(areaProps), localProps)
 
   return (
     <ColorPickerAreaPropsProvider value={areaProps}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </ColorPickerAreaPropsProvider>
   )
-})
-
-ColorPickerArea.displayName = 'ColorPickerArea'
+}

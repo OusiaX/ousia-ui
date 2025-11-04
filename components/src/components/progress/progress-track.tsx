@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
 export interface ProgressTrackBaseProps extends PolymorphicProps {}
-export interface ProgressTrackProps extends HTMLProps<'div'>, ProgressTrackBaseProps {}
+export interface ProgressTrackProps extends ComponentProps<'div'>, ProgressTrackBaseProps {}
 
-export const ProgressTrack = forwardRef<HTMLDivElement, ProgressTrackProps>((props, ref) => {
+export const ProgressTrack = (props: ProgressTrackProps) => {
+  const { ref, ...restProps } = props
   const progress = useProgressContext()
-  const mergedProps = mergeProps(progress.getTrackProps(), props)
+  const mergedProps = mergeProps(progress.getTrackProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-ProgressTrack.displayName = 'ProgressTrack'
+}

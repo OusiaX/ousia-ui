@@ -1,23 +1,25 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UseAvatarProps, useAvatar } from './use-avatar'
 import { AvatarProvider } from './use-avatar-context'
 
 export interface AvatarRootBaseProps extends UseAvatarProps, PolymorphicProps {}
-export interface AvatarRootProps extends HTMLProps<'div'>, AvatarRootBaseProps {}
+export interface AvatarRootProps extends ComponentProps<'div'>, AvatarRootBaseProps {}
 
-export const AvatarRoot = forwardRef<HTMLDivElement, AvatarRootProps>((props, ref) => {
-  const [useAvatarProps, localProps] = createSplitProps<UseAvatarProps>()(props, ['id', 'ids', 'onStatusChange'])
+export const AvatarRoot = (props: AvatarRootProps) => {
+  const { ref, ...restProps } = props
+  const [useAvatarProps, localProps] = createSplitProps<UseAvatarProps>()(restProps, [
+    'id',
+    'ids',
+    'onStatusChange',
+  ])
   const avatar = useAvatar(useAvatarProps)
   const mergedProps = mergeProps(avatar.getRootProps(), localProps)
 
   return (
     <AvatarProvider value={avatar}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </AvatarProvider>
   )
-})
-
-AvatarRoot.displayName = 'AvatarRoot'
+}

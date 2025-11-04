@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
 export interface SliderTrackBaseProps extends PolymorphicProps {}
-export interface SliderTrackProps extends HTMLProps<'div'>, SliderTrackBaseProps {}
+export interface SliderTrackProps extends ComponentProps<'div'>, SliderTrackBaseProps {}
 
-export const SliderTrack = forwardRef<HTMLDivElement, SliderTrackProps>((props, ref) => {
+export const SliderTrack = (props: SliderTrackProps) => {
+  const { ref, ...restProps } = props
   const slider = useSliderContext()
-  const mergedProps = mergeProps(slider.getTrackProps(), props)
+  const mergedProps = mergeProps(slider.getTrackProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-SliderTrack.displayName = 'SliderTrack'
+}

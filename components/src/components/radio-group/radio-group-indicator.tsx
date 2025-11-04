@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useRadioGroupContext } from './use-radio-group-context'
 
 export interface RadioGroupIndicatorBaseProps extends PolymorphicProps {}
-export interface RadioGroupIndicatorProps extends HTMLProps<'div'>, RadioGroupIndicatorBaseProps {}
+export interface RadioGroupIndicatorProps
+  extends ComponentProps<'div'>,
+    RadioGroupIndicatorBaseProps {}
 
-export const RadioGroupIndicator = forwardRef<HTMLDivElement, RadioGroupIndicatorProps>((props, ref) => {
+export const RadioGroupIndicator = (props: RadioGroupIndicatorProps) => {
+  const { ref, ...restProps } = props
   const radioGroup = useRadioGroupContext()
-  const mergedProps = mergeProps(radioGroup.getIndicatorProps(), props)
+  const mergedProps = mergeProps(radioGroup.getIndicatorProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-RadioGroupIndicator.displayName = 'RadioGroupIndicator'
+}

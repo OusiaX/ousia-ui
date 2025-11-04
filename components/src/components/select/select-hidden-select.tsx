@@ -1,15 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectHiddenSelectBaseProps extends PolymorphicProps {}
-export interface SelectHiddenSelectProps extends HTMLProps<'select'>, SelectHiddenSelectBaseProps {}
+export interface SelectHiddenSelectProps
+  extends ComponentProps<'select'>,
+    SelectHiddenSelectBaseProps {}
 
-export const SelectHiddenSelect = forwardRef<HTMLSelectElement, SelectHiddenSelectProps>((props, ref) => {
+export const SelectHiddenSelect = (props: SelectHiddenSelectProps) => {
+  const { ref, ...restProps } = props
   const select = useSelectContext()
-  const mergedProps = mergeProps(select.getHiddenSelectProps(), props)
+  const mergedProps = mergeProps(select.getHiddenSelectProps(), restProps)
   const isValueEmpty = select.value.length === 0
   const field = useFieldContext()
 
@@ -27,5 +29,4 @@ export const SelectHiddenSelect = forwardRef<HTMLSelectElement, SelectHiddenSele
       ))}
     </ark.select>
   )
-})
-SelectHiddenSelect.displayName = 'SelectHiddenSelect'
+}

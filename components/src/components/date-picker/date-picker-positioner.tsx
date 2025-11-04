@@ -1,15 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
 export interface DatePickerPositionerBaseProps extends PolymorphicProps {}
-export interface DatePickerPositionerProps extends HTMLProps<'div'>, DatePickerPositionerBaseProps {}
+export interface DatePickerPositionerProps
+  extends ComponentProps<'div'>,
+    DatePickerPositionerBaseProps {}
 
-export const DatePickerPositioner = forwardRef<HTMLDivElement, DatePickerPositionerProps>((props, ref) => {
+export const DatePickerPositioner = (props: DatePickerPositionerProps) => {
+  const { ref, ...restProps } = props
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getPositionerProps(), props)
+  const mergedProps = mergeProps(datePicker.getPositionerProps(), restProps)
   const presence = usePresenceContext()
 
   if (presence.unmounted) {
@@ -17,6 +19,4 @@ export const DatePickerPositioner = forwardRef<HTMLDivElement, DatePickerPositio
   }
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-DatePickerPositioner.displayName = 'DatePickerPositioner'
+}

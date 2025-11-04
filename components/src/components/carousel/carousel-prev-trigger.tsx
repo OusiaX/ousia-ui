@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useCarouselContext } from './use-carousel-context'
 
 export interface CarouselPrevTriggerBaseProps extends PolymorphicProps {}
-export interface CarouselPrevTriggerProps extends HTMLProps<'button'>, CarouselPrevTriggerBaseProps {}
+export interface CarouselPrevTriggerProps
+  extends ComponentProps<'button'>,
+    CarouselPrevTriggerBaseProps {}
 
-export const CarouselPrevTrigger = forwardRef<HTMLButtonElement, CarouselPrevTriggerProps>((props, ref) => {
+export const CarouselPrevTrigger = (props: CarouselPrevTriggerProps) => {
+  const { ref, ...restProps } = props
   const carousel = useCarouselContext()
-  const mergedProps = mergeProps(carousel.getPrevTriggerProps(), props)
+  const mergedProps = mergeProps(carousel.getPrevTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-CarouselPrevTrigger.displayName = 'CarouselPrevTrigger'
+}

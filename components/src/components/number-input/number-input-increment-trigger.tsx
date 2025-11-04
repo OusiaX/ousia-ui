@@ -1,18 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
 export interface NumberInputIncrementTriggerBaseProps extends PolymorphicProps {}
-export interface NumberInputIncrementTriggerProps extends HTMLProps<'button'>, NumberInputIncrementTriggerBaseProps {}
+export interface NumberInputIncrementTriggerProps
+  extends ComponentProps<'button'>,
+    NumberInputIncrementTriggerBaseProps {}
 
-export const NumberInputIncrementTrigger = forwardRef<HTMLButtonElement, NumberInputIncrementTriggerProps>(
-  (props, ref) => {
-    const numberInput = useNumberInputContext()
-    const mergedProps = mergeProps(numberInput.getIncrementTriggerProps(), props)
+export const NumberInputIncrementTrigger = (props: NumberInputIncrementTriggerProps) => {
+  const { ref, ...restProps } = props
+  const numberInput = useNumberInputContext()
+  const mergedProps = mergeProps(numberInput.getIncrementTriggerProps(), restProps)
 
-    return <ark.button {...mergedProps} ref={ref} />
-  },
-)
-
-NumberInputIncrementTrigger.displayName = 'NumberInputIncrementTrigger'
+  return <ark.button {...mergedProps} ref={ref} />
+}

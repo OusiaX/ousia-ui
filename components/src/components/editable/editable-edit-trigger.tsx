@@ -1,17 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark } from '@ousia-ui/ark'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
 export interface EditableEditTriggerBaseProps extends PolymorphicProps {}
-export interface EditableEditTriggerProps extends HTMLProps<'button'>, EditableEditTriggerBaseProps {}
+export interface EditableEditTriggerProps
+  extends ComponentProps<'button'>,
+    EditableEditTriggerBaseProps {}
 
-export const EditableEditTrigger = forwardRef<HTMLButtonElement, EditableEditTriggerProps>((props, ref) => {
+export const EditableEditTrigger = (props: EditableEditTriggerProps) => {
+  const { ref, ...restProps } = props
   const editable = useEditableContext()
-  const mergedProps = mergeProps(editable.getEditTriggerProps(), props)
+  const mergedProps = mergeProps(editable.getEditTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-EditableEditTrigger.displayName = 'EditableEditTrigger'
+}

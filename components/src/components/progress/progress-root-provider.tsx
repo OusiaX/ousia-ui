@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseProgressReturn } from './use-progress'
 import { ProgressProvider } from './use-progress-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface ProgressRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface ProgressRootProviderProps extends HTMLProps<'div'>, ProgressRootProviderBaseProps {}
+export interface ProgressRootProviderProps
+  extends ComponentProps<'div'>,
+    ProgressRootProviderBaseProps {}
 
-export const ProgressRootProvider = forwardRef<HTMLDivElement, ProgressRootProviderProps>((props, ref) => {
-  const [{ value: progress }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const ProgressRootProvider = (props: ProgressRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: progress }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(progress.getRootProps(), localProps)
 
   return (
     <ProgressProvider value={progress}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </ProgressProvider>
   )
-})
-
-ProgressRootProvider.displayName = 'ProgressRootProvider'
+}

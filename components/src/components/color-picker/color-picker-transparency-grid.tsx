@@ -1,21 +1,19 @@
-import type { TransparencyGridProps } from '@zag-js/color-picker'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import type { TransparencyGridProps } from '@zag-js/color-picker'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
 export interface ColorPickerTransparencyGridBaseProps extends TransparencyGridProps {}
-export interface ColorPickerTransparencyGridProps extends HTMLProps<'div'>, ColorPickerTransparencyGridBaseProps {}
+export interface ColorPickerTransparencyGridProps
+  extends ComponentProps<'div'>,
+    ColorPickerTransparencyGridBaseProps {}
 
-export const ColorPickerTransparencyGrid = forwardRef<HTMLDivElement, ColorPickerTransparencyGridProps>(
-  (props, ref) => {
-    const [gridProps, localProps] = createSplitProps<TransparencyGridProps>()(props, ['size'])
-    const colorPicker = useColorPickerContext()
-    const mergedProps = mergeProps(colorPicker.getTransparencyGridProps(gridProps), localProps)
+export const ColorPickerTransparencyGrid = (props: ColorPickerTransparencyGridProps) => {
+  const { ref, ...restProps } = props
+  const [gridProps, localProps] = createSplitProps<TransparencyGridProps>()(restProps, ['size'])
+  const colorPicker = useColorPickerContext()
+  const mergedProps = mergeProps(colorPicker.getTransparencyGridProps(gridProps), localProps)
 
-    return <arkSimple.div {...mergedProps} ref={ref} />
-  },
-)
-
-ColorPickerTransparencyGrid.displayName = 'ColorPickerTransparencyGrid'
+  return <ark.div {...mergedProps} ref={ref} />
+}

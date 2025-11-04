@@ -1,17 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark } from '@ousia-ui/ark'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
 export interface EditableCancelTriggerBaseProps extends PolymorphicProps {}
-export interface EditableCancelTriggerProps extends HTMLProps<'button'>, EditableCancelTriggerBaseProps {}
+export interface EditableCancelTriggerProps
+  extends ComponentProps<'button'>,
+    EditableCancelTriggerBaseProps {}
 
-export const EditableCancelTrigger = forwardRef<HTMLButtonElement, EditableCancelTriggerProps>((props, ref) => {
+export const EditableCancelTrigger = (props: EditableCancelTriggerProps) => {
+  const { ref, ...restProps } = props
   const editable = useEditableContext()
-  const mergedProps = mergeProps(editable.getCancelTriggerProps(), props)
+  const mergedProps = mergeProps(editable.getCancelTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-EditableCancelTrigger.displayName = 'EditableCancelTrigger'
+}

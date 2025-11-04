@@ -1,23 +1,26 @@
-import { forwardRef } from 'react'
+import { type Assign, type PolymorphicProps, ark } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo, type Assign } from '@ousia-ui/ark'
-import { CheckboxGroupContextProvider, type UseCheckboxGroupContext } from './use-checkbox-group-context'
+import type { ComponentProps } from 'react'
+import {
+  CheckboxGroupContextProvider,
+  type UseCheckboxGroupContext,
+} from './use-checkbox-group-context'
 
 interface ProviderProps {
   value: UseCheckboxGroupContext
 }
 
 export interface CheckboxGroupProviderBaseProps extends ProviderProps, PolymorphicProps {}
-export interface CheckboxGroupProviderProps extends Assign<HTMLProps<'div'>, CheckboxGroupProviderBaseProps> {}
+export interface CheckboxGroupProviderProps
+  extends Assign<ComponentProps<'div'>, CheckboxGroupProviderBaseProps> {}
 
-export const CheckboxGroupProvider = forwardRef<HTMLDivElement, CheckboxGroupProviderProps>((props, ref) => {
-  const [localProps, restProps] = createSplitProps<ProviderProps>()(props, ['value'])
+export const CheckboxGroupProvider = (props: CheckboxGroupProviderProps) => {
+  const { ref, ...restProps } = props
+  const [localProps, restLocalProps] = createSplitProps<ProviderProps>()(restProps, ['value'])
 
   return (
     <CheckboxGroupContextProvider value={localProps.value}>
-      <arkMemo.div ref={ref} role="group" data-scope="checkbox" data-part="group" {...restProps} />
+      <ark.div ref={ref} role="group" data-scope="checkbox" data-part="group" {...restLocalProps} />
     </CheckboxGroupContextProvider>
   )
-})
-
-CheckboxGroupProvider.displayName = 'CheckboxGroupProvider'
+}

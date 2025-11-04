@@ -1,15 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
 export interface ColorPickerPositionerBaseProps extends PolymorphicProps {}
-export interface ColorPickerPositionerProps extends HTMLProps<'div'>, ColorPickerPositionerBaseProps {}
+export interface ColorPickerPositionerProps
+  extends ComponentProps<'div'>,
+    ColorPickerPositionerBaseProps {}
 
-export const ColorPickerPositioner = forwardRef<HTMLDivElement, ColorPickerPositionerProps>((props, ref) => {
+export const ColorPickerPositioner = (props: ColorPickerPositionerProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(colorPicker.getPositionerProps(), props)
+  const mergedProps = mergeProps(colorPicker.getPositionerProps(), restProps)
   const presence = usePresenceContext()
 
   if (presence.unmounted) {
@@ -17,6 +19,4 @@ export const ColorPickerPositioner = forwardRef<HTMLDivElement, ColorPickerPosit
   }
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-ColorPickerPositioner.displayName = 'ColorPickerPositioner'
+}

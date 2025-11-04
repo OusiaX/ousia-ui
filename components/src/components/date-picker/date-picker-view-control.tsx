@@ -1,18 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
 export interface DatePickerViewControlBaseProps extends PolymorphicProps {}
-export interface DatePickerViewControlProps extends HTMLProps<'div'>, DatePickerViewControlBaseProps {}
+export interface DatePickerViewControlProps
+  extends ComponentProps<'div'>,
+    DatePickerViewControlBaseProps {}
 
-export const DatePickerViewControl = forwardRef<HTMLDivElement, DatePickerViewControlProps>((props, ref) => {
+export const DatePickerViewControl = (props: DatePickerViewControlProps) => {
+  const { ref, ...restProps } = props
   const datePicker = useDatePickerContext()
   const viewProps = useDatePickerViewPropsContext()
-  const mergedProps = mergeProps(datePicker.getViewControlProps(viewProps), props)
+  const mergedProps = mergeProps(datePicker.getViewControlProps(viewProps), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-DatePickerViewControl.displayName = 'DatePickerViewControl'
+}

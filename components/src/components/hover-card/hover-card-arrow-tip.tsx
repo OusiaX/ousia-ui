@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useHoverCardContext } from './use-hover-card-context'
 
 export interface HoverCardArrowTipBaseProps extends PolymorphicProps {}
-export interface HoverCardArrowTipProps extends HTMLProps<'div'>, HoverCardArrowTipBaseProps {}
+export interface HoverCardArrowTipProps extends ComponentProps<'div'>, HoverCardArrowTipBaseProps {}
 
-export const HoverCardArrowTip = forwardRef<HTMLDivElement, HoverCardArrowTipProps>((props, ref) => {
+export const HoverCardArrowTip = (props: HoverCardArrowTipProps) => {
+  const { ref, ...restProps } = props
   const hoverCard = useHoverCardContext()
-  const mergedProps = mergeProps(hoverCard.getArrowTipProps(), props)
+  const mergedProps = mergeProps(hoverCard.getArrowTipProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-HoverCardArrowTip.displayName = 'HoverCardArrowTip'
+}

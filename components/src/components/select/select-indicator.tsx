@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectIndicatorBaseProps extends PolymorphicProps {}
-export interface SelectIndicatorProps extends HTMLProps<'div'>, SelectIndicatorBaseProps {}
+export interface SelectIndicatorProps extends ComponentProps<'div'>, SelectIndicatorBaseProps {}
 
-export const SelectIndicator = forwardRef<HTMLDivElement, SelectIndicatorProps>((props, ref) => {
+export const SelectIndicator = (props: SelectIndicatorProps) => {
+  const { ref, ...restProps } = props
   const select = useSelectContext()
-  const mergedProps = mergeProps(select.getIndicatorProps(), props)
+  const mergedProps = mergeProps(select.getIndicatorProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-SelectIndicator.displayName = 'SelectIndicator'
+}

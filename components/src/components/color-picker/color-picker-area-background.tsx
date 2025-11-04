@@ -1,18 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerAreaPropsContext } from './use-color-picker-area-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerAreaBackgroundBaseProps {}
-export interface ColorPickerAreaBackgroundProps extends HTMLProps<'div'>, ColorPickerAreaBackgroundBaseProps {}
+export interface ColorPickerAreaBackgroundBaseProps extends PolymorphicProps {}
+export interface ColorPickerAreaBackgroundProps
+  extends ComponentProps<'div'>,
+    ColorPickerAreaBackgroundBaseProps {}
 
-export const ColorPickerAreaBackground = forwardRef<HTMLDivElement, ColorPickerAreaBackgroundProps>((props, ref) => {
+export const ColorPickerAreaBackground = (props: ColorPickerAreaBackgroundProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
   const areaProps = useColorPickerAreaPropsContext()
-  const mergedProps = mergeProps(colorPicker.getAreaBackgroundProps(areaProps), props)
+  const mergedProps = mergeProps(colorPicker.getAreaBackgroundProps(areaProps), restProps)
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-ColorPickerAreaBackground.displayName = 'ColorPickerAreaBackground'
+  return <ark.div {...mergedProps} ref={ref} />
+}

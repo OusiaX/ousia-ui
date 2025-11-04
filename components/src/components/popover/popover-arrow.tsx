@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
 export interface PopoverArrowBaseProps extends PolymorphicProps {}
-export interface PopoverArrowProps extends HTMLProps<'div'>, PopoverArrowBaseProps {}
+export interface PopoverArrowProps extends ComponentProps<'div'>, PopoverArrowBaseProps {}
 
-export const PopoverArrow = forwardRef<HTMLDivElement, PopoverArrowProps>((props, ref) => {
+export const PopoverArrow = (props: PopoverArrowProps) => {
+  const { ref, ...restProps } = props
   const popover = usePopoverContext()
-  const mergedProps = mergeProps(popover.getArrowProps(), props)
+  const mergedProps = mergeProps(popover.getArrowProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-PopoverArrow.displayName = 'PopoverArrow'
+}

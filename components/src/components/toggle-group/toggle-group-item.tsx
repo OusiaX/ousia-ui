@@ -1,20 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import type { ItemProps } from '@zag-js/toggle-group'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import type { ItemProps } from '@zag-js/toggle-group'
+import type { ComponentProps } from 'react'
 import { useToggleGroupContext } from './use-toggle-group-context'
 
 export interface ToggleGroupItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface ToggleGroupItemProps extends Assign<HTMLProps<'button'>, ToggleGroupItemBaseProps> {}
+export interface ToggleGroupItemProps
+  extends Assign<ComponentProps<'button'>, ToggleGroupItemBaseProps> {}
 
-export const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>((props, ref) => {
-  const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['value', 'disabled'])
+export const ToggleGroupItem = (props: ToggleGroupItemProps) => {
+  const { ref, ...restProps } = props
+  const [itemProps, localProps] = createSplitProps<ItemProps>()(restProps, ['value', 'disabled'])
   const toggleGroup = useToggleGroupContext()
   const mergedProps = mergeProps(toggleGroup.getItemProps(itemProps), localProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-ToggleGroupItem.displayName = 'ToggleGroupItem'
+}

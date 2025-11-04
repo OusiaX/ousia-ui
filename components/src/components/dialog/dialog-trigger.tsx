@@ -1,14 +1,13 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
 export interface DialogTriggerBaseProps extends PolymorphicProps {}
-export interface DialogTriggerProps extends HTMLProps<'button'>, DialogTriggerBaseProps {}
+export interface DialogTriggerProps extends ComponentProps<'button'>, DialogTriggerBaseProps {}
 
-export const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>((props, ref) => {
+export const DialogTrigger = (props: DialogTriggerProps) => {
+  const { ref, ...restProps } = props
   const dialog = useDialogContext()
   const presence = usePresenceContext()
 
@@ -17,10 +16,8 @@ export const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>((
       ...dialog.getTriggerProps(),
       'aria-controls': presence.unmounted ? undefined : dialog.getTriggerProps()['aria-controls'],
     },
-    props,
+    restProps,
   )
 
-  return <arkMemo.button {...mergedProps} ref={ref} />
-})
-
-DialogTrigger.displayName = 'DialogTrigger'
+  return <ark.button {...mergedProps} ref={ref} />
+}

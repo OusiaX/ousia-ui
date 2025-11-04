@@ -1,13 +1,13 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
 export interface MenuTriggerBaseProps extends PolymorphicProps {}
-export interface MenuTriggerProps extends HTMLProps<'button'>, MenuTriggerBaseProps {}
+export interface MenuTriggerProps extends ComponentProps<'button'>, MenuTriggerBaseProps {}
 
-export const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>((props, ref) => {
+export const MenuTrigger = (props: MenuTriggerProps) => {
+  const { ref, ...restProps } = props
   const menu = useMenuContext()
   const presence = usePresenceContext()
   const mergedProps = mergeProps(
@@ -15,10 +15,8 @@ export const MenuTrigger = forwardRef<HTMLButtonElement, MenuTriggerProps>((prop
       ...menu.getTriggerProps(),
       'aria-controls': presence.unmounted ? undefined : menu.getTriggerProps()['aria-controls'],
     },
-    props,
+    restProps,
   )
 
-  return <arkMemo.button {...mergedProps} ref={ref} />
-})
-
-MenuTrigger.displayName = 'MenuTrigger'
+  return <ark.button {...mergedProps} ref={ref} />
+}

@@ -1,17 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import type { ItemProps } from '@zag-js/select'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ItemProps } from '@zag-js/select'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 import { SelectItemProvider } from './use-select-item-context'
 import { SelectItemPropsProvider } from './use-select-item-props-context'
 
 export interface SelectItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface SelectItemProps extends HTMLProps<'div'>, SelectItemBaseProps {}
+export interface SelectItemProps extends ComponentProps<'div'>, SelectItemBaseProps {}
 
-export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>((props, ref) => {
-  const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['item', 'persistFocus'])
+export const SelectItem = (props: SelectItemProps) => {
+  const { ref, ...restProps } = props
+  const [itemProps, localProps] = createSplitProps<ItemProps>()(restProps, ['item', 'persistFocus'])
   const select = useSelectContext()
   const mergedProps = mergeProps(select.getItemProps(itemProps), localProps)
   const itemState = select.getItemState(itemProps)
@@ -19,10 +19,8 @@ export const SelectItem = forwardRef<HTMLDivElement, SelectItemProps>((props, re
   return (
     <SelectItemPropsProvider value={itemProps}>
       <SelectItemProvider value={itemState}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </SelectItemProvider>
     </SelectItemPropsProvider>
   )
-})
-
-SelectItem.displayName = 'SelectItem'
+}

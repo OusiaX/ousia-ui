@@ -1,14 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
 export interface ColorPickerFormatSelectBaseProps extends PolymorphicProps {}
-export interface ColorPickerFormatSelectProps extends HTMLProps<'select'>, ColorPickerFormatSelectBaseProps {}
+export interface ColorPickerFormatSelectProps
+  extends ComponentProps<'select'>,
+    ColorPickerFormatSelectBaseProps {}
 
-export const ColorPickerFormatSelect = forwardRef<HTMLSelectElement, ColorPickerFormatSelectProps>((props, ref) => {
+export const ColorPickerFormatSelect = (props: ColorPickerFormatSelectProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(colorPicker.getFormatSelectProps(), props)
+  const mergedProps = mergeProps(colorPicker.getFormatSelectProps(), restProps)
 
   return (
     <ark.select {...mergedProps} ref={ref}>
@@ -19,6 +21,4 @@ export const ColorPickerFormatSelect = forwardRef<HTMLSelectElement, ColorPicker
       ))}
     </ark.select>
   )
-})
-
-ColorPickerFormatSelect.displayName = 'ColorPickerFormatSelect'
+}

@@ -1,19 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { useComboboxItemPropsContext } from './use-combobox-item-props-context'
 
 export interface ComboboxItemIndicatorBaseProps extends PolymorphicProps {}
-export interface ComboboxItemIndicatorProps extends HTMLProps<'div'>, ComboboxItemIndicatorBaseProps {}
+export interface ComboboxItemIndicatorProps
+  extends ComponentProps<'div'>,
+    ComboboxItemIndicatorBaseProps {}
 
-export const ComboboxItemIndicator = forwardRef<HTMLDivElement, ComboboxItemIndicatorProps>((props, ref) => {
+export const ComboboxItemIndicator = (props: ComboboxItemIndicatorProps) => {
+  const { ref, ...restProps } = props
   const combobox = useComboboxContext()
   const itemProps = useComboboxItemPropsContext()
-  const mergedProps = mergeProps(combobox.getItemIndicatorProps(itemProps), props)
+  const mergedProps = mergeProps(combobox.getItemIndicatorProps(itemProps), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-ComboboxItemIndicator.displayName = 'ComboboxItemIndicator'
+}

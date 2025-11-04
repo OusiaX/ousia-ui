@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseRatingGroupReturn } from './use-rating-group'
 import { RatingGroupProvider } from './use-rating-group-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface RatingGroupRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface RatingGroupRootProviderProps extends HTMLProps<'div'>, RatingGroupRootProviderBaseProps {}
+export interface RatingGroupRootProviderProps
+  extends ComponentProps<'div'>,
+    RatingGroupRootProviderBaseProps {}
 
-export const RatingGroupRootProvider = forwardRef<HTMLDivElement, RatingGroupRootProviderProps>((props, ref) => {
-  const [{ value: ratingGroup }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const RatingGroupRootProvider = (props: RatingGroupRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: ratingGroup }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(ratingGroup.getRootProps(), localProps)
 
   return (
     <RatingGroupProvider value={ratingGroup}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </RatingGroupProvider>
   )
-})
-
-RatingGroupRootProvider.displayName = 'RatingGroupRootProvider'
+}

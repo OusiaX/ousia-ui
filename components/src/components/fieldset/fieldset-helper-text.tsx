@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldsetContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface FieldsetHelperTextBaseProps extends PolymorphicProps {}
-export interface FieldsetHelperTextProps extends HTMLProps<'span'>, FieldsetHelperTextBaseProps {}
+export interface FieldsetHelperTextProps
+  extends ComponentProps<'span'>,
+    FieldsetHelperTextBaseProps {}
 
-export const FieldsetHelperText = forwardRef<HTMLSpanElement, FieldsetHelperTextProps>((props, ref) => {
+export const FieldsetHelperText = (props: FieldsetHelperTextProps) => {
+  const { ref, ...restProps } = props
   const fieldset = useFieldsetContext()
-  const mergedProps = mergeProps(fieldset.getHelperTextProps(), props)
+  const mergedProps = mergeProps(fieldset.getHelperTextProps(), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-FieldsetHelperText.displayName = 'FieldsetHelperText'
+}

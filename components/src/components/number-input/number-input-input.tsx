@@ -1,18 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
 export interface NumberInputInputBaseProps extends PolymorphicProps {}
-export interface NumberInputInputProps extends HTMLProps<'input'>, NumberInputInputBaseProps {}
+export interface NumberInputInputProps extends ComponentProps<'input'>, NumberInputInputBaseProps {}
 
-export const NumberInputInput = forwardRef<HTMLInputElement, NumberInputInputProps>((props, ref) => {
+export const NumberInputInput = (props: NumberInputInputProps) => {
+  const { ref, ...restProps } = props
   const numberInput = useNumberInputContext()
-  const mergedProps = mergeProps(numberInput.getInputProps(), props)
+  const mergedProps = mergeProps(numberInput.getInputProps(), restProps)
   const field = useFieldContext()
 
   return <ark.input aria-describedby={field?.ariaDescribedby} {...mergedProps} ref={ref} />
-})
-
-NumberInputInput.displayName = 'NumberInputInput'
+}

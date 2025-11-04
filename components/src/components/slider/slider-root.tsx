@@ -1,16 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UseSliderProps, useSlider } from './use-slider'
 import { SliderProvider } from './use-slider-context'
 
 export interface SliderRootBaseProps extends UseSliderProps, PolymorphicProps {}
-export interface SliderRootProps extends Assign<HTMLProps<'div'>, SliderRootBaseProps> {}
+export interface SliderRootProps extends Assign<ComponentProps<'div'>, SliderRootBaseProps> {}
 
-export const SliderRoot = forwardRef<HTMLDivElement, SliderRootProps>((props, ref) => {
-  const [useSliderProps, localProps] = createSplitProps<UseSliderProps>()(props, [
+export const SliderRoot = (props: SliderRootProps) => {
+  const { ref, ...restProps } = props
+  const [useSliderProps, localProps] = createSplitProps<UseSliderProps>()(restProps, [
     'aria-label',
     'aria-labelledby',
     'defaultValue',
@@ -40,9 +39,7 @@ export const SliderRoot = forwardRef<HTMLDivElement, SliderRootProps>((props, re
 
   return (
     <SliderProvider value={slider}>
-      <arkSimple.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </SliderProvider>
   )
-})
-
-SliderRoot.displayName = 'SliderRoot'
+}

@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useHoverCardContext } from './use-hover-card-context'
 
 export interface HoverCardTriggerBaseProps extends PolymorphicProps {}
-export interface HoverCardTriggerProps extends HTMLProps<'button'>, HoverCardTriggerBaseProps {}
+export interface HoverCardTriggerProps
+  extends ComponentProps<'button'>,
+    HoverCardTriggerBaseProps {}
 
-export const HoverCardTrigger = forwardRef<HTMLButtonElement, HoverCardTriggerProps>((props, ref) => {
+export const HoverCardTrigger = (props: HoverCardTriggerProps) => {
+  const { ref, ...restProps } = props
   const hoverCard = useHoverCardContext()
-  const mergedProps = mergeProps(hoverCard.getTriggerProps(), props)
+  const mergedProps = mergeProps(hoverCard.getTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-HoverCardTrigger.displayName = 'HoverCardTrigger'
+}

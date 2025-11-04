@@ -1,28 +1,29 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useLocaleContext } from '@ousia-ui/ark/providers'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerChannelPropsContext } from './use-color-picker-channel-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerChannelSliderValueTextBaseProps {}
+export interface ColorPickerChannelSliderValueTextBaseProps extends PolymorphicProps {}
 export interface ColorPickerChannelSliderValueTextProps
-  extends HTMLProps<'span'>,
+  extends ComponentProps<'span'>,
     ColorPickerChannelSliderValueTextBaseProps {}
 
-export const ColorPickerChannelSliderValueText = forwardRef<HTMLSpanElement, ColorPickerChannelSliderValueTextProps>(
-  (props, ref) => {
-    const { locale } = useLocaleContext()
-    const colorPicker = useColorPickerContext()
-    const channelProps = useColorPickerChannelPropsContext()
-    const mergedProps = mergeProps(colorPicker.getChannelSliderValueTextProps(channelProps), props)
+export const ColorPickerChannelSliderValueText = (
+  props: ColorPickerChannelSliderValueTextProps,
+) => {
+  const { ref, ...restProps } = props
+  const { locale } = useLocaleContext()
+  const colorPicker = useColorPickerContext()
+  const channelProps = useColorPickerChannelPropsContext()
+  const mergedProps = mergeProps(
+    colorPicker.getChannelSliderValueTextProps(channelProps),
+    restProps,
+  )
 
-    return (
-      <arkSimple.span {...mergedProps} ref={ref}>
-        {props.children || colorPicker.getChannelValueText(channelProps.channel, locale)}
-      </arkSimple.span>
-    )
-  },
-)
-
-ColorPickerChannelSliderValueText.displayName = 'ColorPickerChannelSliderValueText'
+  return (
+    <ark.span {...mergedProps} ref={ref}>
+      {restProps.children || colorPicker.getChannelValueText(channelProps.channel, locale)}
+    </ark.span>
+  )
+}

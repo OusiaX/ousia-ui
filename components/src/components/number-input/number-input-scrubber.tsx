@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
-export interface NumberInputScrubberBaseProps {}
-export interface NumberInputScrubberProps extends HTMLProps<'div'>, NumberInputScrubberBaseProps {}
+export interface NumberInputScrubberBaseProps extends PolymorphicProps {}
+export interface NumberInputScrubberProps
+  extends ComponentProps<'div'>,
+    NumberInputScrubberBaseProps {}
 
-export const NumberInputScrubber = forwardRef<HTMLDivElement, NumberInputScrubberProps>((props, ref) => {
+export const NumberInputScrubber = (props: NumberInputScrubberProps) => {
+  const { ref, ...restProps } = props
   const numberInput = useNumberInputContext()
-  const mergedProps = mergeProps(numberInput.getScrubberProps(), props)
+  const mergedProps = mergeProps(numberInput.getScrubberProps(), restProps)
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-NumberInputScrubber.displayName = 'NumberInputScrubber'
+  return <ark.div {...mergedProps} ref={ref} />
+}

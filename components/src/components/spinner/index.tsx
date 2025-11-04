@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import type { Ref } from 'react'
 import { styled } from 'styled-system/jsx'
 import { Spinner as StyledSpinner, type SpinnerProps as StyledSpinnerProps } from './spinner'
 
@@ -11,8 +11,8 @@ export interface SpinnerProps extends StyledSpinnerProps {
   label?: string
 }
 
-export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => {
-  const { label = 'Loading...', ...rest } = props
+export const Spinner = (props: SpinnerProps & { ref?: Ref<HTMLDivElement> }) => {
+  const { ref, label = 'Loading...', ...rest } = props
 
   return (
     <StyledSpinner
@@ -24,6 +24,4 @@ export const Spinner = forwardRef<HTMLDivElement, SpinnerProps>((props, ref) => 
       {label && <styled.span srOnly>{label}</styled.span>}
     </StyledSpinner>
   )
-})
-
-Spinner.displayName = 'Spinner'
+}

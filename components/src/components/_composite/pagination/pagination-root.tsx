@@ -1,15 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { Ref } from 'react'
 import { type UsePaginationProps, usePagination } from './use-pagination'
 import { PaginationProvider } from './use-pagination-context'
 
 export interface PaginationRootBaseProps extends UsePaginationProps, PolymorphicProps {}
 export interface PaginationRootProps extends HTMLProps<'nav'>, PaginationRootBaseProps {}
 
-export const PaginationRoot = forwardRef<HTMLElement, PaginationRootProps>((props, ref) => {
-  const [paginationProps, localProps] = createSplitProps<UsePaginationProps>()(props, [
+export const PaginationRoot = (props: PaginationRootProps & { ref?: Ref<HTMLElement> }) => {
+  const { ref, ...restProps } = props
+  const [paginationProps, localProps] = createSplitProps<UsePaginationProps>()(restProps, [
     'count',
     'defaultPage',
     'defaultPageSize',
@@ -29,9 +29,7 @@ export const PaginationRoot = forwardRef<HTMLElement, PaginationRootProps>((prop
 
   return (
     <PaginationProvider value={pagination}>
-      <arkMemo.nav {...mergedProps} ref={ref} />
+      <ark.nav {...mergedProps} ref={ref} />
     </PaginationProvider>
   )
-})
-
-PaginationRoot.displayName = 'PaginationRoot'
+}

@@ -1,14 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { useFileUploadItemPropsContext } from './use-file-upload-item-props-context'
 
 export interface FileUploadItemNameBaseProps extends PolymorphicProps {}
-export interface FileUploadItemNameProps extends HTMLProps<'div'>, FileUploadItemNameBaseProps {}
+export interface FileUploadItemNameProps
+  extends ComponentProps<'div'>,
+    FileUploadItemNameBaseProps {}
 
-export const FileUploadItemName = forwardRef<HTMLDivElement, FileUploadItemNameProps>((props, ref) => {
-  const { children, ...rest } = props
+export const FileUploadItemName = (props: FileUploadItemNameProps) => {
+  const { ref, ...restProps } = props
+  const { children, ...rest } = restProps
   const fileUpload = useFileUploadContext()
   const itemProps = useFileUploadItemPropsContext()
   const mergedProps = mergeProps(fileUpload.getItemNameProps(itemProps), rest)
@@ -18,6 +20,4 @@ export const FileUploadItemName = forwardRef<HTMLDivElement, FileUploadItemNameP
       {children || itemProps.file.name}
     </ark.div>
   )
-})
-
-FileUploadItemName.displayName = 'FileUploadItemName'
+}

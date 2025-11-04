@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectListBaseProps extends PolymorphicProps {}
-export interface SelectListProps extends HTMLProps<'div'>, SelectListBaseProps {}
+export interface SelectListProps extends ComponentProps<'div'>, SelectListBaseProps {}
 
-export const SelectList = forwardRef<HTMLDivElement, SelectListProps>((props, ref) => {
+export const SelectList = (props: SelectListProps) => {
+  const { ref, ...restProps } = props
   const select = useSelectContext()
-  const mergedProps = mergeProps(select.getListProps(), props)
+  const mergedProps = mergeProps(select.getListProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-SelectList.displayName = 'SelectList'
+}

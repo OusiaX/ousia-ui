@@ -1,13 +1,13 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
 export interface PopoverTriggerBaseProps extends PolymorphicProps {}
-export interface PopoverTriggerProps extends HTMLProps<'button'>, PopoverTriggerBaseProps {}
+export interface PopoverTriggerProps extends ComponentProps<'button'>, PopoverTriggerBaseProps {}
 
-export const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>((props, ref) => {
+export const PopoverTrigger = (props: PopoverTriggerProps) => {
+  const { ref, ...restProps } = props
   const popover = usePopoverContext()
   const presence = usePresenceContext()
   const mergedProps = mergeProps(
@@ -15,10 +15,8 @@ export const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>
       ...popover.getTriggerProps(),
       'aria-controls': presence.unmounted ? undefined : popover.getTriggerProps()['aria-controls'],
     },
-    props,
+    restProps,
   )
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-PopoverTrigger.displayName = 'PopoverTrigger'
+}

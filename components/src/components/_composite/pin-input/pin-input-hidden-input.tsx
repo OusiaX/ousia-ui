@@ -1,18 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { usePinInputContext } from './use-pin-input-context'
 
 export interface PinInputHiddenInputBaseProps extends PolymorphicProps {}
-export interface PinInputHiddenInputProps extends HTMLProps<'input'>, PinInputHiddenInputBaseProps {}
+export interface PinInputHiddenInputProps
+  extends ComponentProps<'input'>,
+    PinInputHiddenInputBaseProps {}
 
-export const PinInputHiddenInput = forwardRef<HTMLInputElement, PinInputHiddenInputProps>((props, ref) => {
+export const PinInputHiddenInput = (props: PinInputHiddenInputProps) => {
+  const { ref, ...restProps } = props
   const pinInput = usePinInputContext()
-  const mergedProps = mergeProps(pinInput.getHiddenInputProps(), props)
+  const mergedProps = mergeProps(pinInput.getHiddenInputProps(), restProps)
   const field = useFieldContext()
 
   return <ark.input aria-describedby={field?.ariaDescribedby} {...mergedProps} ref={ref} />
-})
-
-PinInputHiddenInput.displayName = 'PinInputHiddenInput'
+}

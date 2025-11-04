@@ -1,14 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { useFileUploadItemPropsContext } from './use-file-upload-item-props-context'
 
 export interface FileUploadItemSizeTextBaseProps extends PolymorphicProps {}
-export interface FileUploadItemSizeTextProps extends HTMLProps<'div'>, FileUploadItemSizeTextBaseProps {}
+export interface FileUploadItemSizeTextProps
+  extends ComponentProps<'div'>,
+    FileUploadItemSizeTextBaseProps {}
 
-export const FileUploadItemSizeText = forwardRef<HTMLDivElement, FileUploadItemSizeTextProps>((props, ref) => {
-  const { children, ...rest } = props
+export const FileUploadItemSizeText = (props: FileUploadItemSizeTextProps) => {
+  const { ref, ...restProps } = props
+  const { children, ...rest } = restProps
   const fileUpload = useFileUploadContext()
   const itemProps = useFileUploadItemPropsContext()
   const mergedProps = mergeProps(fileUpload.getItemSizeTextProps(itemProps), rest)
@@ -18,6 +20,4 @@ export const FileUploadItemSizeText = forwardRef<HTMLDivElement, FileUploadItemS
       {children || fileUpload.getFileSize(itemProps.file)}
     </ark.div>
   )
-})
-
-FileUploadItemSizeText.displayName = 'FileUploadItemSizeText'
+}

@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type HTMLProps, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { Ref } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 import {
   DatePickerTableCellPropsProvider,
@@ -9,16 +8,19 @@ import {
 } from './use-date-picker-table-cell-props-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
-export interface DatePickerTableCellBaseProps extends UseDatePickerTableCellPropsContext, PolymorphicProps {}
+export interface DatePickerTableCellBaseProps
+  extends UseDatePickerTableCellPropsContext,
+    PolymorphicProps {}
 export interface DatePickerTableCellProps extends HTMLProps<'td'>, DatePickerTableCellBaseProps {}
 
-export const DatePickerTableCell = forwardRef<HTMLTableCellElement, DatePickerTableCellProps>((props, ref) => {
-  const [cellProps, localProps] = createSplitProps<UseDatePickerTableCellPropsContext>()(props, [
-    'disabled',
-    'value',
-    'visibleRange',
-    'columns',
-  ])
+export const DatePickerTableCell = (
+  props: DatePickerTableCellProps & { ref?: Ref<HTMLTableCellElement> },
+) => {
+  const { ref, ...restProps } = props
+  const [cellProps, localProps] = createSplitProps<UseDatePickerTableCellPropsContext>()(
+    restProps,
+    ['disabled', 'value', 'visibleRange', 'columns'],
+  )
   const datePicker = useDatePickerContext()
   const viewProps = useDatePickerViewPropsContext()
   const tableCellProps = {
@@ -32,9 +34,7 @@ export const DatePickerTableCell = forwardRef<HTMLTableCellElement, DatePickerTa
 
   return (
     <DatePickerTableCellPropsProvider value={cellProps}>
-      <arkMemo.td ref={ref} {...mergedProps} />
+      <ark.td ref={ref} {...mergedProps} />
     </DatePickerTableCellPropsProvider>
   )
-})
-
-DatePickerTableCell.displayName = 'DatePickerTableCell'
+}

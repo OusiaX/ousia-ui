@@ -1,16 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
-import { createSplitProps, type RenderStrategyProps, RenderStrategyPropsProvider, splitRenderStrategyProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import {
+  type RenderStrategyProps,
+  RenderStrategyPropsProvider,
+  createSplitProps,
+  splitRenderStrategyProps,
+} from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { type UseTabsProps, useTabs } from './use-tabs'
 import { TabsProvider } from './use-tabs-context'
 
 export interface TabsRootBaseProps extends UseTabsProps, RenderStrategyProps, PolymorphicProps {}
-export interface TabsRootProps extends Assign<HTMLProps<'div'>, TabsRootBaseProps> {}
+export interface TabsRootProps extends Assign<ComponentProps<'div'>, TabsRootBaseProps> {}
 
-export const TabsRoot = forwardRef<HTMLDivElement, TabsRootProps>((props, ref) => {
-  const [renderStrategyProps, tabsProps] = splitRenderStrategyProps(props)
+export const TabsRoot = (props: TabsRootProps) => {
+  const { ref, ...restProps } = props
+  const [renderStrategyProps, tabsProps] = splitRenderStrategyProps(restProps)
   const [useTabsProps, localprops] = createSplitProps<UseTabsProps>()(tabsProps, [
     'activationMode',
     'composite',
@@ -32,10 +36,8 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsRootProps>((props, ref) =
   return (
     <TabsProvider value={tabs}>
       <RenderStrategyPropsProvider value={renderStrategyProps}>
-        <arkSimple.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </RenderStrategyPropsProvider>
     </TabsProvider>
   )
-})
-
-TabsRoot.displayName = 'TabsRoot'
+}

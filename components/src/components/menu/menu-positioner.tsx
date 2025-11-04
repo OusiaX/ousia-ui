@@ -1,15 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
 export interface MenuPositionerBaseProps extends PolymorphicProps {}
-export interface MenuPositionerProps extends HTMLProps<'div'>, MenuPositionerBaseProps {}
+export interface MenuPositionerProps extends ComponentProps<'div'>, MenuPositionerBaseProps {}
 
-export const MenuPositioner = forwardRef<HTMLDivElement, MenuPositionerProps>((props, ref) => {
+export const MenuPositioner = (props: MenuPositionerProps) => {
+  const { ref, ...restProps } = props
   const menu = useMenuContext()
-  const mergedProps = mergeProps(menu.getPositionerProps(), props)
+  const mergedProps = mergeProps(menu.getPositionerProps(), restProps)
   const presence = usePresenceContext()
 
   if (presence.unmounted) {
@@ -17,6 +17,4 @@ export const MenuPositioner = forwardRef<HTMLDivElement, MenuPositionerProps>((p
   }
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-MenuPositioner.displayName = 'MenuPositioner'
+}

@@ -1,18 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
 export interface ColorPickerHiddenInputBaseProps extends PolymorphicProps {}
-export interface ColorPickerHiddenInputProps extends HTMLProps<'input'>, ColorPickerHiddenInputBaseProps {}
+export interface ColorPickerHiddenInputProps
+  extends ComponentProps<'input'>,
+    ColorPickerHiddenInputBaseProps {}
 
-export const ColorPickerHiddenInput = forwardRef<HTMLInputElement, ColorPickerHiddenInputProps>((props, ref) => {
+export const ColorPickerHiddenInput = (props: ColorPickerHiddenInputProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(colorPicker.getHiddenInputProps(), props)
+  const mergedProps = mergeProps(colorPicker.getHiddenInputProps(), restProps)
   const field = useFieldContext()
 
   return <ark.input aria-describedby={field?.ariaDescribedby} {...mergedProps} ref={ref} />
-})
-
-ColorPickerHiddenInput.displayName = 'ColorPickerHiddenInput'
+}

@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useCheckboxContext } from './use-checkbox-context'
 
 export interface CheckboxLabelBaseProps extends PolymorphicProps {}
-export interface CheckboxLabelProps extends HTMLProps<'span'>, CheckboxLabelBaseProps {}
+export interface CheckboxLabelProps extends ComponentProps<'span'>, CheckboxLabelBaseProps {}
 
-export const CheckboxLabel = forwardRef<HTMLSpanElement, CheckboxLabelProps>((props, ref) => {
+export const CheckboxLabel = (props: CheckboxLabelProps) => {
+  const { ref, ...restProps } = props
   const checkbox = useCheckboxContext()
-  const mergedProps = mergeProps(checkbox.getLabelProps(), props)
+  const mergedProps = mergeProps(checkbox.getLabelProps(), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-CheckboxLabel.displayName = 'CheckboxLabel'
+}

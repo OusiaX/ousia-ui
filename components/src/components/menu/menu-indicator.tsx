@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuIndicatorBaseProps {}
-export interface MenuIndicatorProps extends HTMLProps<'div'>, MenuIndicatorBaseProps {}
+export interface MenuIndicatorBaseProps extends PolymorphicProps {}
+export interface MenuIndicatorProps extends ComponentProps<'div'>, MenuIndicatorBaseProps {}
 
-export const MenuIndicator = forwardRef<HTMLDivElement, MenuIndicatorProps>((props, ref) => {
+export const MenuIndicator = (props: MenuIndicatorProps) => {
+  const { ref, ...restProps } = props
   const menu = useMenuContext()
-  const mergedProps = mergeProps(menu.getIndicatorProps(), props)
+  const mergedProps = mergeProps(menu.getIndicatorProps(), restProps)
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-MenuIndicator.displayName = 'MenuIndicator'
+  return <ark.div {...mergedProps} ref={ref} />
+}

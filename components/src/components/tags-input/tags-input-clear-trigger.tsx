@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 
 export interface TagsInputClearTriggerBaseProps extends PolymorphicProps {}
-export interface TagsInputClearTriggerProps extends HTMLProps<'button'>, TagsInputClearTriggerBaseProps {}
+export interface TagsInputClearTriggerProps
+  extends ComponentProps<'button'>,
+    TagsInputClearTriggerBaseProps {}
 
-export const TagsInputClearTrigger = forwardRef<HTMLButtonElement, TagsInputClearTriggerProps>((props, ref) => {
+export const TagsInputClearTrigger = (props: TagsInputClearTriggerProps) => {
+  const { ref, ...restProps } = props
   const tagsInput = useTagsInputContext()
-  const mergedProps = mergeProps(tagsInput.getClearTriggerProps(), props)
+  const mergedProps = mergeProps(tagsInput.getClearTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-TagsInputClearTrigger.displayName = 'TagsInputClearTrigger'
+}

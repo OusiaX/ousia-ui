@@ -1,8 +1,8 @@
-import type { ItemProps } from '@zag-js/menu'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef, useEffect } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo, type Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ItemProps } from '@zag-js/menu'
+import type { ComponentProps } from 'react'
+import { useEffect } from 'react'
 import { useMenuContext } from './use-menu-context'
 import { MenuItemProvider } from './use-menu-item-context'
 import { MenuItemPropsProvider } from './use-menu-option-item-props-context'
@@ -16,10 +16,11 @@ interface ItemBaseProps extends ItemProps {
 
 export interface MenuItemBaseProps extends ItemBaseProps, PolymorphicProps {}
 
-export interface MenuItemProps extends Assign<HTMLProps<'div'>, MenuItemBaseProps> {}
+export interface MenuItemProps extends Assign<ComponentProps<'div'>, MenuItemBaseProps> {}
 
-export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) => {
-  const [itemProps, localProps] = createSplitProps<ItemBaseProps>()(props, [
+export const MenuItem = (props: MenuItemProps) => {
+  const { ref, ...restProps } = props
+  const [itemProps, localProps] = createSplitProps<ItemBaseProps>()(restProps, [
     'closeOnSelect',
     'disabled',
     'value',
@@ -39,10 +40,8 @@ export const MenuItem = forwardRef<HTMLDivElement, MenuItemProps>((props, ref) =
   return (
     <MenuItemPropsProvider value={itemProps}>
       <MenuItemProvider value={itemState}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </MenuItemProvider>
     </MenuItemPropsProvider>
   )
-})
-
-MenuItem.displayName = 'MenuItem'
+}

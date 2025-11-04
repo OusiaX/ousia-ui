@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useAvatarContext } from './use-avatar-context'
 
-export interface AvatarImageBaseProps {}
-export interface AvatarImageProps extends HTMLProps<'img'>, AvatarImageBaseProps {}
+export interface AvatarImageBaseProps extends PolymorphicProps {}
+export interface AvatarImageProps extends ComponentProps<'img'>, AvatarImageBaseProps {}
 
-export const AvatarImage = forwardRef<HTMLImageElement, AvatarImageProps>((props, ref) => {
+export const AvatarImage = (props: AvatarImageProps) => {
+  const { ref, ...restProps } = props
   const avatar = useAvatarContext()
-  const mergedProps = mergeProps(avatar.getImageProps(), props)
+  const mergedProps = mergeProps(avatar.getImageProps(), restProps)
 
-  return <arkSimple.img {...mergedProps} ref={ref} />
-})
-
-AvatarImage.displayName = 'AvatarImage'
+  return <ark.img {...mergedProps} ref={ref} />
+}

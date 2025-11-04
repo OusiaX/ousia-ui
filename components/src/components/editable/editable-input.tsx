@@ -1,19 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark } from '@ousia-ui/ark'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
 export interface EditableInputBaseProps extends PolymorphicProps {}
-export interface EditableInputProps extends HTMLProps<'input'>, EditableInputBaseProps {}
+export interface EditableInputProps extends ComponentProps<'input'>, EditableInputBaseProps {}
 
-export const EditableInput = forwardRef<HTMLInputElement, EditableInputProps>((props, ref) => {
+export const EditableInput = (props: EditableInputProps) => {
+  const { ref, ...restProps } = props
   const editable = useEditableContext()
-  const mergedProps = mergeProps(editable.getInputProps(), props)
+  const mergedProps = mergeProps(editable.getInputProps(), restProps)
   const field = useFieldContext()
 
   return <ark.input aria-describedby={field?.ariaDescribedby} {...mergedProps} ref={ref} />
-})
-
-EditableInput.displayName = 'EditableInput'
+}

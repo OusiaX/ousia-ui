@@ -1,21 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
-export interface NumberInputValueTextBaseProps {}
-export interface NumberInputValueTextProps extends HTMLProps<'span'>, NumberInputValueTextBaseProps {}
+export interface NumberInputValueTextBaseProps extends PolymorphicProps {}
+export interface NumberInputValueTextProps
+  extends ComponentProps<'span'>,
+    NumberInputValueTextBaseProps {}
 
-export const NumberInputValueText = forwardRef<HTMLSpanElement, NumberInputValueTextProps>((props, ref) => {
-  const { children, ...localProps } = props
+export const NumberInputValueText = (props: NumberInputValueTextProps) => {
+  const { ref, children, ...localProps } = props
   const numberInput = useNumberInputContext()
   const mergedProps = mergeProps(numberInput.getValueTextProps(), localProps)
 
   return (
-    <arkSimple.span {...mergedProps} ref={ref}>
+    <ark.span {...mergedProps} ref={ref}>
       {children || numberInput.value}
-    </arkSimple.span>
+    </ark.span>
   )
-})
-
-NumberInputValueText.displayName = 'NumberInputValueText'
+}

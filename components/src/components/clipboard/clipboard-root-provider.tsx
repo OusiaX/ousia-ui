@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkMemo } from '@ousia-ui/ark'
+import { ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import type { UseClipboardReturn } from './use-clipboard'
 import { ClipboardProvider } from './use-clipboard-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface ClipboardRootProviderBaseProps extends RootProviderProps {}
-export interface ClipboardRootProviderProps extends HTMLProps<'div'>, ClipboardRootProviderBaseProps {}
+export interface ClipboardRootProviderProps
+  extends ComponentProps<'div'>,
+    ClipboardRootProviderBaseProps {}
 
-export const ClipboardRootProvider = forwardRef<HTMLDivElement, ClipboardRootProviderProps>((props, ref) => {
-  const [{ value: clipboard }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const ClipboardRootProvider = (props: ClipboardRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: clipboard }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(clipboard.getRootProps(), localProps)
 
   return (
     <ClipboardProvider value={clipboard}>
-      <arkMemo.div ref={ref} {...mergedProps} />
+      <ark.div ref={ref} {...mergedProps} />
     </ClipboardProvider>
   )
-})
-
-ClipboardRootProvider.displayName = 'ClipboardRootProvider'
+}

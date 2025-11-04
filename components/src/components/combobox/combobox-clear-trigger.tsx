@@ -1,17 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { HTMLProps } from '@ousia-ui/ark'
-import { arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxClearTriggerBaseProps {}
-export interface ComboboxClearTriggerProps extends HTMLProps<'button'>, ComboboxClearTriggerBaseProps {}
+export interface ComboboxClearTriggerBaseProps extends PolymorphicProps {}
+export interface ComboboxClearTriggerProps
+  extends ComponentProps<'button'>,
+    ComboboxClearTriggerBaseProps {}
 
-export const ComboboxClearTrigger = forwardRef<HTMLButtonElement, ComboboxClearTriggerProps>((props, ref) => {
+export const ComboboxClearTrigger = (props: ComboboxClearTriggerProps) => {
+  const { ref, ...restProps } = props
   const combobox = useComboboxContext()
-  const mergedProps = mergeProps(combobox.getClearTriggerProps(), props)
+  const mergedProps = mergeProps(combobox.getClearTriggerProps(), restProps)
 
-  return <arkSimple.button {...mergedProps} ref={ref} />
-})
-
-ComboboxClearTrigger.displayName = 'ComboboxClearTrigger'
+  return <ark.button {...mergedProps} ref={ref} />
+}

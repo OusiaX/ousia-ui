@@ -1,4 +1,3 @@
-import { forwardRef } from 'react'
 import * as StyledAvatar from './avatar'
 
 export interface AvatarProps extends StyledAvatar.RootProps {
@@ -6,8 +5,8 @@ export interface AvatarProps extends StyledAvatar.RootProps {
   src?: string
 }
 
-export const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
-  const { name, src, ...rootProps } = props
+export const Avatar = (props: AvatarProps) => {
+  const { ref, name, src, ...rootProps } = props
 
   return (
     <StyledAvatar.Root ref={ref} {...rootProps}>
@@ -15,9 +14,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
       <StyledAvatar.Image src={src} alt={name} />
     </StyledAvatar.Root>
   )
-})
-
-Avatar.displayName = 'Avatar'
+}
 
 const UserIcon = () => (
   <svg

@@ -1,18 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
 export interface TreeViewItemTextBaseProps extends PolymorphicProps {}
-export interface TreeViewItemTextProps extends HTMLProps<'span'>, TreeViewItemTextBaseProps {}
+export interface TreeViewItemTextProps extends ComponentProps<'span'>, TreeViewItemTextBaseProps {}
 
-export const TreeViewItemText = forwardRef<HTMLSpanElement, TreeViewItemTextProps>((props, ref) => {
+export const TreeViewItemText = (props: TreeViewItemTextProps) => {
+  const { ref, ...restProps } = props
   const treeView = useTreeViewContext()
   const nodeProps = useTreeViewNodePropsContext()
-  const mergedProps = mergeProps(treeView.getItemTextProps(nodeProps), props)
+  const mergedProps = mergeProps(treeView.getItemTextProps(nodeProps), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-TreeViewItemText.displayName = 'TreeViewItemText'
+}

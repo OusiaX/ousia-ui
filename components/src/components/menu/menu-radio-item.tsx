@@ -1,8 +1,7 @@
-import type { OptionItemProps } from '@zag-js/menu'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import type { OptionItemProps } from '@zag-js/menu'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 import { MenuItemProvider } from './use-menu-item-context'
 import { useMenuItemGroupContext } from './use-menu-item-group-context'
@@ -11,10 +10,11 @@ import { MenuItemPropsProvider } from './use-menu-option-item-props-context'
 type PartialOptionItemProps = Omit<OptionItemProps, 'type' | 'checked' | 'onCheckedChange'>
 
 export interface MenuRadioItemBaseProps extends PartialOptionItemProps, PolymorphicProps {}
-export interface MenuRadioItemProps extends HTMLProps<'div'>, MenuRadioItemBaseProps {}
+export interface MenuRadioItemProps extends ComponentProps<'div'>, MenuRadioItemBaseProps {}
 
-export const MenuRadioItem = forwardRef<HTMLDivElement, MenuRadioItemProps>((props, ref) => {
-  const [partialItemProps, localProps] = createSplitProps<PartialOptionItemProps>()(props, [
+export const MenuRadioItem = (props: MenuRadioItemProps) => {
+  const { ref, ...restProps } = props
+  const [partialItemProps, localProps] = createSplitProps<PartialOptionItemProps>()(restProps, [
     'closeOnSelect',
     'disabled',
     'value',
@@ -34,10 +34,8 @@ export const MenuRadioItem = forwardRef<HTMLDivElement, MenuRadioItemProps>((pro
   return (
     <MenuItemPropsProvider value={optionItemProps}>
       <MenuItemProvider value={optionItemState}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </MenuItemProvider>
     </MenuItemPropsProvider>
   )
-})
-
-MenuRadioItem.displayName = 'MenuRadioItem'
+}

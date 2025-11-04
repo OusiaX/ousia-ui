@@ -1,22 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useToastContext } from './use-toast-context'
 
 export interface ToastRootBaseProps extends PolymorphicProps {}
-export interface ToastRootProps extends HTMLProps<'div'>, ToastRootBaseProps {}
+export interface ToastRootProps extends ComponentProps<'div'>, ToastRootBaseProps {}
 
-export const ToastRoot = forwardRef<HTMLDivElement, ToastRootProps>((props, ref) => {
+export const ToastRoot = (props: ToastRootProps) => {
+  const { ref, ...restProps } = props
   const toast = useToastContext()
-  const mergedProps = mergeProps(toast.getRootProps(), props)
+  const mergedProps = mergeProps(toast.getRootProps(), restProps)
 
   return (
     <ark.div {...mergedProps} ref={ref}>
       <div {...toast.getGhostBeforeProps()} />
-      {props.children}
+      {restProps.children}
       <div {...toast.getGhostAfterProps()} />
     </ark.div>
   )
-})
-
-ToastRoot.displayName = 'ToastRoot'
+}

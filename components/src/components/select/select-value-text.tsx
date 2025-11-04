@@ -1,6 +1,5 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectValueTextBaseProps extends PolymorphicProps {
@@ -9,10 +8,10 @@ export interface SelectValueTextBaseProps extends PolymorphicProps {
    */
   placeholder?: string | undefined
 }
-export interface SelectValueTextProps extends HTMLProps<'span'>, SelectValueTextBaseProps {}
+export interface SelectValueTextProps extends ComponentProps<'span'>, SelectValueTextBaseProps {}
 
-export const SelectValueText = forwardRef<HTMLSpanElement, SelectValueTextProps>((props, ref) => {
-  const { children, placeholder, ...localprops } = props
+export const SelectValueText = (props: SelectValueTextProps) => {
+  const { ref, children, placeholder, ...localprops } = props
   const select = useSelectContext()
   const mergedProps = mergeProps(select.getValueTextProps(), localprops)
 
@@ -21,6 +20,4 @@ export const SelectValueText = forwardRef<HTMLSpanElement, SelectValueTextProps>
       {children || select.valueAsString || placeholder}
     </ark.span>
   )
-})
-
-SelectValueText.displayName = 'SelectValueText'
+}

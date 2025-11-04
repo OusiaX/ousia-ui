@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 
 export interface TagsInputControlBaseProps extends PolymorphicProps {}
-export interface TagsInputControlProps extends HTMLProps<'div'>, TagsInputControlBaseProps {}
+export interface TagsInputControlProps extends ComponentProps<'div'>, TagsInputControlBaseProps {}
 
-export const TagsInputControl = forwardRef<HTMLDivElement, TagsInputControlProps>((props, ref) => {
+export const TagsInputControl = (props: TagsInputControlProps) => {
+  const { ref, ...restProps } = props
   const tagsInput = useTagsInputContext()
-  const mergedProps = mergeProps(tagsInput.getControlProps(), props)
+  const mergedProps = mergeProps(tagsInput.getControlProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-TagsInputControl.displayName = 'TagsInputControl'
+}

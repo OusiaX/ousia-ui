@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
 export interface ColorPickerFormatTriggerBaseProps extends PolymorphicProps {}
-export interface ColorPickerFormatTriggerProps extends HTMLProps<'button'>, ColorPickerFormatTriggerBaseProps {}
+export interface ColorPickerFormatTriggerProps
+  extends ComponentProps<'button'>,
+    ColorPickerFormatTriggerBaseProps {}
 
-export const ColorPickerFormatTrigger = forwardRef<HTMLButtonElement, ColorPickerFormatTriggerProps>((props, ref) => {
+export const ColorPickerFormatTrigger = (props: ColorPickerFormatTriggerProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(colorPicker.getFormatTriggerProps(), props)
+  const mergedProps = mergeProps(colorPicker.getFormatTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-ColorPickerFormatTrigger.displayName = 'ColorPickerFormatTrigger'
+}

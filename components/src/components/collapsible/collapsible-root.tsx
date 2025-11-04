@@ -1,22 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
-import { type UseCollapsibleProps, useCollapsible, CollapsibleProvider } from '@ousia-ui/ark/utils'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { CollapsibleProvider, type UseCollapsibleProps, useCollapsible } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { splitCollapsibleProps } from './split-collapsible-props'
 
 export interface CollapsibleRootBaseProps extends UseCollapsibleProps, PolymorphicProps {}
-export interface CollapsibleRootProps extends HTMLProps<'div'>, CollapsibleRootBaseProps {}
+export interface CollapsibleRootProps extends ComponentProps<'div'>, CollapsibleRootBaseProps {}
 
-export const CollapsibleRoot = forwardRef<HTMLDivElement, CollapsibleRootProps>((props, ref) => {
-  const [useCollapsibleProps, localProps] = splitCollapsibleProps(props)
+export const CollapsibleRoot = (props: CollapsibleRootProps) => {
+  const { ref, ...restProps } = props
+  const [useCollapsibleProps, localProps] = splitCollapsibleProps(restProps)
   const collapsible = useCollapsible(useCollapsibleProps)
   const mergedProps = mergeProps(collapsible.getRootProps(), localProps)
 
   return (
     <CollapsibleProvider value={collapsible}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </CollapsibleProvider>
   )
-})
-
-CollapsibleRoot.displayName = 'CollapsibleRoot'
+}

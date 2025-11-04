@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
 export interface DatePickerClearTriggerBaseProps extends PolymorphicProps {}
-export interface DatePickerClearTriggerProps extends HTMLProps<'button'>, DatePickerClearTriggerBaseProps {}
+export interface DatePickerClearTriggerProps
+  extends ComponentProps<'button'>,
+    DatePickerClearTriggerBaseProps {}
 
-export const DatePickerClearTrigger = forwardRef<HTMLButtonElement, DatePickerClearTriggerProps>((props, ref) => {
+export const DatePickerClearTrigger = (props: DatePickerClearTriggerProps) => {
+  const { ref, ...restProps } = props
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getClearTriggerProps(), props)
+  const mergedProps = mergeProps(datePicker.getClearTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-DatePickerClearTrigger.displayName = 'DatePickerClearTrigger'
+}

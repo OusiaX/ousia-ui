@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSwitchContext } from './use-switch-context'
 
 export interface SwitchControlBaseProps extends PolymorphicProps {}
-export interface SwitchControlProps extends HTMLProps<'span'>, SwitchControlBaseProps {}
+export interface SwitchControlProps extends ComponentProps<'span'>, SwitchControlBaseProps {}
 
-export const SwitchControl = forwardRef<HTMLSpanElement, SwitchControlProps>((props, ref) => {
+export const SwitchControl = (props: SwitchControlProps) => {
+  const { ref, ...restProps } = props
   const switchContext = useSwitchContext()
-  const mergedProps = mergeProps(switchContext.getControlProps(), props)
+  const mergedProps = mergeProps(switchContext.getControlProps(), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-SwitchControl.displayName = 'SwitchControl'
+}

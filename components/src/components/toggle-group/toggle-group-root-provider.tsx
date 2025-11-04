@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseToggleGroupReturn } from './use-toggle-group'
 import { ToggleGroupProvider } from './use-toggle-group-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface ToggleGroupRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface ToggleGroupRootProviderProps extends HTMLProps<'div'>, ToggleGroupRootProviderBaseProps {}
+export interface ToggleGroupRootProviderProps
+  extends ComponentProps<'div'>,
+    ToggleGroupRootProviderBaseProps {}
 
-export const ToggleGroupRootProvider = forwardRef<HTMLDivElement, ToggleGroupRootProviderProps>((props, ref) => {
-  const [{ value: toggleGroup }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const ToggleGroupRootProvider = (props: ToggleGroupRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: toggleGroup }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(toggleGroup.getRootProps(), localProps)
 
   return (
     <ToggleGroupProvider value={toggleGroup}>
-      <arkSimple.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </ToggleGroupProvider>
   )
-})
-
-ToggleGroupRootProvider.displayName = 'ToggleGroupRootProvider'
+}

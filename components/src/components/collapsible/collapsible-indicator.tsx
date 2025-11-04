@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useCollapsibleContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface CollapsibleIndicatorBaseProps extends PolymorphicProps {}
-export interface CollapsibleIndicatorProps extends HTMLProps<'div'>, CollapsibleIndicatorBaseProps {}
+export interface CollapsibleIndicatorProps
+  extends ComponentProps<'div'>,
+    CollapsibleIndicatorBaseProps {}
 
-export const CollapsibleIndicator = forwardRef<HTMLDivElement, CollapsibleIndicatorProps>((props, ref) => {
+export const CollapsibleIndicator = (props: CollapsibleIndicatorProps) => {
+  const { ref, ...restProps } = props
   const collapsible = useCollapsibleContext()
-  const mergedProps = mergeProps(collapsible.getIndicatorProps(), props)
+  const mergedProps = mergeProps(collapsible.getIndicatorProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-CollapsibleIndicator.displayName = 'CollapsibleIndicator'
+}

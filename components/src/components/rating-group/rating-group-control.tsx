@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useRatingGroupContext } from './use-rating-group-context'
 
 export interface RatingGroupControlBaseProps extends PolymorphicProps {}
-export interface RatingGroupControlProps extends HTMLProps<'div'>, RatingGroupControlBaseProps {}
+export interface RatingGroupControlProps
+  extends ComponentProps<'div'>,
+    RatingGroupControlBaseProps {}
 
-export const RatingGroupControl = forwardRef<HTMLDivElement, RatingGroupControlProps>((props, ref) => {
+export const RatingGroupControl = (props: RatingGroupControlProps) => {
+  const { ref, ...restProps } = props
   const ratingGroup = useRatingGroupContext()
-  const mergedProps = mergeProps(ratingGroup.getControlProps(), props)
+  const mergedProps = mergeProps(ratingGroup.getControlProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-RatingGroupControl.displayName = 'RatingGroupControl'
+}

@@ -1,21 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
 export interface ProgressValueTextBaseProps extends PolymorphicProps {}
-export interface ProgressValueTextProps extends HTMLProps<'span'>, ProgressValueTextBaseProps {}
+export interface ProgressValueTextProps
+  extends ComponentProps<'span'>,
+    ProgressValueTextBaseProps {}
 
-export const ProgressValueText = forwardRef<HTMLSpanElement, ProgressValueTextProps>((props, ref) => {
-  const { children, ...rest } = props
+export const ProgressValueText = (props: ProgressValueTextProps) => {
+  const { ref, children, ...restProps } = props
   const progress = useProgressContext()
-  const mergedProps = mergeProps(progress.getValueTextProps(), rest)
+  const mergedProps = mergeProps(progress.getValueTextProps(), restProps)
 
   return (
     <ark.span {...mergedProps} ref={ref}>
       {children || progress.percentAsString}
     </ark.span>
   )
-})
-
-ProgressValueText.displayName = 'ProgressValueText'
+}

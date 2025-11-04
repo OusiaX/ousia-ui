@@ -1,12 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import type { JSX } from 'react'
-import type { Ref } from 'react'
-import type { RefAttributes } from 'react'
-import { forwardRef } from 'react'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import {
+  PresenceProvider,
+  type UsePresenceProps,
+  createSplitProps,
+  splitPresenceProps,
+  usePresence,
+} from '@ousia-ui/ark/utils'
 import type { CollectionItem } from '@zag-js/collection'
-import type { Assign, HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { arkMemo } from '@ousia-ui/ark'
-import { createSplitProps, usePresence, type UsePresenceProps, PresenceProvider, splitPresenceProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
+import type { JSX } from 'react'
+import type { RefAttributes } from 'react'
 import type { UseComboboxReturn } from './use-combobox'
 import { ComboboxProvider } from './use-combobox-context'
 
@@ -18,26 +21,30 @@ export interface ComboboxRootProviderBaseProps<T extends CollectionItem>
     UsePresenceProps,
     PolymorphicProps {}
 export interface ComboboxRootProviderProps<T extends CollectionItem>
-  extends HTMLProps<'div'>,
+  extends ComponentProps<'div'>,
     ComboboxRootProviderBaseProps<T> {}
 
-const ComboboxImpl = <T extends CollectionItem>(props: ComboboxRootProviderProps<T>, ref: Ref<HTMLDivElement>) => {
-  const [presenceProps, comboboxProps] = splitPresenceProps(props)
-  const [{ value: combobox }, localProps] = createSplitProps<RootProviderProps<T>>()(comboboxProps, ['value'])
+const ComboboxImpl = <T extends CollectionItem>(props: ComboboxRootProviderProps<T>) => {
+  const { ref, ...restProps } = props
+  const [presenceProps, comboboxProps] = splitPresenceProps(restProps)
+  const [{ value: combobox }, localProps] = createSplitProps<RootProviderProps<T>>()(
+    comboboxProps,
+    ['value'],
+  )
   const presence = usePresence(mergeProps({ present: combobox.open }, presenceProps))
   const mergedProps = mergeProps(combobox.getRootProps(), localProps)
 
   return (
     <ComboboxProvider value={combobox}>
       <PresenceProvider value={presence}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </PresenceProvider>
     </ComboboxProvider>
   )
 }
 
-export type ComboboxRootProviderComponent<P = {}> = <T extends CollectionItem>(
+export type ComboboxRootProviderComponent<P = Record<string, unknown>> = <T extends CollectionItem>(
   props: Assign<ComboboxRootProviderProps<T>, P> & RefAttributes<HTMLDivElement>,
 ) => JSX.Element
 
-export const ComboboxRootProvider = forwardRef(ComboboxImpl) as ComboboxRootProviderComponent
+export const ComboboxRootProvider = ComboboxImpl as ComboboxRootProviderComponent

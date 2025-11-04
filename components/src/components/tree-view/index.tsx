@@ -1,38 +1,26 @@
-"use client";
-import {
-  CheckSquareIcon,
-  ChevronRightIcon,
-  FileIcon,
-  FolderIcon,
-} from "lucide-react";
-import { forwardRef } from "react";
-import * as StyledTreeView from "./tree-view";
+'use client'
+import { CheckSquareIcon, ChevronRightIcon, FileIcon, FolderIcon } from 'lucide-react'
+import type { Ref } from 'react'
+import * as StyledTreeView from './tree-view'
 
-export const TreeView = forwardRef<HTMLDivElement, StyledTreeView.RootProps>(
-  (props, ref) => {
-    return (
-      <StyledTreeView.Root ref={ref} {...props}>
-        <StyledTreeView.Tree>
-          {/* @ts-expect-error */}
-          {props.collection.rootNode.children.map((node, index) => (
-            <TreeNode key={node.id} node={node} indexPath={[index]} />
-          ))}
-        </StyledTreeView.Tree>
-      </StyledTreeView.Root>
-    );
-  }
-);
-
-TreeView.displayName = "TreeView";
+export const TreeView = (props: StyledTreeView.RootProps & { ref?: Ref<HTMLDivElement> }) => {
+  const { ref, ...restProps } = props
+  return (
+    <StyledTreeView.Root ref={ref} {...restProps}>
+      <StyledTreeView.Tree>
+        {/* @ts-expect-error */}
+        {restProps.collection.rootNode.children.map((node, index) => (
+          <TreeNode key={node.id} node={node} indexPath={[index]} />
+        ))}
+      </StyledTreeView.Tree>
+    </StyledTreeView.Root>
+  )
+}
 
 const TreeNode = (props: StyledTreeView.NodeProviderProps) => {
-  const { node, indexPath } = props;
+  const { node, indexPath } = props
   return (
-    <StyledTreeView.NodeProvider
-      key={node.id}
-      node={node}
-      indexPath={indexPath}
-    >
+    <StyledTreeView.NodeProvider key={node.id} node={node} indexPath={indexPath}>
       {node.children ? (
         <StyledTreeView.Branch>
           <StyledTreeView.BranchControl>
@@ -47,11 +35,7 @@ const TreeNode = (props: StyledTreeView.NodeProviderProps) => {
             <StyledTreeView.BranchIndentGuide />
             {/* @ts-expect-error */}
             {node.children.map((child, index) => (
-              <TreeNode
-                key={child.id}
-                node={child}
-                indexPath={[...indexPath, index]}
-              />
+              <TreeNode key={child.id} node={child} indexPath={[...indexPath, index]} />
             ))}
           </StyledTreeView.BranchContent>
         </StyledTreeView.Branch>
@@ -67,5 +51,5 @@ const TreeNode = (props: StyledTreeView.NodeProviderProps) => {
         </StyledTreeView.Item>
       )}
     </StyledTreeView.NodeProvider>
-  );
-};
+  )
+}

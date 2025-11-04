@@ -1,20 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import type { TriggerProps } from '@zag-js/tabs'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { TriggerProps } from '@zag-js/tabs'
+import type { ComponentProps } from 'react'
 import { useTabsContext } from './use-tabs-context'
 
 export interface TabTriggerBaseProps extends TriggerProps, PolymorphicProps {}
-export interface TabTriggerProps extends Assign<HTMLProps<'button'>, TabTriggerBaseProps> {}
+export interface TabTriggerProps extends Assign<ComponentProps<'button'>, TabTriggerBaseProps> {}
 
-export const TabTrigger = forwardRef<HTMLButtonElement, TabTriggerProps>((props, ref) => {
-  const [tabProps, localProps] = createSplitProps<TriggerProps>()(props, ['disabled', 'value'])
+export const TabTrigger = (props: TabTriggerProps) => {
+  const { ref, ...restProps } = props
+  const [tabProps, localProps] = createSplitProps<TriggerProps>()(restProps, ['disabled', 'value'])
   const tabs = useTabsContext()
   const mergedProps = mergeProps(tabs.getTriggerProps(tabProps), localProps)
 
-  return <arkSimple.button {...mergedProps} ref={ref} />
-})
-
-TabTrigger.displayName = 'TabTrigger'
+  return <ark.button {...mergedProps} ref={ref} />
+}

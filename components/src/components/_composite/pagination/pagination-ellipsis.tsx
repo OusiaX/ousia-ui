@@ -1,19 +1,19 @@
-import type { EllipsisProps } from '@zag-js/pagination'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { EllipsisProps } from '@zag-js/pagination'
+import type { ComponentProps } from 'react'
 import { usePaginationContext } from './use-pagination-context'
 
 export interface PaginationEllipsisBaseProps extends EllipsisProps {}
-export interface PaginationEllipsisProps extends HTMLProps<'div'>, PaginationEllipsisBaseProps {}
+export interface PaginationEllipsisProps
+  extends ComponentProps<'div'>,
+    PaginationEllipsisBaseProps {}
 
-export const PaginationEllipsis = forwardRef<HTMLDivElement, PaginationEllipsisProps>((props, ref) => {
-  const [ellipsisProps, localProps] = createSplitProps<EllipsisProps>()(props, ['index'])
+export const PaginationEllipsis = (props: PaginationEllipsisProps) => {
+  const { ref, ...restProps } = props
+  const [ellipsisProps, localProps] = createSplitProps<EllipsisProps>()(restProps, ['index'])
   const pagination = usePaginationContext()
   const mergedProps = mergeProps(pagination.getEllipsisProps(ellipsisProps), localProps)
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-PaginationEllipsis.displayName = 'PaginationEllipsis'
+  return <ark.div {...mergedProps} ref={ref} />
+}

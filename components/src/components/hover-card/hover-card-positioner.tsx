@@ -1,15 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useHoverCardContext } from './use-hover-card-context'
 
 export interface HoverCardPositionerBaseProps extends PolymorphicProps {}
-export interface HoverCardPositionerProps extends HTMLProps<'div'>, HoverCardPositionerBaseProps {}
+export interface HoverCardPositionerProps
+  extends ComponentProps<'div'>,
+    HoverCardPositionerBaseProps {}
 
-export const HoverCardPositioner = forwardRef<HTMLDivElement, HoverCardPositionerProps>((props, ref) => {
+export const HoverCardPositioner = (props: HoverCardPositionerProps) => {
+  const { ref, ...restProps } = props
   const hoverCard = useHoverCardContext()
-  const mergedProps = mergeProps(hoverCard.getPositionerProps(), props)
+  const mergedProps = mergeProps(hoverCard.getPositionerProps(), restProps)
   const presence = usePresenceContext()
 
   if (presence.unmounted) {
@@ -17,6 +19,4 @@ export const HoverCardPositioner = forwardRef<HTMLDivElement, HoverCardPositione
   }
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-HoverCardPositioner.displayName = 'HoverCardPositioner'
+}

@@ -1,18 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 import { useMenuItemPropsContext } from './use-menu-option-item-props-context'
 
 export interface MenuItemTextBaseProps extends PolymorphicProps {}
-export interface MenuItemTextProps extends HTMLProps<'div'>, MenuItemTextBaseProps {}
+export interface MenuItemTextProps extends ComponentProps<'div'>, MenuItemTextBaseProps {}
 
-export const MenuItemText = forwardRef<HTMLDivElement, MenuItemTextProps>((props, ref) => {
+export const MenuItemText = (props: MenuItemTextProps) => {
+  const { ref, ...restProps } = props
   const menu = useMenuContext()
   const itemProps = useMenuItemPropsContext()
-  const mergedProps = mergeProps(menu.getItemTextProps(itemProps), props)
+  const mergedProps = mergeProps(menu.getItemTextProps(itemProps), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-MenuItemText.displayName = 'MenuItemText'
+}

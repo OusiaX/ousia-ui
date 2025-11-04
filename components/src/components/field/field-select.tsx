@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface FieldSelectBaseProps extends PolymorphicProps {}
-export interface FieldSelectProps extends HTMLProps<'select'>, FieldSelectBaseProps {}
+export interface FieldSelectProps extends ComponentProps<'select'>, FieldSelectBaseProps {}
 
-export const FieldSelect = forwardRef<HTMLSelectElement, FieldSelectProps>((props, ref) => {
+export const FieldSelect = (props: FieldSelectProps) => {
+  const { ref, ...restProps } = props
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'select'>>(field?.getSelectProps(), props)
+  const mergedProps = mergeProps(field?.getSelectProps(), restProps)
 
   return <ark.select {...mergedProps} ref={ref} />
-})
-
-FieldSelect.displayName = 'FieldSelect'
+}

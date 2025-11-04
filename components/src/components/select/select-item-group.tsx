@@ -1,17 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import type { ItemGroupProps } from '@zag-js/select'
-import { forwardRef, useId } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ItemGroupProps } from '@zag-js/select'
+import type { ComponentProps } from 'react'
+import { useId } from 'react'
 import { useSelectContext } from './use-select-context'
 import { SelectItemGroupPropsProvider } from './use-select-item-group-props'
 
 export interface SelectItemGroupBaseProps extends PolymorphicProps {}
-export interface SelectItemGroupProps extends HTMLProps<'div'>, SelectItemGroupBaseProps {}
+export interface SelectItemGroupProps extends ComponentProps<'div'>, SelectItemGroupBaseProps {}
 
-export const SelectItemGroup = forwardRef<HTMLDivElement, SelectItemGroupProps>((props, ref) => {
+export const SelectItemGroup = (props: SelectItemGroupProps) => {
+  const { ref, ...restProps } = props
   const id = useId()
-  const [_itemGroupProps, localProps] = createSplitProps<Partial<ItemGroupProps>>()(props, ['id'])
+  const [_itemGroupProps, localProps] = createSplitProps<Partial<ItemGroupProps>>()(restProps, [
+    'id',
+  ])
   const itemGroupProps = { id, ..._itemGroupProps }
 
   const select = useSelectContext()
@@ -19,9 +22,7 @@ export const SelectItemGroup = forwardRef<HTMLDivElement, SelectItemGroupProps>(
 
   return (
     <SelectItemGroupPropsProvider value={itemGroupProps}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </SelectItemGroupPropsProvider>
   )
-})
-
-SelectItemGroup.displayName = 'SelectItemGroup'
+}

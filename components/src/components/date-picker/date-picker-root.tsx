@@ -1,16 +1,25 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign, HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { arkMemo } from '@ousia-ui/ark'
-import { PresenceProvider, type UsePresenceProps, splitPresenceProps, usePresence, createSplitProps } from '@ousia-ui/ark/utils'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import {
+  PresenceProvider,
+  type UsePresenceProps,
+  createSplitProps,
+  splitPresenceProps,
+  usePresence,
+} from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { type UseDatePickerProps, useDatePicker } from './use-date-picker'
 import { DatePickerProvider } from './use-date-picker-context'
 
-export interface DatePickerRootBaseProps extends UseDatePickerProps, UsePresenceProps, PolymorphicProps {}
-export interface DatePickerRootProps extends Assign<HTMLProps<'div'>, DatePickerRootBaseProps> {}
+export interface DatePickerRootBaseProps
+  extends UseDatePickerProps,
+    UsePresenceProps,
+    PolymorphicProps {}
+export interface DatePickerRootProps
+  extends Assign<ComponentProps<'div'>, DatePickerRootBaseProps> {}
 
-export const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerRootProps>((props, ref) => {
-  const [presenceProps, datePickerProps] = splitPresenceProps(props)
+export const DatePickerRoot = (props: DatePickerRootProps) => {
+  const { ref, ...restProps } = props
+  const [presenceProps, datePickerProps] = splitPresenceProps(restProps)
   const [useDatePickerProps, localProps] = createSplitProps<UseDatePickerProps>()(datePickerProps, [
     'closeOnSelect',
     'defaultFocusedValue',
@@ -56,10 +65,8 @@ export const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerRootProps>((p
   return (
     <DatePickerProvider value={datePicker}>
       <PresenceProvider value={presence}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </PresenceProvider>
     </DatePickerProvider>
   )
-})
-
-DatePickerRoot.displayName = 'DatePickerRoot'
+}

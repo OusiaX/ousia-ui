@@ -1,20 +1,17 @@
-import type { TriggerProps } from '@zag-js/combobox'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { ark } from '@ousia-ui/ark'
+import type { TriggerProps } from '@zag-js/combobox'
+import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
 export interface ComboboxTriggerBaseProps extends TriggerProps, PolymorphicProps {}
-export interface ComboboxTriggerProps extends HTMLProps<'button'>, ComboboxTriggerBaseProps {}
+export interface ComboboxTriggerProps extends ComponentProps<'button'>, ComboboxTriggerBaseProps {}
 
-export const ComboboxTrigger = forwardRef<HTMLButtonElement, ComboboxTriggerProps>((props, ref) => {
-  const [triggerProps, localProps] = createSplitProps<TriggerProps>()(props, ['focusable'])
+export const ComboboxTrigger = (props: ComboboxTriggerProps) => {
+  const { ref, ...restProps } = props
+  const [triggerProps, localProps] = createSplitProps<TriggerProps>()(restProps, ['focusable'])
   const combobox = useComboboxContext()
   const mergedProps = mergeProps(combobox.getTriggerProps(triggerProps), localProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-ComboboxTrigger.displayName = 'ComboboxTrigger'
+}

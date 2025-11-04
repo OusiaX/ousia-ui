@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTooltipContext } from './use-tooltip-context'
 
 export interface TooltipTriggerBaseProps extends PolymorphicProps {}
-export interface TooltipTriggerProps extends HTMLProps<'button'>, TooltipTriggerBaseProps {}
+export interface TooltipTriggerProps extends ComponentProps<'button'>, TooltipTriggerBaseProps {}
 
-export const TooltipTrigger = forwardRef<HTMLButtonElement, TooltipTriggerProps>((props, ref) => {
+export const TooltipTrigger = (props: TooltipTriggerProps) => {
+  const { ref, ...restProps } = props
   const tooltip = useTooltipContext()
-  const mergedProps = mergeProps(tooltip.getTriggerProps(), props)
+  const mergedProps = mergeProps(tooltip.getTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-TooltipTrigger.displayName = 'TooltipTrigger'
+}

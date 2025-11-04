@@ -1,17 +1,21 @@
-import { mergeProps } from '@zag-js/react'
-import type { ItemProps } from '@zag-js/tags-input'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ItemProps } from '@zag-js/tags-input'
+import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 import { TagsInputItemProvider } from './use-tags-input-item-context'
 import { TagsInputItemPropsProvider } from './use-tags-input-item-props-context'
 
 export interface TagsInputItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface TagsInputItemProps extends HTMLProps<'div'>, TagsInputItemBaseProps {}
+export interface TagsInputItemProps extends ComponentProps<'div'>, TagsInputItemBaseProps {}
 
-export const TagsInputItem = forwardRef<HTMLDivElement, TagsInputItemProps>((props, ref) => {
-  const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['index', 'disabled', 'value'])
+export const TagsInputItem = (props: TagsInputItemProps) => {
+  const { ref, ...restProps } = props
+  const [itemProps, localProps] = createSplitProps<ItemProps>()(restProps, [
+    'index',
+    'disabled',
+    'value',
+  ])
   const tagsInput = useTagsInputContext()
   const mergedProps = mergeProps(tagsInput.getItemProps(itemProps), localProps)
   const tagsInputItem = tagsInput.getItemState(itemProps)
@@ -19,10 +23,8 @@ export const TagsInputItem = forwardRef<HTMLDivElement, TagsInputItemProps>((pro
   return (
     <TagsInputItemPropsProvider value={itemProps}>
       <TagsInputItemProvider value={tagsInputItem}>
-        <arkSimple.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </TagsInputItemProvider>
     </TagsInputItemPropsProvider>
   )
-})
-
-TagsInputItem.displayName = 'TagsInputItem'
+}

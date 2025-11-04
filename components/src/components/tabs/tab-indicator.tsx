@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTabsContext } from './use-tabs-context'
 
 export interface TabIndicatorBaseProps extends PolymorphicProps {}
-export interface TabIndicatorProps extends HTMLProps<'div'>, TabIndicatorBaseProps {}
+export interface TabIndicatorProps extends ComponentProps<'div'>, TabIndicatorBaseProps {}
 
-export const TabIndicator = forwardRef<HTMLDivElement, TabIndicatorProps>((props, ref) => {
+export const TabIndicator = (props: TabIndicatorProps) => {
+  const { ref, ...restProps } = props
   const tabs = useTabsContext()
-  const mergedProps = mergeProps(tabs.getIndicatorProps(), props)
+  const mergedProps = mergeProps(tabs.getIndicatorProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-TabIndicator.displayName = 'TabIndicator'
+}

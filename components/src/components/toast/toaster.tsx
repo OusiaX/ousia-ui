@@ -1,9 +1,9 @@
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import { ark } from '@ousia-ui/ark'
+import { useEnvironmentContext, useLocaleContext } from '@ousia-ui/ark/providers'
 import { mergeProps, normalizeProps, useMachine } from '@zag-js/react'
 import * as toast from '@zag-js/toast'
-import { type ReactNode, forwardRef, useId } from 'react'
-import { useEnvironmentContext, useLocaleContext } from '@ousia-ui/ark/providers'
-import type { Assign } from '@ousia-ui/ark'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import { type ComponentProps, type ReactNode, useId } from 'react'
 import type { CreateToasterReturn } from './create-toaster'
 import { ToastProvider } from './use-toast-context'
 
@@ -12,10 +12,10 @@ export interface ToasterBaseProps extends PolymorphicProps, Omit<toast.GroupProp
   children: (toast: toast.Options<ReactNode>) => ReactNode
 }
 
-export interface ToasterProps extends Assign<HTMLProps<'div'>, ToasterBaseProps> {}
+export interface ToasterProps extends Assign<ComponentProps<'div'>, ToasterBaseProps> {}
 
-export const Toaster = forwardRef<HTMLDivElement, ToasterProps>((props, ref) => {
-  const { toaster, children, ...localProps } = props
+export const Toaster = (props: ToasterProps) => {
+  const { ref, toaster, children, ...localProps } = props
 
   const locale = useLocaleContext()
   const env = useEnvironmentContext()
@@ -32,17 +32,15 @@ export const Toaster = forwardRef<HTMLDivElement, ToasterProps>((props, ref) => 
   const mergedProps = mergeProps(api.getGroupProps(), localProps)
 
   return (
-    <arkSimple.div {...mergedProps} ref={ref}>
+    <ark.div {...mergedProps} ref={ref}>
       {api.getToasts().map((toast, index) => (
         <ToastActor key={toast.id} value={toast} parent={service} index={index}>
           {(ctx) => children(ctx)}
         </ToastActor>
       ))}
-    </arkSimple.div>
+    </ark.div>
   )
-})
-
-Toaster.displayName = 'Toaster'
+}
 
 interface ToastActorProps {
   value: toast.Props<ReactNode>

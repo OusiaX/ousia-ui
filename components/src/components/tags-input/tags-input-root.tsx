@@ -1,16 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { type UseTagsInputProps, useTagsInput } from './use-tags-input'
 import { TagsInputProvider } from './use-tags-input-context'
 
 export interface TagsInputRootBaseProps extends UseTagsInputProps, PolymorphicProps {}
-export interface TagsInputRootProps extends Assign<HTMLProps<'div'>, TagsInputRootBaseProps> {}
+export interface TagsInputRootProps extends Assign<ComponentProps<'div'>, TagsInputRootBaseProps> {}
 
-export const TagsInputRoot = forwardRef<HTMLDivElement, TagsInputRootProps>((props, ref) => {
-  const [useTagsInputProps, localProps] = createSplitProps<UseTagsInputProps>()(props, [
+export const TagsInputRoot = (props: TagsInputRootProps) => {
+  const { ref, ...restProps } = props
+  const [useTagsInputProps, localProps] = createSplitProps<UseTagsInputProps>()(restProps, [
     'addOnPaste',
     'allowOverflow',
     'autoFocus',
@@ -46,9 +45,7 @@ export const TagsInputRoot = forwardRef<HTMLDivElement, TagsInputRootProps>((pro
 
   return (
     <TagsInputProvider value={tagsInput}>
-      <arkSimple.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </TagsInputProvider>
   )
-})
-
-TagsInputRoot.displayName = 'TagsInputRoot'
+}

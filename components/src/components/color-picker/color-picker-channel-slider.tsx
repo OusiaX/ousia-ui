@@ -1,17 +1,22 @@
-import type { ChannelProps } from '@zag-js/color-picker'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import type { ChannelProps } from '@zag-js/color-picker'
+import type { ComponentProps } from 'react'
 import { ColorPickerChannelPropsProvider } from './use-color-picker-channel-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 import { useColorPickerFormatPropsContext } from './use-color-picker-format-context'
 
 export interface ColorPickerChannelSliderBaseProps extends ChannelProps, PolymorphicProps {}
-export interface ColorPickerChannelSliderProps extends HTMLProps<'div'>, ColorPickerChannelSliderBaseProps {}
+export interface ColorPickerChannelSliderProps
+  extends ComponentProps<'div'>,
+    ColorPickerChannelSliderBaseProps {}
 
-export const ColorPickerChannelSlider = forwardRef<HTMLDivElement, ColorPickerChannelSliderProps>((props, ref) => {
-  const [channelProps, localProps] = createSplitProps<ChannelProps>()(props, ['channel', 'orientation'])
+export const ColorPickerChannelSlider = (props: ColorPickerChannelSliderProps) => {
+  const { ref, ...restProps } = props
+  const [channelProps, localProps] = createSplitProps<ChannelProps>()(restProps, [
+    'channel',
+    'orientation',
+  ])
 
   const colorPicker = useColorPickerContext()
 
@@ -25,6 +30,4 @@ export const ColorPickerChannelSlider = forwardRef<HTMLDivElement, ColorPickerCh
       <ark.div {...mergedProps} ref={ref} />
     </ColorPickerChannelPropsProvider>
   )
-})
-
-ColorPickerChannelSlider.displayName = 'ColorPickerChannelSlider'
+}

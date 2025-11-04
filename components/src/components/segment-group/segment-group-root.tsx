@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { type UseSegmentGroupProps, useSegmentGroup } from './use-segment-group'
 import { SegmentGroupProvider } from './use-segment-group-context'
 
 export interface SegmentGroupRootBaseProps extends UseSegmentGroupProps, PolymorphicProps {}
-export interface SegmentGroupRootProps extends Assign<HTMLProps<'div'>, SegmentGroupRootBaseProps> {}
+export interface SegmentGroupRootProps
+  extends Assign<ComponentProps<'div'>, SegmentGroupRootBaseProps> {}
 
-export const SegmentGroupRoot = forwardRef<HTMLDivElement, SegmentGroupRootProps>((props, ref) => {
-  const [useSegmentGroupProps, localProps] = createSplitProps<UseSegmentGroupProps>()(props, [
+export const SegmentGroupRoot = (props: SegmentGroupRootProps) => {
+  const { ref, ...restProps } = props
+  const [useSegmentGroupProps, localProps] = createSplitProps<UseSegmentGroupProps>()(restProps, [
     'defaultValue',
     'disabled',
     'form',
@@ -27,9 +27,7 @@ export const SegmentGroupRoot = forwardRef<HTMLDivElement, SegmentGroupRootProps
 
   return (
     <SegmentGroupProvider value={segmentGroup}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </SegmentGroupProvider>
   )
-})
-
-SegmentGroupRoot.displayName = 'SegmentGroupRoot'
+}

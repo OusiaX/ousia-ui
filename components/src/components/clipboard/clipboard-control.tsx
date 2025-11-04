@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
-export interface ClipboardControlBaseProps {}
-export interface ClipboardControlProps extends HTMLProps<'div'>, ClipboardControlBaseProps {}
+export interface ClipboardControlBaseProps extends PolymorphicProps {}
+export interface ClipboardControlProps extends ComponentProps<'div'>, ClipboardControlBaseProps {}
 
-export const ClipboardControl = forwardRef<HTMLDivElement, ClipboardControlProps>((props, ref) => {
+export const ClipboardControl = (props: ClipboardControlProps) => {
+  const { ref, ...restProps } = props
   const clipboard = useClipboardContext()
-  const mergedProps = mergeProps(clipboard.getControlProps(), props)
+  const mergedProps = mergeProps(clipboard.getControlProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-ClipboardControl.displayName = 'ClipboardControl'
+}

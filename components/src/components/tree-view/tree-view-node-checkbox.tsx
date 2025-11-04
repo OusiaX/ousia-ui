@@ -1,18 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
 export interface TreeViewNodeCheckboxBaseProps extends PolymorphicProps {}
-export interface TreeViewNodeCheckboxProps extends HTMLProps<'span'>, TreeViewNodeCheckboxBaseProps {}
+export interface TreeViewNodeCheckboxProps
+  extends ComponentProps<'span'>,
+    TreeViewNodeCheckboxBaseProps {}
 
-export const TreeViewNodeCheckbox = forwardRef<HTMLSpanElement, TreeViewNodeCheckboxProps>((props, ref) => {
+export const TreeViewNodeCheckbox = (props: TreeViewNodeCheckboxProps) => {
+  const { ref, ...restProps } = props
   const treeView = useTreeViewContext()
   const nodeProps = useTreeViewNodePropsContext()
-  const mergedProps = mergeProps(treeView.getNodeCheckboxProps(nodeProps), props)
+  const mergedProps = mergeProps(treeView.getNodeCheckboxProps(nodeProps), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-TreeViewNodeCheckbox.displayName = 'TreeViewNodeCheckbox'
+}

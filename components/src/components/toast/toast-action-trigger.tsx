@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useToastContext } from './use-toast-context'
 
 export interface ToastActionTriggerBaseProps extends PolymorphicProps {}
-export interface ToastActionTriggerProps extends HTMLProps<'button'>, ToastActionTriggerBaseProps {}
+export interface ToastActionTriggerProps
+  extends ComponentProps<'button'>,
+    ToastActionTriggerBaseProps {}
 
-export const ToastActionTrigger = forwardRef<HTMLButtonElement, ToastActionTriggerProps>((props, ref) => {
+export const ToastActionTrigger = (props: ToastActionTriggerProps) => {
+  const { ref, ...restProps } = props
   const toast = useToastContext()
-  const mergedProps = mergeProps(toast.getActionTriggerProps(), props)
+  const mergedProps = mergeProps(toast.getActionTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-ToastActionTrigger.displayName = 'ToastActionTrigger'
+}

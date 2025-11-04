@@ -1,19 +1,17 @@
-import type { InputProps } from '@zag-js/pin-input'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import type { InputProps } from '@zag-js/pin-input'
+import type { ComponentProps } from 'react'
 import { usePinInputContext } from './use-pin-input-context'
 
 export interface PinInputInputBaseProps extends InputProps, PolymorphicProps {}
-export interface PinInputInputProps extends HTMLProps<'input'>, PinInputInputBaseProps {}
+export interface PinInputInputProps extends ComponentProps<'input'>, PinInputInputBaseProps {}
 
-export const PinInputInput = forwardRef<HTMLInputElement, PinInputInputProps>((props, ref) => {
-  const [inputProps, localProps] = createSplitProps<InputProps>()(props, ['index'])
+export const PinInputInput = (props: PinInputInputProps) => {
+  const { ref, ...restProps } = props
+  const [inputProps, localProps] = createSplitProps<InputProps>()(restProps, ['index'])
   const pinInput = usePinInputContext()
   const mergedProps = mergeProps(pinInput.getInputProps(inputProps), localProps)
 
   return <ark.input {...mergedProps} ref={ref} />
-})
-
-PinInputInput.displayName = 'PinInputInput'
+}

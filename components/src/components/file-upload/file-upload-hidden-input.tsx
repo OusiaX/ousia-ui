@@ -1,18 +1,18 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 
 export interface FileUploadHiddenInputBaseProps extends PolymorphicProps {}
-export interface FileUploadHiddenInputProps extends HTMLProps<'input'>, FileUploadHiddenInputBaseProps {}
+export interface FileUploadHiddenInputProps
+  extends ComponentProps<'input'>,
+    FileUploadHiddenInputBaseProps {}
 
-export const FileUploadHiddenInput = forwardRef<HTMLInputElement, FileUploadHiddenInputProps>((props, ref) => {
+export const FileUploadHiddenInput = (props: FileUploadHiddenInputProps) => {
+  const { ref, ...restProps } = props
   const fileUpload = useFileUploadContext()
-  const mergedProps = mergeProps(fileUpload.getHiddenInputProps(), props)
+  const mergedProps = mergeProps(fileUpload.getHiddenInputProps(), restProps)
   const field = useFieldContext()
 
   return <ark.input aria-describedby={field?.ariaDescribedby} {...mergedProps} ref={ref} />
-})
-
-FileUploadHiddenInput.displayName = 'FileUploadHiddenInput'
+}

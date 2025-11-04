@@ -1,22 +1,22 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, mergeProps } from '@ousia-ui/ark'
 import { useRenderStrategyPropsContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { Collapsible } from '~/components/collapsible'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodeContext } from './use-tree-view-node-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
 export interface TreeViewBranchBaseProps extends PolymorphicProps {}
-export interface TreeViewBranchProps extends Assign<HTMLProps<'div'>, TreeViewBranchBaseProps> {}
+export interface TreeViewBranchProps
+  extends Assign<ComponentProps<'div'>, TreeViewBranchBaseProps> {}
 
-export const TreeViewBranch = forwardRef<HTMLDivElement, TreeViewBranchProps>((props, ref) => {
+export const TreeViewBranch = (props: TreeViewBranchProps) => {
+  const { ref, ...restProps } = props
   const treeView = useTreeViewContext()
   const nodeProps = useTreeViewNodePropsContext()
   const nodeState = useTreeViewNodeContext()
   const renderStrategyProps = useRenderStrategyPropsContext()
-  const mergedProps = mergeProps(treeView.getBranchProps(nodeProps), props)
+  const mergedProps = mergeProps(treeView.getBranchProps(nodeProps), restProps)
   const branchContentProps = treeView.getBranchContentProps(nodeProps)
 
   return (
@@ -28,6 +28,4 @@ export const TreeViewBranch = forwardRef<HTMLDivElement, TreeViewBranchProps>((p
       {...mergedProps}
     />
   )
-})
-
-TreeViewBranch.displayName = 'TreeViewBranch'
+}

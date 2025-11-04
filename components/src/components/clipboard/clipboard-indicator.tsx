@@ -1,23 +1,26 @@
-import { mergeProps } from '@zag-js/react'
-import { type ReactNode, forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { ark, mergeProps } from '@ousia-ui/ark'
+import type { ReactNode } from 'react'
+import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
 export interface ClipboardIndicatorBaseProps {
   copied?: ReactNode | undefined
 }
-export interface ClipboardIndicatorProps extends HTMLProps<'div'>, ClipboardIndicatorBaseProps {}
+export interface ClipboardIndicatorProps
+  extends ComponentProps<'div'>,
+    ClipboardIndicatorBaseProps {}
 
-export const ClipboardIndicator = forwardRef<HTMLDivElement, ClipboardIndicatorProps>((props, ref) => {
-  const { children, copied, ...localProps } = props
+export const ClipboardIndicator = (props: ClipboardIndicatorProps) => {
+  const { ref, children, copied, ...restProps } = props
   const clipboard = useClipboardContext()
-  const mergedProps = mergeProps(clipboard.getIndicatorProps({ copied: clipboard.copied }), localProps)
+  const mergedProps = mergeProps(
+    clipboard.getIndicatorProps({ copied: clipboard.copied }),
+    restProps,
+  )
 
   return (
-    <arkSimple.div {...mergedProps} ref={ref}>
+    <ark.div {...mergedProps} ref={ref}>
       {clipboard.copied ? copied : children}
-    </arkSimple.div>
+    </ark.div>
   )
-})
-
-ClipboardIndicator.displayName = 'ClipboardIndicator'
+}

@@ -1,17 +1,18 @@
-"use client";
-import { type ReactNode, forwardRef } from "react";
-import * as StyledSlider from "./slider";
+'use client'
+import type { ReactNode } from 'react'
+import * as StyledSlider from './slider'
 
 export interface SliderProps extends StyledSlider.RootProps {
-  children?: ReactNode;
+  children?: ReactNode
   marks?: {
-    value: number;
-    label?: ReactNode;
-  }[];
+    value: number
+    label?: ReactNode
+  }[]
 }
 
-export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
-  const { children, marks, ...rootProps } = props;
+export const Slider = (props: SliderProps) => {
+  const { ref, ...restProps } = props
+  const { children, marks, ...rootProps } = restProps
 
   return (
     <StyledSlider.Root ref={ref} {...rootProps}>
@@ -29,9 +30,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
                 </StyledSlider.Thumb>
               ))}
             </StyledSlider.Control>
-            {props.marks && (
+            {restProps.marks && (
               <StyledSlider.MarkerGroup>
-                {props.marks.map((mark) => (
+                {restProps.marks.map((mark) => (
                   <StyledSlider.Marker key={mark.value} value={mark.value}>
                     {mark.label}
                   </StyledSlider.Marker>
@@ -42,7 +43,5 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>((props, ref) => {
         )}
       </StyledSlider.Context>
     </StyledSlider.Root>
-  );
-});
-
-Slider.displayName = "Slider";
+  )
+}

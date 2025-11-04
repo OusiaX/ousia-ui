@@ -1,17 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
-import { ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
 export interface DialogCloseTriggerBaseProps extends PolymorphicProps {}
-export interface DialogCloseTriggerProps extends HTMLProps<'button'>, DialogCloseTriggerBaseProps {}
+export interface DialogCloseTriggerProps
+  extends ComponentProps<'button'>,
+    DialogCloseTriggerBaseProps {}
 
-export const DialogCloseTrigger = forwardRef<HTMLButtonElement, DialogCloseTriggerProps>((props, ref) => {
+export const DialogCloseTrigger = (props: DialogCloseTriggerProps) => {
+  const { ref, ...restProps } = props
   const dialog = useDialogContext()
-  const mergedProps = mergeProps(dialog.getCloseTriggerProps(), props)
+  const mergedProps = mergeProps(dialog.getCloseTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-DialogCloseTrigger.displayName = 'DialogCloseTrigger'
+}

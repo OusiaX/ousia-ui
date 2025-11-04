@@ -1,19 +1,20 @@
-import type { ItemProps } from '@zag-js/accordion'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { Collapsible } from '~/components/collapsible'
+import { mergeProps } from '@ousia-ui/ark'
+import type { PolymorphicProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import { useRenderStrategyPropsContext } from '@ousia-ui/ark/utils'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import type { ItemProps } from '@zag-js/accordion'
+import type { ComponentProps } from 'react'
+import { Collapsible } from '~/components/collapsible'
 import { useAccordionContext } from './use-accordion-context'
 import { AccordionItemProvider } from './use-accordion-item-context'
 import { AccordionItemPropsProvider } from './use-accordion-item-props-context'
 
 export interface AccordionItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface AccordionItemProps extends HTMLProps<'div'>, AccordionItemBaseProps {}
+export interface AccordionItemProps extends ComponentProps<'div'>, AccordionItemBaseProps {}
 
-export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>((props, ref) => {
-  const [itemProps, localProps] = createSplitProps<ItemProps>()(props, ['value', 'disabled'])
+export const AccordionItem = (props: AccordionItemProps) => {
+  const { ref, ...restProps } = props
+  const [itemProps, localProps] = createSplitProps<ItemProps>()(restProps, ['value', 'disabled'])
   const accordion = useAccordionContext()
   const renderStrategy = useRenderStrategyPropsContext()
   const mergedProps = mergeProps(accordion.getItemProps(itemProps), localProps)
@@ -33,6 +34,4 @@ export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>((pro
       </AccordionItemProvider>
     </AccordionItemPropsProvider>
   )
-})
-
-AccordionItem.displayName = 'AccordionItem'
+}

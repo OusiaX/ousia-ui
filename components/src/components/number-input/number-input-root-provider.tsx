@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import type { UseNumberInputReturn } from './use-number-input'
 import { NumberInputProvider } from './use-number-input-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface NumberInputRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface NumberInputRootProviderProps extends HTMLProps<'div'>, NumberInputRootProviderBaseProps {}
+export interface NumberInputRootProviderProps
+  extends ComponentProps<'div'>,
+    NumberInputRootProviderBaseProps {}
 
-export const NumberInputRootProvider = forwardRef<HTMLDivElement, NumberInputRootProviderProps>((props, ref) => {
-  const [{ value: numberInput }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const NumberInputRootProvider = (props: NumberInputRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: numberInput }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(numberInput.getRootProps(), localProps)
 
   return (
     <NumberInputProvider value={numberInput}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </NumberInputProvider>
   )
-})
-
-NumberInputRootProvider.displayName = 'NumberInputRootProvider'
+}

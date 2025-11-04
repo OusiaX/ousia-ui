@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark, type HTMLProps, type PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldsetContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface FieldsetLegendBaseProps extends PolymorphicProps {}
-export interface FieldsetLegendProps extends HTMLProps<'legend'>, FieldsetLegendBaseProps {}
+export interface FieldsetLegendProps extends ComponentProps<'legend'>, FieldsetLegendBaseProps {}
 
-export const FieldsetLegend = forwardRef<HTMLLegendElement, FieldsetLegendProps>((props, ref) => {
+export const FieldsetLegend = (props: FieldsetLegendProps) => {
+  const { ref, ...restProps } = props
   const fieldset = useFieldsetContext()
-  const mergedProps = mergeProps(fieldset.getLegendProps(), props)
+  const mergedProps = mergeProps(fieldset.getLegendProps(), restProps)
 
   return <ark.legend {...mergedProps} ref={ref} />
-})
-
-FieldsetLegend.displayName = 'FieldsetLegend'
+}

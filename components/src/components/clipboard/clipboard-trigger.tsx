@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
 export interface ClipboardTriggerBaseProps extends PolymorphicProps {}
-export interface ClipboardTriggerProps extends HTMLProps<'button'>, ClipboardTriggerBaseProps {}
+export interface ClipboardTriggerProps
+  extends ComponentProps<'button'>,
+    ClipboardTriggerBaseProps {}
 
-export const ClipboardTrigger = forwardRef<HTMLButtonElement, ClipboardTriggerProps>((props, ref) => {
+export const ClipboardTrigger = (props: ClipboardTriggerProps) => {
+  const { ref, ...restProps } = props
   const clipboard = useClipboardContext()
-  const mergedProps = mergeProps(clipboard.getTriggerProps(), props)
+  const mergedProps = mergeProps(clipboard.getTriggerProps(), restProps)
 
   return <ark.button {...mergedProps} ref={ref} />
-})
-
-ClipboardTrigger.displayName = 'ClipboardTrigger'
+}

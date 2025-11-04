@@ -1,22 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
 export interface PopoverPositionerBaseProps extends PolymorphicProps {}
-export interface PopoverPositionerProps extends HTMLProps<'div'>, PopoverPositionerBaseProps {}
+export interface PopoverPositionerProps extends ComponentProps<'div'>, PopoverPositionerBaseProps {}
 
-export const PopoverPositioner = forwardRef<HTMLDivElement, PopoverPositionerProps>((props, ref) => {
+export const PopoverPositioner = (props: PopoverPositionerProps) => {
+  const { ref, ...restProps } = props
   const popover = usePopoverContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(popover.getPositionerProps(), props)
+  const mergedProps = mergeProps(popover.getPositionerProps(), restProps)
 
   if (presence.unmounted) {
     return null
   }
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-PopoverPositioner.displayName = 'PopoverPositioner'
+}

@@ -1,16 +1,16 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerSwatchGroupBaseProps {}
-export interface ColorPickerSwatchGroupProps extends HTMLProps<'div'>, ColorPickerSwatchGroupBaseProps {}
+export interface ColorPickerSwatchGroupBaseProps extends PolymorphicProps {}
+export interface ColorPickerSwatchGroupProps
+  extends ComponentProps<'div'>,
+    ColorPickerSwatchGroupBaseProps {}
 
-export const ColorPickerSwatchGroup = forwardRef<HTMLDivElement, ColorPickerSwatchGroupProps>((props, ref) => {
+export const ColorPickerSwatchGroup = (props: ColorPickerSwatchGroupProps) => {
+  const { ref, ...restProps } = props
   const colorPicker = useColorPickerContext()
-  const mergedProps = mergeProps(colorPicker.getSwatchGroupProps(), props)
+  const mergedProps = mergeProps(colorPicker.getSwatchGroupProps(), restProps)
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-ColorPickerSwatchGroup.displayName = 'ColorPickerSwatchGroup'
+  return <ark.div {...mergedProps} ref={ref} />
+}

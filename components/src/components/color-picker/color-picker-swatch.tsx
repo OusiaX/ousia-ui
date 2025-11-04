@@ -1,16 +1,19 @@
-import type { SwatchProps } from '@zag-js/color-picker'
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import type { SwatchProps } from '@zag-js/color-picker'
+import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 import { ColorPickerSwatchPropsProvider } from './use-color-picker-swatch-props-context'
 
 export interface ColorPickerSwatchBaseProps extends SwatchProps, PolymorphicProps {}
-export interface ColorPickerSwatchProps extends HTMLProps<'div'>, ColorPickerSwatchBaseProps {}
+export interface ColorPickerSwatchProps extends ComponentProps<'div'>, ColorPickerSwatchBaseProps {}
 
-export const ColorPickerSwatch = forwardRef<HTMLDivElement, ColorPickerSwatchProps>((props, ref) => {
-  const [swatwchProps, localProps] = createSplitProps<SwatchProps>()(props, ['respectAlpha', 'value'])
+export const ColorPickerSwatch = (props: ColorPickerSwatchProps) => {
+  const { ref, ...restProps } = props
+  const [swatwchProps, localProps] = createSplitProps<SwatchProps>()(restProps, [
+    'respectAlpha',
+    'value',
+  ])
   const colorPicker = useColorPickerContext()
   const mergedProps = mergeProps(colorPicker.getSwatchProps(swatwchProps), localProps)
 
@@ -19,6 +22,4 @@ export const ColorPickerSwatch = forwardRef<HTMLDivElement, ColorPickerSwatchPro
       <ark.div {...mergedProps} ref={ref} />
     </ColorPickerSwatchPropsProvider>
   )
-})
-
-ColorPickerSwatch.displayName = 'ColorPickerSwatch'
+}

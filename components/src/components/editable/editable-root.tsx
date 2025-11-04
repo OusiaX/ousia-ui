@@ -1,17 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
-import { arkMemo } from '@ousia-ui/ark'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { type UseEditableProps, useEditable } from './use-editable'
 import { EditableProvider } from './use-editable-context'
 
 export interface EditableRootBaseProps extends UseEditableProps, PolymorphicProps {}
-export interface EditableRootProps extends Assign<HTMLProps<'div'>, EditableRootBaseProps> {}
+export interface EditableRootProps extends Assign<ComponentProps<'div'>, EditableRootBaseProps> {}
 
-export const EditableRoot = forwardRef<HTMLDivElement, EditableRootProps>((props, ref) => {
-  const [useEditableProps, localProps] = createSplitProps<UseEditableProps>()(props, [
+export const EditableRoot = (props: EditableRootProps) => {
+  const { ref, ...restProps } = props
+  const [useEditableProps, localProps] = createSplitProps<UseEditableProps>()(restProps, [
     'activationMode',
     'autoResize',
     'defaultEdit',
@@ -45,9 +43,7 @@ export const EditableRoot = forwardRef<HTMLDivElement, EditableRootProps>((props
 
   return (
     <EditableProvider value={editable}>
-      <arkMemo.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </EditableProvider>
   )
-})
-
-EditableRoot.displayName = 'EditableRoot'
+}

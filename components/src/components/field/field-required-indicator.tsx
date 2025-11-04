@@ -1,28 +1,26 @@
-import { mergeProps } from '@zag-js/core'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface FieldRequiredIndicatorBaseProps extends PolymorphicProps {
   fallback?: React.ReactNode | undefined
 }
-export interface FieldRequiredIndicatorProps extends HTMLProps<'span'>, FieldRequiredIndicatorBaseProps {}
+export interface FieldRequiredIndicatorProps
+  extends ComponentProps<'span'>,
+    FieldRequiredIndicatorBaseProps {}
 
-export const FieldRequiredIndicator = forwardRef<HTMLSpanElement, FieldRequiredIndicatorProps>(
-  ({ fallback, ...props }, ref) => {
-    const field = useFieldContext()
+export const FieldRequiredIndicator = (props: FieldRequiredIndicatorProps) => {
+  const { ref, fallback, ...restProps } = props
+  const field = useFieldContext()
 
-    if (!field.required) {
-      return fallback
-    }
+  if (!field.required) {
+    return fallback
+  }
 
-    const mergedProps = mergeProps(field.getRequiredIndicatorProps(), props)
-    return (
-      <ark.span {...mergedProps} ref={ref}>
-        {props.children ?? '*'}
-      </ark.span>
-    )
-  },
-)
-
-FieldRequiredIndicator.displayName = 'FieldRequiredIndicator'
+  const mergedProps = mergeProps(field.getRequiredIndicatorProps(), restProps)
+  return (
+    <ark.span {...mergedProps} ref={ref}>
+      {restProps.children ?? '*'}
+    </ark.span>
+  )
+}

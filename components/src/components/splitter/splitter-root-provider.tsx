@@ -1,7 +1,6 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import type { UseSplitterReturn } from './use-splitter'
 import { SplitterProvider } from './use-splitter-context'
 
@@ -10,17 +9,20 @@ interface RootProviderProps {
 }
 
 export interface SplitterRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface SplitterRootProviderProps extends HTMLProps<'div'>, SplitterRootProviderBaseProps {}
+export interface SplitterRootProviderProps
+  extends ComponentProps<'div'>,
+    SplitterRootProviderBaseProps {}
 
-export const SplitterRootProvider = forwardRef<HTMLDivElement, SplitterRootProviderProps>((props, ref) => {
-  const [{ value: splitter }, localProps] = createSplitProps<RootProviderProps>()(props, ['value'])
+export const SplitterRootProvider = (props: SplitterRootProviderProps) => {
+  const { ref, ...restProps } = props
+  const [{ value: splitter }, localProps] = createSplitProps<RootProviderProps>()(restProps, [
+    'value',
+  ])
   const mergedProps = mergeProps(splitter.getRootProps(), localProps)
 
   return (
     <SplitterProvider value={splitter}>
-      <arkSimple.div {...mergedProps} ref={ref} />
+      <ark.div {...mergedProps} ref={ref} />
     </SplitterProvider>
   )
-})
-
-SplitterRootProvider.displayName = 'SplitterRootProvider'
+}

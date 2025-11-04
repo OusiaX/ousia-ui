@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface FieldHelperTextBaseProps extends PolymorphicProps {}
-export interface FieldHelperTextProps extends HTMLProps<'span'>, FieldHelperTextBaseProps {}
+export interface FieldHelperTextProps extends ComponentProps<'span'>, FieldHelperTextBaseProps {}
 
-export const FieldHelperText = forwardRef<HTMLSpanElement, FieldHelperTextProps>((props, ref) => {
+export const FieldHelperText = (props: FieldHelperTextProps) => {
+  const { ref, ...restProps } = props
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'span'>>(field?.getHelperTextProps(), props)
+  const mergedProps = mergeProps(field?.getHelperTextProps(), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-FieldHelperText.displayName = 'FieldHelperText'
+}

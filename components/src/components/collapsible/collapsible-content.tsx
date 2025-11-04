@@ -1,20 +1,20 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useCollapsibleContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface CollapsibleContentBaseProps extends PolymorphicProps {}
-export interface CollapsibleContentProps extends HTMLProps<'div'>, CollapsibleContentBaseProps {}
+export interface CollapsibleContentProps
+  extends ComponentProps<'div'>,
+    CollapsibleContentBaseProps {}
 
-export const CollapsibleContent = forwardRef<HTMLDivElement, CollapsibleContentProps>((props, ref) => {
+export const CollapsibleContent = (props: CollapsibleContentProps) => {
+  const { ref, ...restProps } = props
   const collapsible = useCollapsibleContext()
 
   if (collapsible.isUnmounted) {
     return null
   }
 
-  const mergedProps = mergeProps(collapsible.getContentProps(), props)
-  return <arkMemo.div {...mergedProps} ref={ref} />
-})
-
-CollapsibleContent.displayName = 'CollapsibleContent'
+  const mergedProps = mergeProps(collapsible.getContentProps(), restProps)
+  return <ark.div {...mergedProps} ref={ref} />
+}

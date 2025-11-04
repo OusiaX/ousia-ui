@@ -1,17 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { ark } from '@ousia-ui/ark'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
 export interface EditableAreaBaseProps extends PolymorphicProps {}
-export interface EditableAreaProps extends HTMLProps<'div'>, EditableAreaBaseProps {}
+export interface EditableAreaProps extends ComponentProps<'div'>, EditableAreaBaseProps {}
 
-export const EditableArea = forwardRef<HTMLDivElement, EditableAreaProps>((props, ref) => {
+export const EditableArea = (props: EditableAreaProps) => {
+  const { ref, ...restProps } = props
   const editable = useEditableContext()
-  const mergedProps = mergeProps(editable.getAreaProps(), props)
+  const mergedProps = mergeProps(editable.getAreaProps(), restProps)
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-EditableArea.displayName = 'EditableArea'
+}

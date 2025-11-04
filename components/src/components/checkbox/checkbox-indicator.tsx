@@ -1,20 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useCheckboxContext } from './use-checkbox-context'
 
 export interface CheckboxIndicatorBaseProps extends PolymorphicProps {
   indeterminate?: boolean | undefined
 }
-export interface CheckboxIndicatorProps extends HTMLProps<'div'>, CheckboxIndicatorBaseProps {}
+export interface CheckboxIndicatorProps extends ComponentProps<'div'>, CheckboxIndicatorBaseProps {}
 
-export const CheckboxIndicator = forwardRef<HTMLDivElement, CheckboxIndicatorProps>((props, ref) => {
-  const { indeterminate, ...rest } = props
+export const CheckboxIndicator = (props: CheckboxIndicatorProps) => {
+  const { ref, indeterminate, ...restProps } = props
   const checkbox = useCheckboxContext()
-  const mergedProps = mergeProps(checkbox.getIndicatorProps(), rest)
+  const mergedProps = mergeProps(checkbox.getIndicatorProps(), restProps)
   const isVisible = indeterminate ? checkbox.indeterminate : checkbox.checked
 
   return <ark.div {...mergedProps} hidden={!isVisible} ref={ref} />
-})
-
-CheckboxIndicator.displayName = 'CheckboxIndicator'
+}

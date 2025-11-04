@@ -1,20 +1,17 @@
-import { mergeProps } from '@zag-js/react'
-import type { PanelProps } from '@zag-js/splitter'
-import { forwardRef } from 'react'
-import type { Assign } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkSimple } from '@ousia-ui/ark'
+import type { PanelProps } from '@zag-js/splitter'
+import type { ComponentProps } from 'react'
 import { useSplitterContext } from './use-splitter-context'
 
 export interface SplitterPanelBaseProps extends PanelProps, PolymorphicProps {}
-export interface SplitterPanelProps extends Assign<HTMLProps<'div'>, SplitterPanelBaseProps> {}
+export interface SplitterPanelProps extends Assign<ComponentProps<'div'>, SplitterPanelBaseProps> {}
 
-export const SplitterPanel = forwardRef<HTMLDivElement, SplitterPanelProps>((props, ref) => {
-  const [splitterPanelProps, localProps] = createSplitProps<PanelProps>()(props, ['id'])
+export const SplitterPanel = (props: SplitterPanelProps) => {
+  const { ref, ...restProps } = props
+  const [splitterPanelProps, localProps] = createSplitProps<PanelProps>()(restProps, ['id'])
   const splitter = useSplitterContext()
   const mergedProps = mergeProps(splitter.getPanelProps(splitterPanelProps), localProps)
 
-  return <arkSimple.div {...mergedProps} ref={ref} />
-})
-
-SplitterPanel.displayName = 'SplitterPanel'
+  return <ark.div {...mergedProps} ref={ref} />
+}

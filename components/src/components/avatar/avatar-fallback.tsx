@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, arkSimple } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useAvatarContext } from './use-avatar-context'
 
-export interface AvatarFallbackBaseProps {}
-export interface AvatarFallbackProps extends HTMLProps<'span'>, AvatarFallbackBaseProps {}
+export interface AvatarFallbackBaseProps extends PolymorphicProps {}
+export interface AvatarFallbackProps extends ComponentProps<'span'>, AvatarFallbackBaseProps {}
 
-export const AvatarFallback = forwardRef<HTMLSpanElement, AvatarFallbackProps>((props, ref) => {
+export const AvatarFallback = (props: AvatarFallbackProps) => {
+  const { ref, ...restProps } = props
   const avatar = useAvatarContext()
-  const mergedProps = mergeProps(avatar.getFallbackProps(), props)
+  const mergedProps = mergeProps(avatar.getFallbackProps(), restProps)
 
-  return <arkSimple.span {...mergedProps} ref={ref} />
-})
-
-AvatarFallback.displayName = 'AvatarFallback'
+  return <ark.span {...mergedProps} ref={ref} />
+}

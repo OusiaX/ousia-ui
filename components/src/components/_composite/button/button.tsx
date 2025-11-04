@@ -1,4 +1,3 @@
-import { forwardRef } from 'react'
 import { ark } from '@ousia-ui/ark'
 import { Center, styled } from 'styled-system/jsx'
 import { button } from 'styled-system/recipes'
@@ -11,17 +10,16 @@ interface ButtonLoadingProps {
 }
 
 export interface ButtonProps extends StyledButtonProps, ButtonLoadingProps {}
-
 export type StyledButtonProps = ComponentProps<typeof StyledButton>
 const StyledButton = styled(ark.button, button)
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
-  const { loading, disabled, loadingText, children, ...rest } = props
+export const Button = (props: ButtonProps) => {
+  const { ref, loading, disabled, loadingText, children, ...restProps } = props
 
   const trulyDisabled = loading || disabled
 
   return (
-    <StyledButton disabled={trulyDisabled} ref={ref} {...rest}>
+    <StyledButton disabled={trulyDisabled} ref={ref} {...restProps}>
       {loading && !loadingText ? (
         <>
           <ButtonSpinner />
@@ -34,9 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
       )}
     </StyledButton>
   )
-})
-
-Button.displayName = 'Button'
+}
 
 const ButtonSpinner = () => (
   <Center inline position="absolute" transform="translate(-50%, -50%)" top="50%" insetStart="50%">

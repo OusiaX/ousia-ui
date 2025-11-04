@@ -1,15 +1,15 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
 export interface SelectPositionerBaseProps extends PolymorphicProps {}
-export interface SelectPositionerProps extends HTMLProps<'div'>, SelectPositionerBaseProps {}
+export interface SelectPositionerProps extends ComponentProps<'div'>, SelectPositionerBaseProps {}
 
-export const SelectPositioner = forwardRef<HTMLDivElement, SelectPositionerProps>((props, ref) => {
+export const SelectPositioner = (props: SelectPositionerProps) => {
+  const { ref, ...restProps } = props
   const select = useSelectContext()
-  const mergedProps = mergeProps(select.getPositionerProps(), props)
+  const mergedProps = mergeProps(select.getPositionerProps(), restProps)
   const presence = usePresenceContext()
 
   if (presence.unmounted) {
@@ -17,6 +17,4 @@ export const SelectPositioner = forwardRef<HTMLDivElement, SelectPositionerProps
   }
 
   return <ark.div {...mergedProps} ref={ref} />
-})
-
-SelectPositioner.displayName = 'SelectPositioner'
+}

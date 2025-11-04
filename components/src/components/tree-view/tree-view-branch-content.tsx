@@ -1,13 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { type PolymorphicProps, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { Collapsible } from '~/components/collapsible'
-import type { HTMLProps, PolymorphicProps } from '@ousia-ui/ark'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
 export interface TreeViewBranchContentBaseProps extends PolymorphicProps {}
-export interface TreeViewBranchContentProps extends HTMLProps<'div'>, TreeViewBranchContentBaseProps {}
+export interface TreeViewBranchContentProps
+  extends ComponentProps<'div'>,
+    TreeViewBranchContentBaseProps {}
 
 interface VisibilityProps {
   hidden?: boolean | undefined
@@ -16,15 +17,14 @@ interface VisibilityProps {
 
 const splitVisibilityProps = createSplitProps<VisibilityProps>()
 
-export const TreeViewBranchContent = forwardRef<HTMLDivElement, TreeViewBranchContentProps>((props, ref) => {
+export const TreeViewBranchContent = (props: TreeViewBranchContentProps) => {
+  const { ref, ...restProps } = props
   const treeView = useTreeViewContext()
   const nodeProps = useTreeViewNodePropsContext()
   const contentProps = treeView.getBranchContentProps(nodeProps)
 
   const [, branchContentProps] = splitVisibilityProps(contentProps, ['hidden', 'data-state'])
-  const mergedProps = mergeProps(branchContentProps, props)
+  const mergedProps = mergeProps(branchContentProps, restProps)
 
   return <Collapsible.Content ref={ref} {...mergedProps} />
-})
-
-TreeViewBranchContent.displayName = 'TreeViewBranchContent'
+}

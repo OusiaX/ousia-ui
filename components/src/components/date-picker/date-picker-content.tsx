@@ -1,22 +1,24 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
 export interface DatePickerContentBaseProps extends PolymorphicProps {}
-export interface DatePickerContentProps extends HTMLProps<'div'>, DatePickerContentBaseProps {}
+export interface DatePickerContentProps extends ComponentProps<'div'>, DatePickerContentBaseProps {}
 
-export const DatePickerContent = forwardRef<HTMLDivElement, DatePickerContentProps>((props, ref) => {
+export const DatePickerContent = (props: DatePickerContentProps) => {
+  const { ref, ...restProps } = props
   const datePicker = useDatePickerContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(datePicker.getContentProps(), presence.getPresenceProps(), props)
+  const mergedProps = mergeProps(
+    datePicker.getContentProps(),
+    presence.getPresenceProps(),
+    restProps,
+  )
 
   if (presence.unmounted) {
     return null
   }
 
   return <ark.div {...mergedProps} ref={composeRefs(presence.ref, ref)} />
-})
-
-DatePickerContent.displayName = 'DatePickerContent'
+}

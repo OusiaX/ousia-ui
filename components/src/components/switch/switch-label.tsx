@@ -1,16 +1,14 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { type HTMLProps, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import type { ComponentProps } from 'react'
 import { useSwitchContext } from './use-switch-context'
 
 export interface SwitchLabelBaseProps extends PolymorphicProps {}
-export interface SwitchLabelProps extends HTMLProps<'span'>, SwitchLabelBaseProps {}
+export interface SwitchLabelProps extends ComponentProps<'span'>, SwitchLabelBaseProps {}
 
-export const SwitchLabel = forwardRef<HTMLSpanElement, SwitchLabelProps>((props, ref) => {
+export const SwitchLabel = (props: SwitchLabelProps) => {
+  const { ref, ...restProps } = props
   const switchContext = useSwitchContext()
-  const mergedProps = mergeProps(switchContext.getLabelProps(), props)
+  const mergedProps = mergeProps(switchContext.getLabelProps(), restProps)
 
   return <ark.span {...mergedProps} ref={ref} />
-})
-
-SwitchLabel.displayName = 'SwitchLabel'
+}

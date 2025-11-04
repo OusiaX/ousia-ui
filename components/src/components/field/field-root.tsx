@@ -1,13 +1,19 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
-import { composeRefs, createSplitProps, useField, type UseFieldProps, FieldProvider } from '@ousia-ui/ark/utils'
-import { type HTMLProps, type PolymorphicProps, arkMemo } from '@ousia-ui/ark'
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import {
+  FieldProvider,
+  type UseFieldProps,
+  composeRefs,
+  createSplitProps,
+  useField,
+} from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 
 export interface FieldRootBaseProps extends UseFieldProps, PolymorphicProps {}
-export interface FieldRootProps extends HTMLProps<'div'>, FieldRootBaseProps {}
+export interface FieldRootProps extends ComponentProps<'div'>, FieldRootBaseProps {}
 
-export const FieldRoot = forwardRef<HTMLDivElement, FieldRootProps>((props, ref) => {
-  const [useFieldProps, localProps] = createSplitProps<UseFieldProps>()(props, [
+export const FieldRoot = (props: FieldRootProps) => {
+  const { ref, ...restProps } = props
+  const [useFieldProps, localProps] = createSplitProps<UseFieldProps>()(restProps, [
     'id',
     'ids',
     'disabled',
@@ -16,13 +22,11 @@ export const FieldRoot = forwardRef<HTMLDivElement, FieldRootProps>((props, ref)
     'required',
   ])
   const field = useField(useFieldProps)
-  const mergedProps = mergeProps<HTMLProps<'div'>>(field.getRootProps(), localProps)
+  const mergedProps = mergeProps(field.getRootProps(), localProps)
 
   return (
     <FieldProvider value={field}>
-      <arkMemo.div {...mergedProps} ref={composeRefs(ref, field.refs.rootRef)} />
+      <ark.div {...mergedProps} ref={composeRefs(ref, field.refs.rootRef)} />
     </FieldProvider>
   )
-})
-
-FieldRoot.displayName = 'FieldRoot'
+}

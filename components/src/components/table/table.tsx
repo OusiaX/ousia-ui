@@ -1,5 +1,5 @@
 'use client'
-import { type Assign, ark, arkMemo, type PolymorphicProps } from '@ousia-ui/ark'
+import { type Assign, type PolymorphicProps, ark } from '@ousia-ui/ark'
 import { type TableVariantProps, table } from 'styled-system/recipes'
 import type { HTMLStyledProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
@@ -9,7 +9,7 @@ const { withProvider, withContext } = createStyleContext(table)
 export interface RootProps
   extends Assign<HTMLStyledProps<'table'>, PolymorphicProps>,
     TableVariantProps {}
-export const Root = withProvider<HTMLTableElement, RootProps>(arkMemo.table, 'root')
+export const Root = withProvider<HTMLTableElement, RootProps>(ark.table, 'root')
 
 export const Body = withContext<
   HTMLTableSectionElement,
@@ -24,7 +24,7 @@ export const Caption = withContext<
 export const Cell = withContext<
   HTMLTableCellElement,
   Assign<HTMLStyledProps<'td'>, PolymorphicProps>
->(arkMemo.td, 'cell')
+>(ark.td, 'cell')
 
 export const Foot = withContext<
   HTMLTableSectionElement,
@@ -39,9 +39,9 @@ export const Head = withContext<
 export const Header = withContext<
   HTMLTableCellElement,
   Assign<HTMLStyledProps<'th'>, PolymorphicProps>
->(arkMemo.th, 'header')
+>(ark.th, 'header')
 
 export const Row = withContext<
   HTMLTableRowElement,
   Assign<HTMLStyledProps<'tr'>, PolymorphicProps>
->(arkMemo.tr, 'row')
+>(ark.tr, 'row')

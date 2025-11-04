@@ -1,25 +1,24 @@
-import { mergeProps } from '@zag-js/react'
-import { forwardRef } from 'react'
+import { ark, mergeProps } from '@ousia-ui/ark'
+import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
 import {
-  type Assign,
-  type HTMLProps,
-  type PolymorphicProps,
-  arkMemo,
-} from '@ousia-ui/ark'
-import {
-  createSplitProps,
   type RenderStrategyProps,
   RenderStrategyPropsProvider,
+  createSplitProps,
   splitRenderStrategyProps,
 } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
 import { type UseAccordionProps, useAccordion } from './use-accordion'
 import { AccordionProvider } from './use-accordion-context'
 
-export interface AccordionRootBaseProps extends UseAccordionProps, RenderStrategyProps, PolymorphicProps {}
-export interface AccordionRootProps extends Assign<HTMLProps<'div'>, AccordionRootBaseProps> {}
+export interface AccordionRootBaseProps
+  extends UseAccordionProps,
+    RenderStrategyProps,
+    PolymorphicProps {}
+export interface AccordionRootProps extends Assign<ComponentProps<'div'>, AccordionRootBaseProps> {}
 
-export const AccordionRoot = forwardRef<HTMLDivElement, AccordionRootProps>((props, ref) => {
-  const [renderStrategyProps, accordionProps] = splitRenderStrategyProps(props)
+export const AccordionRoot = (props: AccordionRootProps) => {
+  const { ref, ...restProps } = props
+  const [renderStrategyProps, accordionProps] = splitRenderStrategyProps(restProps)
   const [useAccordionProps, localProps] = createSplitProps<UseAccordionProps>()(accordionProps, [
     'collapsible',
     'defaultValue',
@@ -38,10 +37,8 @@ export const AccordionRoot = forwardRef<HTMLDivElement, AccordionRootProps>((pro
   return (
     <AccordionProvider value={accordion}>
       <RenderStrategyPropsProvider value={renderStrategyProps}>
-        <arkMemo.div {...mergedProps} ref={ref} />
+        <ark.div {...mergedProps} ref={ref} />
       </RenderStrategyPropsProvider>
     </AccordionProvider>
   )
-})
-
-AccordionRoot.displayName = 'AccordionRoot'
+}
