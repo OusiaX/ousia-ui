@@ -6,6 +6,10 @@ description: All notable changes will be documented in this file.
 
 # @ousia-ui/ark
 
+## 0.0.23 - 2025-11-06
+
+- Support Assigns Type up to 6 Type Parameters
+
 ## 0.0.22 - 2025-11-04
 
 - Delete Type HTMLProps

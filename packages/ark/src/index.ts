@@ -1,4 +1,4 @@
-export type { Assign, Optional } from './types'
+export type { Assign, Assigns, Optional } from './types'
 export type { PolymorphicProps } from './factory'
 
 export { ark } from './factory'
