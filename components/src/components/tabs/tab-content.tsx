@@ -1,4 +1,4 @@
-import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   PresenceProvider,
   composeRefs,
@@ -10,8 +10,12 @@ import type { ContentProps } from '@zag-js/tabs'
 import type { ComponentProps } from 'react'
 import { useTabsContext } from './use-tabs-context'
 
-export interface TabContentBaseProps extends ContentProps, PolymorphicProps {}
-export interface TabContentProps extends ComponentProps<'div'>, TabContentBaseProps {}
+export const TabContentElement = 'div' as const
+export type TabContentProps = Assigns<
+  ComponentProps<typeof TabContentElement>,
+  ContentProps,
+  PolymorphicProps
+>
 
 export const TabContent = (props: TabContentProps) => {
   const { ref, ...restProps } = props

@@ -1,8 +1,7 @@
 import * as StyledCheckbox from './checkbox'
+export type { RootProps as CheckboxProps } from './checkbox'
 
-export interface CheckboxProps extends StyledCheckbox.RootProps {}
-
-export const Checkbox = (props: CheckboxProps) => {
+export const Checkbox = (props: StyledCheckbox.RootProps) => {
   const { ref, children, ...rootProps } = props
 
   return (

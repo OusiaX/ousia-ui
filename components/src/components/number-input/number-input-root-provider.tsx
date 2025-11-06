@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseNumberInputReturn
 }
 
-export interface NumberInputRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const NumberInputRootProviderElement = 'div' as const
 export interface NumberInputRootProviderProps
-  extends ComponentProps<'div'>,
-    NumberInputRootProviderBaseProps {}
+  extends ComponentProps<typeof NumberInputRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const NumberInputRootProvider = (props: NumberInputRootProviderProps) => {
   const { ref, ...restProps } = props

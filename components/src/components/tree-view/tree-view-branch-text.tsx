@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
-export interface TreeViewBranchTextProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const TreeViewBranchTextElement = 'span' as const
+export interface TreeViewBranchTextProps
+  extends ComponentProps<typeof TreeViewBranchTextElement>,
+    PolymorphicProps {}
 
 export const TreeViewBranchText = (props: TreeViewBranchTextProps) => {
   const { ref, ...restProps } = props

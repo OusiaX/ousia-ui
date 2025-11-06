@@ -1,51 +1,68 @@
 'use client'
 import type { Assign } from '@ousia-ui/ark'
 import { type RadioButtonGroupVariantProps, radioButtonGroup } from 'styled-system/recipes'
-import type { HTMLStyledProps } from 'styled-system/types'
+import {
+  RadioGroupIndicator,
+  type RadioGroupIndicatorElement,
+  type RadioGroupIndicatorProps,
+} from '~/components/radio-group/radio-group-indicator'
+import {
+  RadioGroupItem,
+  type RadioGroupItemElement,
+  type RadioGroupItemProps,
+} from '~/components/radio-group/radio-group-item'
+import {
+  RadioGroupItemControl,
+  type RadioGroupItemControlElement,
+  type RadioGroupItemControlProps,
+} from '~/components/radio-group/radio-group-item-control'
+import {
+  RadioGroupItemText,
+  type RadioGroupItemTextElement,
+  type RadioGroupItemTextProps,
+} from '~/components/radio-group/radio-group-item-text'
+import {
+  RadioGroupLabel,
+  type RadioGroupLabelElement,
+  type RadioGroupLabelProps,
+} from '~/components/radio-group/radio-group-label'
+import {
+  RadioGroupRoot,
+  type RadioGroupRootElement,
+  type RadioGroupRootProps,
+} from '~/components/radio-group/radio-group-root'
 import { createStyleContext } from '~/utils/create-style-context'
-import { RadioGroupRoot, type RadioGroupRootProps } from '~/components/radio-group/radio-group-root'
-import { RadioGroupIndicator, type RadioGroupIndicatorProps } from '~/components/radio-group/radio-group-indicator'
-import { RadioGroupItemControl, type RadioGroupItemControlProps } from '~/components/radio-group/radio-group-item-control'
-import { RadioGroupItem, type RadioGroupItemProps } from '~/components/radio-group/radio-group-item'
-import { RadioGroupItemText, type RadioGroupItemTextProps } from '~/components/radio-group/radio-group-item-text'
-import { RadioGroupLabel, type RadioGroupLabelProps } from '~/components/radio-group/radio-group-label'
 
 const { withProvider, withContext } = createStyleContext(radioButtonGroup)
 
-export interface RootProps
-  extends Assign<HTMLStyledProps<'div'>, RadioGroupRootProps>,
-    RadioButtonGroupVariantProps {}
-export const Root = withProvider<HTMLDivElement, RootProps>(RadioGroupRoot, 'root')
+export type RootProps = Assign<RadioGroupRootProps, RadioButtonGroupVariantProps>
+export const Root = withProvider<typeof RadioGroupRootElement, RootProps>(RadioGroupRoot, 'root')
 
-export const Indicator = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, RadioGroupIndicatorProps>
->(RadioGroupIndicator, 'indicator')
+export const Indicator = withContext<typeof RadioGroupIndicatorElement, RadioGroupIndicatorProps>(
+  RadioGroupIndicator,
+  'indicator',
+)
 
 export const ItemControl = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, RadioGroupItemControlProps>
+  typeof RadioGroupItemControlElement,
+  RadioGroupItemControlProps
 >(RadioGroupItemControl, 'itemControl')
 
-export const Item = withContext<
-  HTMLLabelElement,
-  Assign<HTMLStyledProps<'label'>, RadioGroupItemProps>
->(RadioGroupItem, 'item')
+export const Item = withContext<typeof RadioGroupItemElement, RadioGroupItemProps>(
+  RadioGroupItem,
+  'item',
+)
 
-export const ItemText = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, RadioGroupItemTextProps>
->(RadioGroupItemText, 'itemText')
+export const ItemText = withContext<typeof RadioGroupItemTextElement, RadioGroupItemTextProps>(
+  RadioGroupItemText,
+  'itemText',
+)
 
-export const Label = withContext<
-  HTMLLabelElement,
-  Assign<HTMLStyledProps<'label'>, RadioGroupLabelProps>
->(RadioGroupLabel, 'label')
+export const Label = withContext<typeof RadioGroupLabelElement, RadioGroupLabelProps>(
+  RadioGroupLabel,
+  'label',
+)
 
-export {
-  RadioGroupContext as Context
-} from "~/components/radio-group/radio-group-context"
+export { RadioGroupContext as Context } from '~/components/radio-group/radio-group-context'
 
-export {
-  RadioGroupItemHiddenInput as ItemHiddenInput,
-} from "~/components/radio-group/radio-group-item-hidden-input"
+export { RadioGroupItemHiddenInput as ItemHiddenInput } from '~/components/radio-group/radio-group-item-hidden-input'

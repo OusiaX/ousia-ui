@@ -3,7 +3,10 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
-export interface DialogTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
+export const DialogTriggerElement = 'button' as const
+export interface DialogTriggerProps
+  extends ComponentProps<typeof DialogTriggerElement>,
+    PolymorphicProps {}
 
 export const DialogTrigger = (props: DialogTriggerProps) => {
   const { ref, ...restProps } = props

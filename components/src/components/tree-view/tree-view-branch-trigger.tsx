@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
-export interface TreeViewBranchTriggerProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const TreeViewBranchTriggerElement = 'div' as const
+export interface TreeViewBranchTriggerProps
+  extends ComponentProps<typeof TreeViewBranchTriggerElement>,
+    PolymorphicProps {}
 
 export const TreeViewBranchTrigger = (props: TreeViewBranchTriggerProps) => {
   const { ref, ...restProps } = props

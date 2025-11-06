@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
-export interface SelectListProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const SelectListElement = 'div' as const
+export interface SelectListProps
+  extends ComponentProps<typeof SelectListElement>,
+    PolymorphicProps {}
 
 export const SelectList = (props: SelectListProps) => {
   const { ref, ...restProps } = props

@@ -1,10 +1,14 @@
-import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { CollapsibleProvider, type UseCollapsibleProps, useCollapsible } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { splitCollapsibleProps } from './split-collapsible-props'
 
-export interface CollapsibleRootBaseProps extends UseCollapsibleProps, PolymorphicProps {}
-export interface CollapsibleRootProps extends ComponentProps<'div'>, CollapsibleRootBaseProps {}
+export const CollapsibleRootElement = 'div' as const
+export type CollapsibleRootProps = Assigns<
+  ComponentProps<typeof CollapsibleRootElement>,
+  UseCollapsibleProps,
+  PolymorphicProps
+>
 
 export const CollapsibleRoot = (props: CollapsibleRootProps) => {
   const { ref, ...restProps } = props

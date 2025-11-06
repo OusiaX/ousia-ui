@@ -5,8 +5,11 @@ import type { ComponentProps } from 'react'
 import { ColorPickerAreaPropsProvider } from './use-color-picker-area-props-context'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerAreaBaseProps extends AreaProps, PolymorphicProps {}
-export interface ColorPickerAreaProps extends ComponentProps<'div'>, ColorPickerAreaBaseProps {}
+export const ColorPickerAreaElement = 'div' as const
+export interface ColorPickerAreaProps
+  extends ComponentProps<typeof ColorPickerAreaElement>,
+    AreaProps,
+    PolymorphicProps {}
 
 export const ColorPickerArea = (props: ColorPickerAreaProps) => {
   const { ref, ...restProps } = props

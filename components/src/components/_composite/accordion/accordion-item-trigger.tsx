@@ -4,7 +4,10 @@ import type { ComponentProps } from 'react'
 import { useAccordionContext } from './use-accordion-context'
 import { useAccordionItemPropsContext } from './use-accordion-item-props-context'
 
-export interface AccordionItemTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
+export const AccordionItemTriggerElement = 'button' as const
+export interface AccordionItemTriggerProps
+  extends ComponentProps<typeof AccordionItemTriggerElement>,
+    PolymorphicProps {}
 
 export const AccordionItemTrigger = (props: AccordionItemTriggerProps) => {
   const { ref, ...restProps } = props

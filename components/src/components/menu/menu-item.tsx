@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ItemProps } from '@zag-js/menu'
 import type { ComponentProps } from 'react'
@@ -14,9 +14,9 @@ interface ItemBaseProps extends ItemProps {
   onSelect?: VoidFunction | undefined
 }
 
-export interface MenuItemBaseProps extends ItemBaseProps, PolymorphicProps {}
-
-export interface MenuItemProps extends Assign<ComponentProps<'div'>, MenuItemBaseProps> {}
+export const MenuItemElement = 'div' as const
+export interface MenuItemProps
+  extends Assigns<ComponentProps<typeof MenuItemElement>, ItemBaseProps, PolymorphicProps> {}
 
 export const MenuItem = (props: MenuItemProps) => {
   const { ref, ...restProps } = props

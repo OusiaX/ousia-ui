@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
+export const FieldLabelElement = 'label' as const
+export interface FieldLabelProps
+  extends ComponentProps<typeof FieldLabelElement>,
+    PolymorphicProps {}
 
 export const FieldLabel = (props: FieldLabelProps) => {
   const { ref, ...restProps } = props

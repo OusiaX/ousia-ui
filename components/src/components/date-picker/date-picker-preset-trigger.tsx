@@ -1,12 +1,16 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { PresetTriggerProps } from '@zag-js/date-picker'
 import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerPresetTriggerBaseProps extends PresetTriggerProps, PolymorphicProps {}
+export const DatePickerPresetTriggerElement = 'button' as const
 export interface DatePickerPresetTriggerProps
-  extends Assign<ComponentProps<'button'>, DatePickerPresetTriggerBaseProps> {}
+  extends Assigns<
+    ComponentProps<typeof DatePickerPresetTriggerElement>,
+    PresetTriggerProps,
+    PolymorphicProps
+  > {}
 
 export const DatePickerPresetTrigger = (props: DatePickerPresetTriggerProps) => {
   const { ref, ...restProps } = props

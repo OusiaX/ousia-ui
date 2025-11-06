@@ -4,10 +4,10 @@ import type { TransparencyGridProps } from '@zag-js/color-picker'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerTransparencyGridBaseProps extends TransparencyGridProps {}
+export const ColorPickerTransparencyGridElement = 'div' as const
 export interface ColorPickerTransparencyGridProps
-  extends ComponentProps<'div'>,
-    ColorPickerTransparencyGridBaseProps {}
+  extends ComponentProps<typeof ColorPickerTransparencyGridElement>,
+    TransparencyGridProps {}
 
 export const ColorPickerTransparencyGrid = (props: ColorPickerTransparencyGridProps) => {
   const { ref, ...restProps } = props

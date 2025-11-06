@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { useFileUploadItemPropsContext } from './use-file-upload-item-props-context'
 
-export interface FileUploadItemPreviewImageProps extends ComponentProps<'img'>, PolymorphicProps {}
+export const FileUploadItemPreviewImageElement = 'img' as const
+export interface FileUploadItemPreviewImageProps
+  extends ComponentProps<typeof FileUploadItemPreviewImageElement>,
+    PolymorphicProps {}
 
 export const FileUploadItemPreviewImage = (props: FileUploadItemPreviewImageProps) => {
   const { ref, ...restProps } = props

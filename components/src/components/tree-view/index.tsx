@@ -1,9 +1,8 @@
 'use client'
 import { CheckSquareIcon, ChevronRightIcon, FileIcon, FolderIcon } from 'lucide-react'
-import type { Ref } from 'react'
 import * as StyledTreeView from './tree-view'
 
-export const TreeView = (props: StyledTreeView.RootProps & { ref?: Ref<HTMLDivElement> }) => {
+export const TreeView = (props: StyledTreeView.RootProps) => {
   const { ref, ...restProps } = props
   return (
     <StyledTreeView.Root ref={ref} {...restProps}>

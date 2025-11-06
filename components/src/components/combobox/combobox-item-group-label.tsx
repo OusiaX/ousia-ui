@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { useComboboxItemGroupPropsContext } from './use-combobox-item-group-props-context'
 
-export interface ComboboxItemGroupLabelProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const ComboboxItemGroupLabelElement = 'div' as const
+export interface ComboboxItemGroupLabelProps
+  extends ComponentProps<typeof ComboboxItemGroupLabelElement>,
+    PolymorphicProps {}
 
 export const ComboboxItemGroupLabel = (props: ComboboxItemGroupLabelProps) => {
   const { ref, ...restProps } = props

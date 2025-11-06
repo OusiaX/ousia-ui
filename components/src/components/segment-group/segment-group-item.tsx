@@ -6,8 +6,11 @@ import { useSegmentGroupContext } from './use-segment-group-context'
 import { SegmentGroupItemProvider } from './use-segment-group-item-context'
 import { SegmentGroupItemPropsProvider } from './use-segment-group-item-props-context'
 
-export interface SegmentGroupItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface SegmentGroupItemProps extends ComponentProps<'label'>, SegmentGroupItemBaseProps {}
+export const SegmentGroupItemElement = 'label' as const
+export interface SegmentGroupItemProps
+  extends ComponentProps<typeof SegmentGroupItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const SegmentGroupItem = (props: SegmentGroupItemProps) => {
   const { ref, ...restProps } = props

@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseEditableReturn
 }
 
-export interface EditableRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const EditableRootProviderElement = 'div' as const
 export interface EditableRootProviderProps
-  extends ComponentProps<'div'>,
-    EditableRootProviderBaseProps {}
+  extends ComponentProps<typeof EditableRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const EditableRootProvider = (props: EditableRootProviderProps) => {
   const { ref, ...restProps } = props

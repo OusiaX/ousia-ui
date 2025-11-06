@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
-export interface SliderLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
+export const SliderLabelElement = 'label' as const
+export interface SliderLabelProps
+  extends ComponentProps<typeof SliderLabelElement>,
+    PolymorphicProps {}
 
 export const SliderLabel = (props: SliderLabelProps) => {
   const { ref, ...restProps } = props

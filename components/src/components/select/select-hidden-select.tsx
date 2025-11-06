@@ -3,7 +3,10 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
-export interface SelectHiddenSelectProps extends ComponentProps<'select'>, PolymorphicProps {}
+export const SelectHiddenSelectElement = 'select' as const
+export interface SelectHiddenSelectProps
+  extends ComponentProps<typeof SelectHiddenSelectElement>,
+    PolymorphicProps {}
 
 export const SelectHiddenSelect = (props: SelectHiddenSelectProps) => {
   const { ref, ...restProps } = props

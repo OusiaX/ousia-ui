@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useAccordionContext } from './use-accordion-context'
 import { useAccordionItemPropsContext } from './use-accordion-item-props-context'
 
-export interface AccordionItemIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const AccordionItemIndicatorElement = 'div' as const
+export interface AccordionItemIndicatorProps
+  extends ComponentProps<typeof AccordionItemIndicatorElement>,
+    PolymorphicProps {}
 
 export const AccordionItemIndicator = (props: AccordionItemIndicatorProps) => {
   const { ref, ...restProps } = props

@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseToggleGroupReturn
 }
 
-export interface ToggleGroupRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const ToggleGroupRootProviderElement = 'div' as const
 export interface ToggleGroupRootProviderProps
-  extends ComponentProps<'div'>,
-    ToggleGroupRootProviderBaseProps {}
+  extends ComponentProps<typeof ToggleGroupRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const ToggleGroupRootProvider = (props: ToggleGroupRootProviderProps) => {
   const { ref, ...restProps } = props

@@ -14,13 +14,12 @@ interface RootProviderProps {
   value: UseColorPickerReturn
 }
 
-export interface ColorPickerRootProviderBaseProps
-  extends RootProviderProps,
+export const ColorPickerRootProviderElement = 'div' as const
+export interface ColorPickerRootProviderProps
+  extends ComponentProps<typeof ColorPickerRootProviderElement>,
+    RootProviderProps,
     UsePresenceProps,
     PolymorphicProps {}
-export interface ColorPickerRootProviderProps
-  extends ComponentProps<'div'>,
-    ColorPickerRootProviderBaseProps {}
 
 export const ColorPickerRootProvider = (props: ColorPickerRootProviderProps) => {
   const { ref, ...restProps } = props

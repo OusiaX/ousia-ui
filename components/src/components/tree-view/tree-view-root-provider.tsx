@@ -13,13 +13,12 @@ import { TreeViewProvider } from './use-tree-view-context'
 interface RootProviderProps<T extends TreeNode> {
   value: UseTreeViewReturn<T>
 }
-export interface TreeViewRootProviderBaseProps<T extends TreeNode>
-  extends RootProviderProps<T>,
+export const TreeViewRootProviderElement = 'div' as const
+export interface TreeViewRootProviderProps<T extends TreeNode>
+  extends ComponentProps<typeof TreeViewRootProviderElement>,
+    RootProviderProps<T>,
     RenderStrategyProps,
     PolymorphicProps {}
-export interface TreeViewRootProviderProps<T extends TreeNode>
-  extends ComponentProps<'div'>,
-    TreeViewRootProviderBaseProps<T> {}
 
 const TreeViewImpl = <T extends TreeNode>(props: TreeViewRootProviderProps<T>) => {
   const { ref, ...restProps } = props

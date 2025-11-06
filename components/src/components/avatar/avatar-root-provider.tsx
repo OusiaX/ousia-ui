@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseAvatarReturn
 }
 
-export interface AvatarRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const AvatarRootProviderElement = 'div' as const
 export interface AvatarRootProviderProps
-  extends ComponentProps<'div'>,
-    AvatarRootProviderBaseProps {}
+  extends ComponentProps<typeof AvatarRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const AvatarRootProvider = (props: AvatarRootProviderProps) => {
   const { ref, ...restProps } = props

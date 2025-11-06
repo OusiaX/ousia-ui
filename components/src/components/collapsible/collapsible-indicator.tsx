@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useCollapsibleContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface CollapsibleIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const CollapsibleIndicatorElement = 'div' as const
+export interface CollapsibleIndicatorProps
+  extends ComponentProps<typeof CollapsibleIndicatorElement>,
+    PolymorphicProps {}
 
 export const CollapsibleIndicator = (props: CollapsibleIndicatorProps) => {
   const { ref, ...restProps } = props

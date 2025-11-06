@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerClearTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
+export const DatePickerClearTriggerElement = 'button' as const
+export interface DatePickerClearTriggerProps
+  extends ComponentProps<typeof DatePickerClearTriggerElement>,
+    PolymorphicProps {}
 
 export const DatePickerClearTrigger = (props: DatePickerClearTriggerProps) => {
   const { ref, ...restProps } = props

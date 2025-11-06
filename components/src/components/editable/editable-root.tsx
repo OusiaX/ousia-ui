@@ -1,11 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseEditableProps, useEditable } from './use-editable'
 import { EditableProvider } from './use-editable-context'
 
-export interface EditableRootBaseProps extends UseEditableProps, PolymorphicProps {}
-export interface EditableRootProps extends Assign<ComponentProps<'div'>, EditableRootBaseProps> {}
+export const EditableRootElement = 'div' as const
+export type EditableRootProps = Assigns<
+  ComponentProps<typeof EditableRootElement>,
+  UseEditableProps,
+  PolymorphicProps
+>
 
 export const EditableRoot = (props: EditableRootProps) => {
   const { ref, ...restProps } = props

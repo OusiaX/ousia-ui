@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 
-export interface TagsInputInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const TagsInputInputElement = 'input' as const
+export interface TagsInputInputProps
+  extends ComponentProps<typeof TagsInputInputElement>,
+    PolymorphicProps {}
 
 export const TagsInputInput = (props: TagsInputInputProps) => {
   const { ref, ...restProps } = props

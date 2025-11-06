@@ -4,8 +4,11 @@ import type { MarkerProps } from '@zag-js/slider'
 import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
-export interface SliderMarkerBaseProps extends MarkerProps, PolymorphicProps {}
-export interface SliderMarkerProps extends ComponentProps<'span'>, SliderMarkerBaseProps {}
+export const SliderMarkerElement = 'span' as const
+export interface SliderMarkerProps
+  extends ComponentProps<typeof SliderMarkerElement>,
+    MarkerProps,
+    PolymorphicProps {}
 
 export const SliderMarker = (props: SliderMarkerProps) => {
   const { ref, ...restProps } = props

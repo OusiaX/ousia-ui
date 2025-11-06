@@ -1,71 +1,92 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type EditableVariantProps, editable } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { EditableArea } from './editable-area'
-import { EditableCancelTrigger } from './editable-cancel-trigger'
-import { EditableControl } from './editable-control'
-import { EditableEditTrigger } from './editable-edit-trigger'
-import { EditableInput } from './editable-input'
-import { EditableLabel } from './editable-label'
-import { EditablePreview } from './editable-preview'
-import { EditableRoot } from './editable-root'
-import { EditableRootProvider } from './editable-root-provider'
-import { EditableSubmitTrigger } from './editable-submit-trigger'
+import { EditableArea, type EditableAreaElement, type EditableAreaProps } from './editable-area'
+import {
+  EditableCancelTrigger,
+  type EditableCancelTriggerElement,
+  type EditableCancelTriggerProps,
+} from './editable-cancel-trigger'
+import {
+  EditableControl,
+  type EditableControlElement,
+  type EditableControlProps,
+} from './editable-control'
+import {
+  EditableEditTrigger,
+  type EditableEditTriggerElement,
+  type EditableEditTriggerProps,
+} from './editable-edit-trigger'
+import { EditableInput, type EditableInputElement, type EditableInputProps } from './editable-input'
+import { EditableLabel, type EditableLabelElement, type EditableLabelProps } from './editable-label'
+import {
+  EditablePreview,
+  type EditablePreviewElement,
+  type EditablePreviewProps,
+} from './editable-preview'
+import { EditableRoot, type EditableRootElement, type EditableRootProps } from './editable-root'
+import {
+  EditableRootProvider,
+  type EditableRootProviderElement,
+  type EditableRootProviderProps,
+} from './editable-root-provider'
+import {
+  EditableSubmitTrigger,
+  type EditableSubmitTriggerElement,
+  type EditableSubmitTriggerProps,
+} from './editable-submit-trigger'
 
 const { withProvider, withContext } = createStyleContext(editable)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, EditableVariantProps>
+  typeof EditableRootProviderElement,
+  Assign<EditableRootProviderProps, EditableVariantProps>
 >(EditableRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, EditableVariantProps>
+  typeof EditableRootElement,
+  Assign<EditableRootProps, EditableVariantProps>
 >(EditableRoot, 'root')
 
-export const Area = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>, PolymorphicProps>>(
-  EditableArea,
-  'area',
-)
+export const Area = withContext<typeof EditableAreaElement, EditableAreaProps>(EditableArea, 'area')
 
 export const CancelTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof EditableCancelTriggerElement,
+  EditableCancelTriggerProps
 >(EditableCancelTrigger, 'cancelTrigger')
 
-export const Control = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(EditableControl, 'control')
+export const Control = withContext<typeof EditableControlElement, EditableControlProps>(
+  EditableControl,
+  'control',
+)
 
-export const EditTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
->(EditableEditTrigger, 'editTrigger')
+export const EditTrigger = withContext<typeof EditableEditTriggerElement, EditableEditTriggerProps>(
+  EditableEditTrigger,
+  'editTrigger',
+)
 
-export const Input = withContext<
-  HTMLInputElement,
-  Assign<HTMLStyledProps<'input'>, PolymorphicProps>
->(EditableInput, 'input')
+export const Input = withContext<typeof EditableInputElement, EditableInputProps>(
+  EditableInput,
+  'input',
+)
 
-export const Label = withContext<
-  HTMLLabelElement,
-  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
->(EditableLabel, 'label')
+export const Label = withContext<typeof EditableLabelElement, EditableLabelProps>(
+  EditableLabel,
+  'label',
+)
 
-export const Preview = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(EditablePreview, 'preview')
+export const Preview = withContext<typeof EditablePreviewElement, EditablePreviewProps>(
+  EditablePreview,
+  'preview',
+)
 
 export const SubmitTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof EditableSubmitTriggerElement,
+  EditableSubmitTriggerProps
 >(EditableSubmitTrigger, 'submitTrigger')
 
 export { EditableContext as Context } from './editable-context'

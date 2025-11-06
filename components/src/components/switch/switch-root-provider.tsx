@@ -1,4 +1,4 @@
-import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import type { UseSwitchReturn } from './use-switch'
@@ -8,10 +8,13 @@ interface RootProviderProps {
   value: UseSwitchReturn
 }
 
-export interface SwitchRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const SwitchRootProviderElement = 'label' as const
 export interface SwitchRootProviderProps
-  extends ComponentProps<'label'>,
-    SwitchRootProviderBaseProps {}
+  extends Assigns<
+    ComponentProps<typeof SwitchRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps
+  > {}
 
 export const SwitchRootProvider = (props: SwitchRootProviderProps) => {
   const { ref, ...restProps } = props

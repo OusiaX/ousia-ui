@@ -8,8 +8,11 @@ interface RootProviderProps {
   value: UseFieldReturn
 }
 
-export interface FieldRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
-export interface FieldRootProviderProps extends ComponentProps<'div'>, FieldRootProviderBaseProps {}
+export const FieldRootProviderElement = 'div' as const
+export interface FieldRootProviderProps
+  extends ComponentProps<typeof FieldRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const FieldRootProvider = (props: FieldRootProviderProps) => {
   const { ref, ...restProps } = props

@@ -1,161 +1,261 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type DatePickerVariantProps, datePicker } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { DatePickerClearTrigger } from './date-picker-clear-trigger'
-import { DatePickerContent } from './date-picker-content'
-import { DatePickerControl } from './date-picker-control'
-import { DatePickerInput } from './date-picker-input'
-import { DatePickerLabel } from './date-picker-label'
-import { DatePickerMonthSelect } from './date-picker-month-select'
-import { DatePickerNextTrigger } from './date-picker-next-trigger'
-import { DatePickerPositioner } from './date-picker-positioner'
-import { DatePickerPresetTrigger } from './date-picker-preset-trigger'
-import { DatePickerPrevTrigger } from './date-picker-prev-trigger'
-import { DatePickerRangeText } from './date-picker-range-text'
-import { DatePickerRoot } from './date-picker-root'
-import { DatePickerRootProvider } from './date-picker-root-provider'
-import { DatePickerTable } from './date-picker-table'
-import { DatePickerTableBody } from './date-picker-table-body'
-import { DatePickerTableCell } from './date-picker-table-cell'
-import { DatePickerTableCellTrigger } from './date-picker-table-cell-trigger'
-import { DatePickerTableHead } from './date-picker-table-head'
-import { DatePickerTableHeader } from './date-picker-table-header'
-import { DatePickerTableRow } from './date-picker-table-row'
-import { DatePickerTrigger } from './date-picker-trigger'
-import { DatePickerView } from './date-picker-view'
-import { DatePickerViewControl } from './date-picker-view-control'
-import { DatePickerViewTrigger } from './date-picker-view-trigger'
-import { DatePickerYearSelect } from './date-picker-year-select'
+import {
+  DatePickerClearTrigger,
+  type DatePickerClearTriggerElement,
+  type DatePickerClearTriggerProps,
+} from './date-picker-clear-trigger'
+import {
+  DatePickerContent,
+  type DatePickerContentElement,
+  type DatePickerContentProps,
+} from './date-picker-content'
+import {
+  DatePickerControl,
+  type DatePickerControlElement,
+  type DatePickerControlProps,
+} from './date-picker-control'
+import {
+  DatePickerInput,
+  type DatePickerInputElement,
+  type DatePickerInputProps,
+} from './date-picker-input'
+import {
+  DatePickerLabel,
+  type DatePickerLabelElement,
+  type DatePickerLabelProps,
+} from './date-picker-label'
+import {
+  DatePickerMonthSelect,
+  type DatePickerMonthSelectElement,
+  type DatePickerMonthSelectProps,
+} from './date-picker-month-select'
+import {
+  DatePickerNextTrigger,
+  type DatePickerNextTriggerElement,
+  type DatePickerNextTriggerProps,
+} from './date-picker-next-trigger'
+import {
+  DatePickerPositioner,
+  type DatePickerPositionerElement,
+  type DatePickerPositionerProps,
+} from './date-picker-positioner'
+import {
+  DatePickerPresetTrigger,
+  type DatePickerPresetTriggerElement,
+  type DatePickerPresetTriggerProps,
+} from './date-picker-preset-trigger'
+import {
+  DatePickerPrevTrigger,
+  type DatePickerPrevTriggerElement,
+  type DatePickerPrevTriggerProps,
+} from './date-picker-prev-trigger'
+import {
+  DatePickerRangeText,
+  type DatePickerRangeTextElement,
+  type DatePickerRangeTextProps,
+} from './date-picker-range-text'
+import {
+  DatePickerRoot,
+  type DatePickerRootElement,
+  type DatePickerRootProps,
+} from './date-picker-root'
+import {
+  DatePickerRootProvider,
+  type DatePickerRootProviderElement,
+  type DatePickerRootProviderProps,
+} from './date-picker-root-provider'
+import {
+  DatePickerTable,
+  type DatePickerTableElement,
+  type DatePickerTableProps,
+} from './date-picker-table'
+import {
+  DatePickerTableBody,
+  type DatePickerTableBodyElement,
+  type DatePickerTableBodyProps,
+} from './date-picker-table-body'
+import {
+  DatePickerTableCell,
+  type DatePickerTableCellElement,
+  type DatePickerTableCellProps,
+} from './date-picker-table-cell'
+import {
+  DatePickerTableCellTrigger,
+  type DatePickerTableCellTriggerElement,
+  type DatePickerTableCellTriggerProps,
+} from './date-picker-table-cell-trigger'
+import {
+  DatePickerTableHead,
+  type DatePickerTableHeadElement,
+  type DatePickerTableHeadProps,
+} from './date-picker-table-head'
+import {
+  DatePickerTableHeader,
+  type DatePickerTableHeaderElement,
+  type DatePickerTableHeaderProps,
+} from './date-picker-table-header'
+import {
+  DatePickerTableRow,
+  type DatePickerTableRowElement,
+  type DatePickerTableRowProps,
+} from './date-picker-table-row'
+import {
+  DatePickerTrigger,
+  type DatePickerTriggerElement,
+  type DatePickerTriggerProps,
+} from './date-picker-trigger'
+import {
+  DatePickerView,
+  type DatePickerViewElement,
+  type DatePickerViewProps,
+} from './date-picker-view'
+import {
+  DatePickerViewControl,
+  type DatePickerViewControlElement,
+  type DatePickerViewControlProps,
+} from './date-picker-view-control'
+import {
+  DatePickerViewTrigger,
+  type DatePickerViewTriggerElement,
+  type DatePickerViewTriggerProps,
+} from './date-picker-view-trigger'
+import {
+  DatePickerYearSelect,
+  type DatePickerYearSelectElement,
+  type DatePickerYearSelectProps,
+} from './date-picker-year-select'
 
 const { withProvider, withContext } = createStyleContext(datePicker)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, DatePickerVariantProps>
+  typeof DatePickerRootProviderElement,
+  Assign<DatePickerRootProviderProps, DatePickerVariantProps>
 >(DatePickerRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, DatePickerVariantProps>
+  typeof DatePickerRootElement,
+  Assign<DatePickerRootProps, DatePickerVariantProps>
 >(DatePickerRoot, 'root')
 
 export const ClearTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof DatePickerClearTriggerElement,
+  DatePickerClearTriggerProps
 >(DatePickerClearTrigger, 'clearTrigger')
 
-export const Content = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(DatePickerContent, 'content')
+export const Content = withContext<typeof DatePickerContentElement, DatePickerContentProps>(
+  DatePickerContent,
+  'content',
+)
 
-export const Control = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(DatePickerControl, 'control')
+export const Control = withContext<typeof DatePickerControlElement, DatePickerControlProps>(
+  DatePickerControl,
+  'control',
+)
 
-export const Input = withContext<
-  HTMLInputElement,
-  Assign<HTMLStyledProps<'input'>, PolymorphicProps>
->(DatePickerInput, 'input')
+export const Input = withContext<typeof DatePickerInputElement, DatePickerInputProps>(
+  DatePickerInput,
+  'input',
+)
 
-export const Label = withContext<
-  HTMLLabelElement,
-  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
->(DatePickerLabel, 'label')
+export const Label = withContext<typeof DatePickerLabelElement, DatePickerLabelProps>(
+  DatePickerLabel,
+  'label',
+)
 
 export const MonthSelect = withContext<
-  HTMLSelectElement,
-  Assign<HTMLStyledProps<'select'>, PolymorphicProps>
+  typeof DatePickerMonthSelectElement,
+  DatePickerMonthSelectProps
 >(DatePickerMonthSelect, 'monthSelect')
 
 export const NextTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof DatePickerNextTriggerElement,
+  DatePickerNextTriggerProps
 >(DatePickerNextTrigger, 'nextTrigger')
 
 export const Positioner = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+  typeof DatePickerPositionerElement,
+  DatePickerPositionerProps
 >(DatePickerPositioner, 'positioner')
 
 export const PresetTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof DatePickerPresetTriggerElement,
+  DatePickerPresetTriggerProps
 >(DatePickerPresetTrigger, 'presetTrigger')
 
 export const PrevTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof DatePickerPrevTriggerElement,
+  DatePickerPrevTriggerProps
 >(DatePickerPrevTrigger, 'prevTrigger')
 
-export const RangeText = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(DatePickerRangeText, 'rangeText')
+export const RangeText = withContext<typeof DatePickerRangeTextElement, DatePickerRangeTextProps>(
+  DatePickerRangeText,
+  'rangeText',
+)
 
-export const TableBody = withContext<
-  HTMLTableSectionElement,
-  Assign<HTMLStyledProps<'tbody'>, PolymorphicProps>
->(DatePickerTableBody, 'tableBody')
+export const TableBody = withContext<typeof DatePickerTableBodyElement, DatePickerTableBodyProps>(
+  DatePickerTableBody,
+  'tableBody',
+)
 
-export const TableCell = withContext<
-  HTMLTableCellElement,
-  Assign<HTMLStyledProps<'td'>, PolymorphicProps>
->(DatePickerTableCell, 'tableCell')
+export const TableCell = withContext<typeof DatePickerTableCellElement, DatePickerTableCellProps>(
+  DatePickerTableCell,
+  'tableCell',
+)
 
 export const TableCellTrigger = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+  typeof DatePickerTableCellTriggerElement,
+  DatePickerTableCellTriggerProps
 >(DatePickerTableCellTrigger, 'tableCellTrigger')
 
-export const TableHead = withContext<
-  HTMLTableSectionElement,
-  Assign<HTMLStyledProps<'thead'>, PolymorphicProps>
->(DatePickerTableHead, 'tableHead')
+export const TableHead = withContext<typeof DatePickerTableHeadElement, DatePickerTableHeadProps>(
+  DatePickerTableHead,
+  'tableHead',
+)
 
 export const TableHeader = withContext<
-  HTMLTableCellElement,
-  Assign<HTMLStyledProps<'th'>, PolymorphicProps>
+  typeof DatePickerTableHeaderElement,
+  DatePickerTableHeaderProps
 >(DatePickerTableHeader, 'tableHeader')
 
-export const Table = withContext<
-  HTMLTableElement,
-  Assign<HTMLStyledProps<'table'>, PolymorphicProps>
->(DatePickerTable, 'table')
+export const Table = withContext<typeof DatePickerTableElement, DatePickerTableProps>(
+  DatePickerTable,
+  'table',
+)
 
-export const TableRow = withContext<
-  HTMLTableRowElement,
-  Assign<HTMLStyledProps<'tr'>, PolymorphicProps>
->(DatePickerTableRow, 'tableRow')
+export const TableRow = withContext<typeof DatePickerTableRowElement, DatePickerTableRowProps>(
+  DatePickerTableRow,
+  'tableRow',
+)
 
-export const Trigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
->(DatePickerTrigger, 'trigger')
+export const Trigger = withContext<typeof DatePickerTriggerElement, DatePickerTriggerProps>(
+  DatePickerTrigger,
+  'trigger',
+)
 
 export const ViewControl = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+  typeof DatePickerViewControlElement,
+  DatePickerViewControlProps
 >(DatePickerViewControl, 'viewControl')
 
-export const View = withContext<HTMLDivElement, Assign<HTMLStyledProps<'div'>, PolymorphicProps>>(
+export const View = withContext<typeof DatePickerViewElement, DatePickerViewProps>(
   DatePickerView,
   'view',
 )
 
 export const ViewTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof DatePickerViewTriggerElement,
+  DatePickerViewTriggerProps
 >(DatePickerViewTrigger, 'viewTrigger')
 
 export const YearSelect = withContext<
-  HTMLSelectElement,
-  Assign<HTMLStyledProps<'select'>, PolymorphicProps>
+  typeof DatePickerYearSelectElement,
+  DatePickerYearSelectProps
 >(DatePickerYearSelect, 'yearSelect')
 
 export { DatePickerContext as Context } from './date-picker-context'

@@ -1,5 +1,5 @@
 import { ark, mergeProps } from '@ousia-ui/ark'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assigns, PolymorphicProps } from '@ousia-ui/ark'
 import {
   type RenderStrategyProps,
   RenderStrategyPropsProvider,
@@ -10,11 +10,13 @@ import type { ComponentProps } from 'react'
 import { type UseAccordionProps, useAccordion } from './use-accordion'
 import { AccordionProvider } from './use-accordion-context'
 
-export interface AccordionRootBaseProps
-  extends UseAccordionProps,
-    RenderStrategyProps,
-    PolymorphicProps {}
-export interface AccordionRootProps extends Assign<ComponentProps<'div'>, AccordionRootBaseProps> {}
+export const AccordionRootElement = 'div' as const
+export type AccordionRootProps = Assigns<
+  ComponentProps<typeof AccordionRootElement>,
+  UseAccordionProps,
+  RenderStrategyProps,
+  PolymorphicProps
+>
 
 export const AccordionRoot = (props: AccordionRootProps) => {
   const { ref, ...restProps } = props

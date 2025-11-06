@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useSegmentGroupContext } from './use-segment-group-context'
 import { useSegmentGroupItemPropsContext } from './use-segment-group-item-props-context'
 
-export interface SegmentGroupItemTextProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const SegmentGroupItemTextElement = 'span' as const
+export interface SegmentGroupItemTextProps
+  extends ComponentProps<typeof SegmentGroupItemTextElement>,
+    PolymorphicProps {}
 
 export const SegmentGroupItemText = (props: SegmentGroupItemTextProps) => {
   const { ref, ...restProps } = props

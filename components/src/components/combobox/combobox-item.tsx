@@ -6,8 +6,11 @@ import { useComboboxContext } from './use-combobox-context'
 import { ComboboxItemProvider } from './use-combobox-item-context'
 import { ComboboxItemPropsProvider } from './use-combobox-item-props-context'
 
-export interface ComboboxItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface ComboboxItemProps extends ComponentProps<'div'>, ComboboxItemBaseProps {}
+export const ComboboxItemElement = 'div' as const
+export interface ComboboxItemProps
+  extends ComponentProps<typeof ComboboxItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const ComboboxItem = (props: ComboboxItemProps) => {
   const { ref, ...restProps } = props

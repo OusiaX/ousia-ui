@@ -6,8 +6,11 @@ import { useTagsInputContext } from './use-tags-input-context'
 import { TagsInputItemProvider } from './use-tags-input-item-context'
 import { TagsInputItemPropsProvider } from './use-tags-input-item-props-context'
 
-export interface TagsInputItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface TagsInputItemProps extends ComponentProps<'div'>, TagsInputItemBaseProps {}
+export const TagsInputItemElement = 'div' as const
+export interface TagsInputItemProps
+  extends ComponentProps<typeof TagsInputItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const TagsInputItem = (props: TagsInputItemProps) => {
   const { ref, ...restProps } = props

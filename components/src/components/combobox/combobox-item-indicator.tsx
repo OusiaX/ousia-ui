@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 import { useComboboxItemPropsContext } from './use-combobox-item-props-context'
 
-export interface ComboboxItemIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const ComboboxItemIndicatorElement = 'div' as const
+export interface ComboboxItemIndicatorProps
+  extends ComponentProps<typeof ComboboxItemIndicatorElement>,
+    PolymorphicProps {}
 
 export const ComboboxItemIndicator = (props: ComboboxItemIndicatorProps) => {
   const { ref, ...restProps } = props

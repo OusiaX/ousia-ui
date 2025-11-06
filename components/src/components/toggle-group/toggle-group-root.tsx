@@ -1,12 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseToggleGroupProps, useToggleGroup } from './use-toggle-group'
 import { ToggleGroupProvider } from './use-toggle-group-context'
 
-export interface ToggleGroupRootBaseProps extends UseToggleGroupProps, PolymorphicProps {}
-export interface ToggleGroupRootProps
-  extends Assign<ComponentProps<'div'>, ToggleGroupRootBaseProps> {}
+export const ToggleGroupRootElement = 'div' as const
+export type ToggleGroupRootProps = Assigns<
+  ComponentProps<typeof ToggleGroupRootElement>,
+  UseToggleGroupProps,
+  PolymorphicProps
+>
 
 export const ToggleGroupRoot = (props: ToggleGroupRootProps) => {
   const { ref, ...restProps } = props

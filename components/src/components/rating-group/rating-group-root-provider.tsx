@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseRatingGroupReturn
 }
 
-export interface RatingGroupRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const RatingGroupRootProviderElement = 'div' as const
 export interface RatingGroupRootProviderProps
-  extends ComponentProps<'div'>,
-    RatingGroupRootProviderBaseProps {}
+  extends ComponentProps<typeof RatingGroupRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const RatingGroupRootProvider = (props: RatingGroupRootProviderProps) => {
   const { ref, ...restProps } = props

@@ -1,12 +1,16 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ResizeTriggerProps } from '@zag-js/splitter'
 import type { ComponentProps } from 'react'
 import { useSplitterContext } from './use-splitter-context'
 
-export interface SplitterResizeTriggerBaseProps extends ResizeTriggerProps, PolymorphicProps {}
+export const SplitterResizeTriggerElement = 'button' as const
 export interface SplitterResizeTriggerProps
-  extends Assign<ComponentProps<'button'>, SplitterResizeTriggerBaseProps> {}
+  extends Assigns<
+    ComponentProps<typeof SplitterResizeTriggerElement>,
+    ResizeTriggerProps,
+    PolymorphicProps
+  > {}
 
 export const SplitterResizeTrigger = (props: SplitterResizeTriggerProps) => {
   const { ref, ...restProps } = props

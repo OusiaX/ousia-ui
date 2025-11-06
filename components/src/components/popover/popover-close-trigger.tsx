@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
-export interface PopoverCloseTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
+export const PopoverCloseTriggerElement = 'button' as const
+export interface PopoverCloseTriggerProps
+  extends ComponentProps<typeof PopoverCloseTriggerElement>,
+    PolymorphicProps {}
 
 export const PopoverCloseTrigger = (props: PopoverCloseTriggerProps) => {
   const { ref, ...restProps } = props

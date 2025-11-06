@@ -9,8 +9,11 @@ import { MenuItemPropsProvider } from './use-menu-option-item-props-context'
 
 type PartialOptionItemProps = Omit<OptionItemProps, 'type' | 'checked' | 'onCheckedChange'>
 
-export interface MenuRadioItemBaseProps extends PartialOptionItemProps, PolymorphicProps {}
-export interface MenuRadioItemProps extends ComponentProps<'div'>, MenuRadioItemBaseProps {}
+export const MenuRadioItemElement = 'div' as const
+export interface MenuRadioItemProps
+  extends ComponentProps<typeof MenuRadioItemElement>,
+    PartialOptionItemProps,
+    PolymorphicProps {}
 
 export const MenuRadioItem = (props: MenuRadioItemProps) => {
   const { ref, ...restProps } = props

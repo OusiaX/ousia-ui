@@ -3,7 +3,10 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
-export interface NumberInputInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const NumberInputInputElement = 'input' as const
+export interface NumberInputInputProps
+  extends ComponentProps<typeof NumberInputInputElement>,
+    PolymorphicProps {}
 
 export const NumberInputInput = (props: NumberInputInputProps) => {
   const { ref, ...restProps } = props

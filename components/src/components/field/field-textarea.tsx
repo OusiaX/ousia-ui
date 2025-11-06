@@ -3,14 +3,13 @@ import { composeRefs, useFieldContext } from '@ousia-ui/ark/utils'
 import { autoresizeTextarea } from '@zag-js/auto-resize'
 import { type ComponentProps, useEffect, useRef } from 'react'
 
-export interface FieldTextareaBaseProps extends PolymorphicProps {
+export interface FieldTextareaProps extends ComponentProps<'textarea'>, PolymorphicProps {
   /**
    * Whether the textarea should autoresize
    * @default false
    */
   autoresize?: boolean | undefined
 }
-export interface FieldTextareaProps extends ComponentProps<'textarea'>, FieldTextareaBaseProps {}
 
 export const FieldTextarea = (props: FieldTextareaProps) => {
   const { ref, autoresize, ...restProps } = props

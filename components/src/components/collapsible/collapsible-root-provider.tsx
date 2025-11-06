@@ -10,10 +10,11 @@ interface RootProviderProps {
   value: UseCollapsibleReturn
 }
 
-export interface CollapsibleRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const CollapsibleRootProviderElement = 'div' as const
 export interface CollapsibleRootProviderProps
-  extends ComponentProps<'div'>,
-    CollapsibleRootProviderBaseProps {}
+  extends ComponentProps<typeof CollapsibleRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const CollapsibleRootProvider = (props: CollapsibleRootProviderProps) => {
   const { ref, ...restProps } = props

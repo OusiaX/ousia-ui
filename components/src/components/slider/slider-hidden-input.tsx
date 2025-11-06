@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 import { useSliderThumbPropsContext } from './use-slider-thumb-props-context'
 
-export interface SliderHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const SliderHiddenInputElement = 'input' as const
+export interface SliderHiddenInputProps
+  extends ComponentProps<typeof SliderHiddenInputElement>,
+    PolymorphicProps {}
 
 export const SliderHiddenInput = (props: SliderHiddenInputProps) => {
   const { ref, ...restProps } = props

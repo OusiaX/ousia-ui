@@ -3,7 +3,10 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const ComboboxInputElement = 'input' as const
+export interface ComboboxInputProps
+  extends ComponentProps<typeof ComboboxInputElement>,
+    PolymorphicProps {}
 
 export const ComboboxInput = (props: ComboboxInputProps) => {
   const { ref, ...restProps } = props

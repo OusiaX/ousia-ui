@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuSeparatorProps extends ComponentProps<'hr'>, PolymorphicProps {}
+export const MenuSeparatorElement = 'hr' as const
+export interface MenuSeparatorProps
+  extends ComponentProps<typeof MenuSeparatorElement>,
+    PolymorphicProps {}
 
 export const MenuSeparator = (props: MenuSeparatorProps) => {
   const { ref, ...restProps } = props

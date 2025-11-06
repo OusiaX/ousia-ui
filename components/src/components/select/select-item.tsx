@@ -6,8 +6,11 @@ import { useSelectContext } from './use-select-context'
 import { SelectItemProvider } from './use-select-item-context'
 import { SelectItemPropsProvider } from './use-select-item-props-context'
 
-export interface SelectItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface SelectItemProps extends ComponentProps<'div'>, SelectItemBaseProps {}
+export const SelectItemElement = 'div' as const
+export interface SelectItemProps
+  extends ComponentProps<typeof SelectItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const SelectItem = (props: SelectItemProps) => {
   const { ref, ...restProps } = props

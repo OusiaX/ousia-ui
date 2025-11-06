@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
-export interface EditableLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
+export const EditableLabelElement = 'label' as const
+export interface EditableLabelProps
+  extends ComponentProps<typeof EditableLabelElement>,
+    PolymorphicProps {}
 
 export const EditableLabel = (props: EditableLabelProps) => {
   const { ref, ...restProps } = props

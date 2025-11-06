@@ -1,50 +1,63 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type AccordionVariantProps, accordion } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { AccordionItem, type AccordionItemBaseProps } from './accordion-item'
-import { AccordionItemContent } from './accordion-item-content'
-import { AccordionItemIndicator } from './accordion-item-indicator'
-import { AccordionItemTrigger } from './accordion-item-trigger'
-import { AccordionRoot, type AccordionRootBaseProps } from './accordion-root'
+import { AccordionItem, type AccordionItemElement, type AccordionItemProps } from './accordion-item'
+import {
+  AccordionItemContent,
+  type AccordionItemContentElement,
+  type AccordionItemContentProps,
+} from './accordion-item-content'
+import {
+  AccordionItemIndicator,
+  type AccordionItemIndicatorElement,
+  type AccordionItemIndicatorProps,
+} from './accordion-item-indicator'
+import {
+  AccordionItemTrigger,
+  type AccordionItemTriggerElement,
+  type AccordionItemTriggerProps,
+} from './accordion-item-trigger'
+import { AccordionRoot, type AccordionRootElement, type AccordionRootProps } from './accordion-root'
 import {
   AccordionRootProvider,
-  type AccordionRootProviderBaseProps,
+  type AccordionRootProviderElement,
+  type AccordionRootProviderProps,
 } from './accordion-root-provider'
 
 const { withProvider, withContext } = createStyleContext(accordion)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, AccordionRootProviderBaseProps>, AccordionVariantProps>
+  typeof AccordionRootProviderElement,
+  Assign<AccordionRootProviderProps, AccordionVariantProps>
 >(AccordionRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, AccordionRootBaseProps>, AccordionVariantProps>
+  typeof AccordionRootElement,
+  Assign<AccordionRootProps, AccordionVariantProps>
 >(AccordionRoot, 'root')
 
 export const ItemContent = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+  typeof AccordionItemContentElement,
+  AccordionItemContentProps
 >(AccordionItemContent, 'itemContent')
 
 export const ItemIndicator = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
+  typeof AccordionItemIndicatorElement,
+  AccordionItemIndicatorProps
 >(AccordionItemIndicator, 'itemIndicator')
 
-export const Item = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, AccordionItemBaseProps>
->(AccordionItem, 'item')
+export const Item = withContext<typeof AccordionItemElement, AccordionItemProps>(
+  AccordionItem,
+  'item',
+)
 
 export const ItemTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof AccordionItemTriggerElement,
+  AccordionItemTriggerProps
 >(AccordionItemTrigger, 'itemTrigger')
 
 export { AccordionContext as Context } from './accordion-context'

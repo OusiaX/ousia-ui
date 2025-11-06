@@ -1,11 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseSliderProps, useSlider } from './use-slider'
 import { SliderProvider } from './use-slider-context'
 
-export interface SliderRootBaseProps extends UseSliderProps, PolymorphicProps {}
-export interface SliderRootProps extends Assign<ComponentProps<'div'>, SliderRootBaseProps> {}
+export const SliderRootElement = 'div' as const
+export type SliderRootProps = Assigns<
+  ComponentProps<typeof SliderRootElement>,
+  UseSliderProps,
+  PolymorphicProps
+>
 
 export const SliderRoot = (props: SliderRootProps) => {
   const { ref, ...restProps } = props

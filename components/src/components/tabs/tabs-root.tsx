@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   type RenderStrategyProps,
   RenderStrategyPropsProvider,
@@ -9,8 +9,13 @@ import type { ComponentProps } from 'react'
 import { type UseTabsProps, useTabs } from './use-tabs'
 import { TabsProvider } from './use-tabs-context'
 
-export interface TabsRootBaseProps extends UseTabsProps, RenderStrategyProps, PolymorphicProps {}
-export interface TabsRootProps extends Assign<ComponentProps<'div'>, TabsRootBaseProps> {}
+export const TabsRootElement = 'div' as const
+export type TabsRootProps = Assigns<
+  ComponentProps<typeof TabsRootElement>,
+  UseTabsProps,
+  RenderStrategyProps,
+  PolymorphicProps
+>
 
 export const TabsRoot = (props: TabsRootProps) => {
   const { ref, ...restProps } = props

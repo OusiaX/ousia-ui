@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
-export interface EditableEditTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
+export const EditableEditTriggerElement = 'button' as const
+export interface EditableEditTriggerProps
+  extends ComponentProps<typeof EditableEditTriggerElement>,
+    PolymorphicProps {}
 
 export const EditableEditTrigger = (props: EditableEditTriggerProps) => {
   const { ref, ...restProps } = props

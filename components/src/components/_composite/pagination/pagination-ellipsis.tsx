@@ -4,10 +4,10 @@ import type { EllipsisProps } from '@zag-js/pagination'
 import type { ComponentProps } from 'react'
 import { usePaginationContext } from './use-pagination-context'
 
-export interface PaginationEllipsisBaseProps extends EllipsisProps {}
+export const PaginationEllipsisElement = 'div' as const
 export interface PaginationEllipsisProps
-  extends ComponentProps<'div'>,
-    PaginationEllipsisBaseProps {}
+  extends ComponentProps<typeof PaginationEllipsisElement>,
+    EllipsisProps {}
 
 export const PaginationEllipsis = (props: PaginationEllipsisProps) => {
   const { ref, ...restProps } = props

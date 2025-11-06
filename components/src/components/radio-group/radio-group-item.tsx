@@ -6,8 +6,11 @@ import { useRadioGroupContext } from './use-radio-group-context'
 import { RadioGroupItemProvider } from './use-radio-group-item-context'
 import { RadioGroupItemPropsProvider } from './use-radio-group-item-props-context'
 
-export interface RadioGroupItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface RadioGroupItemProps extends ComponentProps<'label'>, RadioGroupItemBaseProps {}
+export const RadioGroupItemElement = 'div' as const
+export interface RadioGroupItemProps
+  extends ComponentProps<typeof RadioGroupItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const RadioGroupItem = (props: RadioGroupItemProps) => {
   const { ref, ...restProps } = props

@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   PresenceProvider,
   type UsePresenceProps,
@@ -14,13 +14,13 @@ import { ComboboxProvider } from './use-combobox-context'
 interface RootProviderProps<T extends CollectionItem> {
   value: UseComboboxReturn<T>
 }
-export interface ComboboxRootProviderBaseProps<T extends CollectionItem>
-  extends RootProviderProps<T>,
-    UsePresenceProps,
-    PolymorphicProps {}
-export interface ComboboxRootProviderProps<T extends CollectionItem>
-  extends ComponentProps<'div'>,
-    ComboboxRootProviderBaseProps<T> {}
+export const ComboboxRootProviderElement = 'div' as const
+export type ComboboxRootProviderProps<T extends CollectionItem> = Assigns<
+  ComponentProps<typeof ComboboxRootProviderElement>,
+  RootProviderProps<T>,
+  UsePresenceProps,
+  PolymorphicProps
+>
 
 const ComboboxImpl = <T extends CollectionItem>(props: ComboboxRootProviderProps<T>) => {
   const { ref, ...restProps } = props
@@ -42,7 +42,7 @@ const ComboboxImpl = <T extends CollectionItem>(props: ComboboxRootProviderProps
 }
 
 export type ComboboxRootProviderComponent<P = Record<string, unknown>> = <T extends CollectionItem>(
-  props: Assign<ComboboxRootProviderProps<T>, P>,
+  props: ComboboxRootProviderProps<T> & P,
 ) => JSX.Element
 
 export const ComboboxRootProvider = ComboboxImpl as unknown as ComboboxRootProviderComponent

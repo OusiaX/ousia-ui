@@ -5,7 +5,10 @@ import { Collapsible } from '~/components/collapsible'
 import { useAccordionContext } from './use-accordion-context'
 import { useAccordionItemPropsContext } from './use-accordion-item-props-context'
 
-export interface AccordionItemContentProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const AccordionItemContentElement = 'div' as const
+export interface AccordionItemContentProps
+  extends ComponentProps<typeof AccordionItemContentElement>,
+    PolymorphicProps {}
 
 interface VisibilityProps {
   hidden?: boolean | undefined

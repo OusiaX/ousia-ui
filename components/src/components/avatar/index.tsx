@@ -1,9 +1,13 @@
+import type { Assign } from '@ousia-ui/ark'
 import * as StyledAvatar from './avatar'
 
-export interface AvatarProps extends StyledAvatar.RootProps {
-  name?: string
-  src?: string
-}
+export type AvatarProps = Assign<
+  StyledAvatar.RootProps,
+  {
+    name?: string
+    src?: string
+  }
+>
 
 export const Avatar = (props: AvatarProps) => {
   const { ref, name, src, ...rootProps } = props

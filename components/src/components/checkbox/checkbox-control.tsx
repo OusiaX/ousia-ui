@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useCheckboxContext } from './use-checkbox-context'
 
-export interface CheckboxControlProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const CheckboxControlElement = 'div' as const
+export interface CheckboxControlProps
+  extends ComponentProps<typeof CheckboxControlElement>,
+    PolymorphicProps {}
 
 export const CheckboxControl = (props: CheckboxControlProps) => {
   const { ref, ...restProps } = props

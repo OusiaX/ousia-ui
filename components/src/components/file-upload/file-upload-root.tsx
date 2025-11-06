@@ -1,12 +1,16 @@
-import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import type { UseFileUploadProps } from './use-file-upload'
 import { useFileUpload } from './use-file-upload'
 import { FileUploadProvider } from './use-file-upload-context'
 
-export interface FileUploadRootBaseProps extends UseFileUploadProps, PolymorphicProps {}
-export interface FileUploadRootProps extends ComponentProps<'div'>, FileUploadRootBaseProps {}
+export const FileUploadRootElement = 'div' as const
+export type FileUploadRootProps = Assigns<
+  ComponentProps<typeof FileUploadRootElement>,
+  UseFileUploadProps,
+  PolymorphicProps
+>
 
 export const FileUploadRoot = (props: FileUploadRootProps) => {
   const { ref, ...restProps } = props

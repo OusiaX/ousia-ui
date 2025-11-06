@@ -1,7 +1,12 @@
+import { useEffectOnce } from '@ousia-ui/ark/utils'
+import {
+  PresenceProvider,
+  type UsePresenceProps,
+  splitPresenceProps,
+  usePresence,
+} from '@ousia-ui/ark/utils'
 import { mergeProps } from '@zag-js/react'
 import { type ReactNode, useCallback } from 'react'
-import { useEffectOnce } from '@ousia-ui/ark/utils'
-import { PresenceProvider, type UsePresenceProps, splitPresenceProps, usePresence } from '@ousia-ui/ark/utils'
 import type { UseMenuReturn } from './use-menu'
 import { MenuProvider, useMenuContext } from './use-menu-context'
 import { MenuMachineProvider, useMenuMachineContext } from './use-menu-machine-context'
@@ -11,8 +16,7 @@ interface RootProviderProps {
   value: UseMenuReturn
 }
 
-export interface MenuRootProviderBaseProps extends RootProviderProps, UsePresenceProps {}
-export interface MenuRootProviderProps extends MenuRootProviderBaseProps {
+export interface MenuRootProviderProps extends RootProviderProps, UsePresenceProps {
   children?: ReactNode | undefined
 }
 
@@ -31,7 +35,10 @@ export const MenuRootProvider = (props: MenuRootProviderProps) => {
     api.setParent(parentMachine)
   })
 
-  const triggerItemContext = useCallback(() => parentApi?.getTriggerItemProps(api), [api, parentApi])
+  const triggerItemContext = useCallback(
+    () => parentApi?.getTriggerItemProps(api),
+    [api, parentApi],
+  )
 
   return (
     <MenuTriggerItemProvider value={triggerItemContext}>

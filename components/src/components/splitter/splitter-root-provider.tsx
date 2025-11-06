@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseSplitterReturn
 }
 
-export interface SplitterRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const SplitterRootProviderElement = 'div' as const
 export interface SplitterRootProviderProps
-  extends ComponentProps<'div'>,
-    SplitterRootProviderBaseProps {}
+  extends ComponentProps<typeof SplitterRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const SplitterRootProvider = (props: SplitterRootProviderProps) => {
   const { ref, ...restProps } = props

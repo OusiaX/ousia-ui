@@ -3,7 +3,10 @@ import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
-export interface SelectContentProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const SelectContentElement = 'div' as const
+export interface SelectContentProps
+  extends ComponentProps<typeof SelectContentElement>,
+    PolymorphicProps {}
 
 export const SelectContent = (props: SelectContentProps) => {
   const { ref, ...restProps } = props

@@ -4,10 +4,11 @@ import type { DropzoneProps } from '@zag-js/file-upload'
 import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 
-export interface FileUploadDropzoneBaseProps extends PolymorphicProps, DropzoneProps {}
+export const FileUploadDropzoneElement = 'div' as const
 export interface FileUploadDropzoneProps
-  extends ComponentProps<'div'>,
-    FileUploadDropzoneBaseProps {}
+  extends ComponentProps<typeof FileUploadDropzoneElement>,
+    PolymorphicProps,
+    DropzoneProps {}
 
 export const FileUploadDropzone = (props: FileUploadDropzoneProps) => {
   const { ref, ...restProps } = props

@@ -8,8 +8,11 @@ import { MenuItemPropsProvider } from './use-menu-option-item-props-context'
 
 type PartialOptionItemProps = Omit<OptionItemProps, 'type'>
 
-export interface MenuCheckboxItemBaseProps extends PartialOptionItemProps, PolymorphicProps {}
-export interface MenuCheckboxItemProps extends ComponentProps<'div'>, MenuCheckboxItemBaseProps {}
+export const MenuCheckboxItemElement = 'div' as const
+export interface MenuCheckboxItemProps
+  extends ComponentProps<typeof MenuCheckboxItemElement>,
+    PartialOptionItemProps,
+    PolymorphicProps {}
 
 export const MenuCheckboxItem = (props: MenuCheckboxItemProps) => {
   const { ref, ...restProps } = props

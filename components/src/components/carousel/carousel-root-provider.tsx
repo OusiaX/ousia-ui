@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseCarouselReturn
 }
 
-export interface CarouselRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const CarouselRootProviderElement = 'div' as const
 export interface CarouselRootProviderProps
-  extends ComponentProps<'div'>,
-    CarouselRootProviderBaseProps {}
+  extends ComponentProps<typeof CarouselRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const CarouselRootProvider = (props: CarouselRootProviderProps) => {
   const { ref, ...restProps } = props

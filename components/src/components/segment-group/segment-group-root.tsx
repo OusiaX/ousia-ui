@@ -1,12 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseSegmentGroupProps, useSegmentGroup } from './use-segment-group'
 import { SegmentGroupProvider } from './use-segment-group-context'
 
-export interface SegmentGroupRootBaseProps extends UseSegmentGroupProps, PolymorphicProps {}
-export interface SegmentGroupRootProps
-  extends Assign<ComponentProps<'div'>, SegmentGroupRootBaseProps> {}
+export const SegmentGroupRootElement = 'div' as const
+export type SegmentGroupRootProps = Assigns<
+  ComponentProps<typeof SegmentGroupRootElement>,
+  UseSegmentGroupProps,
+  PolymorphicProps
+>
 
 export const SegmentGroupRoot = (props: SegmentGroupRootProps) => {
   const { ref, ...restProps } = props

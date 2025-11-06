@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 
-export interface FileUploadLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
+export const FileUploadLabelElement = 'label' as const
+export interface FileUploadLabelProps
+  extends ComponentProps<typeof FileUploadLabelElement>,
+    PolymorphicProps {}
 
 export const FileUploadLabel = (props: FileUploadLabelProps) => {
   const { ref, ...restProps } = props

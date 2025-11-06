@@ -8,8 +8,11 @@ import { FileUploadItemPropsProvider } from './use-file-upload-item-props-contex
 
 type ItemBaseProps = Omit<ItemProps, 'type'>
 
-export interface FileUploadItemBaseProps extends ItemBaseProps, PolymorphicProps {}
-export interface FileUploadItemProps extends ComponentProps<'li'>, FileUploadItemBaseProps {}
+export const FileUploadItemElement = 'li' as const
+export interface FileUploadItemProps
+  extends ComponentProps<typeof FileUploadItemElement>,
+    ItemBaseProps,
+    PolymorphicProps {}
 
 export const FileUploadItem = (props: FileUploadItemProps) => {
   const { ref, ...restProps } = props

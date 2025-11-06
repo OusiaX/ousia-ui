@@ -6,8 +6,11 @@ import { useDatePickerContext } from './use-date-picker-context'
 import { DatePickerTablePropsProvider } from './use-date-picker-table-props-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
-export interface DatePickerTableBaseProps extends Pick<TableProps, 'columns'>, PolymorphicProps {}
-export interface DatePickerTableProps extends ComponentProps<'table'>, DatePickerTableBaseProps {}
+export const DatePickerTableElement = 'table' as const
+export interface DatePickerTableProps
+  extends ComponentProps<typeof DatePickerTableElement>,
+    Pick<TableProps, 'columns'>,
+    PolymorphicProps {}
 
 export const DatePickerTable = (props: DatePickerTableProps) => {
   const { ref, ...restProps } = props

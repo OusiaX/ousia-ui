@@ -1,12 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseNumberInputProps, useNumberInput } from './use-number-input'
 import { NumberInputProvider } from './use-number-input-context'
 
-export interface NumberInputRootBaseProps extends UseNumberInputProps, PolymorphicProps {}
-export interface NumberInputRootProps
-  extends Assign<ComponentProps<'div'>, NumberInputRootBaseProps> {}
+export const NumberInputRootElement = 'div' as const
+export type NumberInputRootProps = Assigns<
+  ComponentProps<typeof NumberInputRootElement>,
+  UseNumberInputProps,
+  PolymorphicProps
+>
 
 export const NumberInputRoot = (props: NumberInputRootProps) => {
   const { ref, ...restProps } = props

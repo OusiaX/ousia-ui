@@ -1,6 +1,14 @@
-import { type ComponentType, type ElementType, type Ref, createContext, useContext } from 'react'
+import type { Assign } from '@ousia-ui/ark'
+import {
+  type ComponentPropsWithRef,
+  type ComponentType,
+  type ElementType,
+  createContext,
+  useContext,
+} from 'react'
 import { cx } from 'styled-system/css'
 import { type StyledComponent, isCssProperty, styled } from 'styled-system/jsx'
+import type { HTMLStyledProps } from 'styled-system/types'
 
 type Props = Record<string, unknown>
 type Recipe = {
@@ -30,11 +38,11 @@ export const createStyleContext = <R extends Recipe>(recipe: R) => {
     return StyledComponent
   }
 
-  const withProvider = <T, P extends { className?: string | undefined }>(
+  const withProvider = <E extends ElementType, P extends object = Record<string, never>>(
     Component: ElementType,
     slot: Slot<R>,
     options?: Options,
-  ): ComponentType<P & { ref?: Ref<T> }> => {
+  ): ComponentType<Assign<HTMLStyledProps<E>, P>> => {
     const StyledComponent = styled(
       Component,
       {},
@@ -42,7 +50,12 @@ export const createStyleContext = <R extends Recipe>(recipe: R) => {
         shouldForwardProp: (prop, variantKeys) => shouldForwardProp(prop, variantKeys, options),
       },
     ) as StyledComponent<ElementType>
-    const StyledSlotProvider = (props: P & { ref?: Ref<T> }) => {
+    const StyledSlotProvider = (
+      props: Assign<HTMLStyledProps<E>, P> & {
+        ref?: ComponentPropsWithRef<E>['ref']
+        className?: string
+      },
+    ) => {
       const { ref, ...restProps } = props
       const [variantProps, otherProps] = recipe.splitVariantProps(restProps)
       const slotStyles = recipe(variantProps) as Record<Slot<R>, string>
@@ -63,21 +76,19 @@ export const createStyleContext = <R extends Recipe>(recipe: R) => {
     return StyledSlotProvider
   }
 
-  const withContext = <T, P extends { className?: string | undefined }>(
+  const withContext = <E extends ElementType, P extends object = Record<string, never>>(
     Component: ElementType,
     slot: Slot<R>,
-  ): ComponentType<P & { ref?: Ref<T> }> => {
+  ): ComponentType<Assign<HTMLStyledProps<E>, P>> => {
     const StyledComponent = styled(Component)
-    const StyledSlotComponent = (props: P & { ref?: Ref<T> }) => {
-      const { ref, ...restProps } = props
+    const StyledSlotComponent = (
+      props: Assign<HTMLStyledProps<E>, P> & {
+        ref?: ComponentPropsWithRef<E>['ref']
+        className?: string
+      },
+    ) => {
       const slotStyles = useContext(StyleContext)
-      return (
-        <StyledComponent
-          {...restProps}
-          ref={ref}
-          className={cx(slotStyles?.[slot], props.className)}
-        />
-      )
+      return <StyledComponent {...props} className={cx(slotStyles?.[slot], props.className)} />
     }
     // @ts-expect-error
     StyledSlotComponent.displayName = Component.displayName || Component.name

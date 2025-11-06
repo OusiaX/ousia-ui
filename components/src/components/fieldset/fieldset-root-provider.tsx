@@ -6,10 +6,11 @@ interface RootProviderProps {
   value: UseFieldsetReturn
 }
 
-export interface FieldsetRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const FieldsetRootProviderElement = 'fieldset' as const
 export interface FieldsetRootProviderProps
-  extends ComponentProps<'fieldset'>,
-    FieldsetRootProviderBaseProps {}
+  extends ComponentProps<typeof FieldsetRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const FieldsetRootProvider = (props: FieldsetRootProviderProps) => {
   const { ref, ...restProps } = props

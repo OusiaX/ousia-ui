@@ -1,38 +1,41 @@
-"use client";
-import type { Assign } from "@ousia-ui/ark";
-import { ToggleGroupRootProvider, type ToggleGroupRootProviderBaseProps } from './toggle-group-root-provider';
-import { ToggleGroupRoot, type ToggleGroupRootBaseProps } from './toggle-group-root';
-import { ToggleGroupItem, type ToggleGroupItemBaseProps } from './toggle-group-item';
+'use client'
+import type { Assign } from '@ousia-ui/ark'
+import { type ToggleGroupVariantProps, toggleGroup } from 'styled-system/recipes'
+import type { ComponentProps } from 'styled-system/types'
+import { createStyleContext } from '~/utils/create-style-context'
 import {
-  type ToggleGroupVariantProps,
-  toggleGroup,
-} from "styled-system/recipes";
-import type { ComponentProps, HTMLStyledProps } from "styled-system/types";
-import { createStyleContext } from "~/utils/create-style-context";
+  ToggleGroupItem,
+  type ToggleGroupItemElement,
+  type ToggleGroupItemProps,
+} from './toggle-group-item'
+import {
+  ToggleGroupRoot,
+  type ToggleGroupRootElement,
+  type ToggleGroupRootProps,
+} from './toggle-group-root'
+import {
+  ToggleGroupRootProvider,
+  type ToggleGroupRootProviderElement,
+  type ToggleGroupRootProviderProps,
+} from './toggle-group-root-provider'
 
-const { withProvider, withContext } = createStyleContext(toggleGroup);
+const { withProvider, withContext } = createStyleContext(toggleGroup)
 
-export type RootProviderProps = ComponentProps<typeof RootProvider>;
+export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, ToggleGroupRootProviderBaseProps>,
-    ToggleGroupVariantProps
-  >
->(ToggleGroupRootProvider, "root");
+  typeof ToggleGroupRootProviderElement,
+  Assign<ToggleGroupRootProviderProps, ToggleGroupVariantProps>
+>(ToggleGroupRootProvider, 'root')
 
-export type RootProps = ComponentProps<typeof Root>;
+export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<
-    Assign<HTMLStyledProps<"div">, ToggleGroupRootBaseProps>,
-    ToggleGroupVariantProps
-  >
->(ToggleGroupRoot, "root");
+  typeof ToggleGroupRootElement,
+  Assign<ToggleGroupRootProps, ToggleGroupVariantProps>
+>(ToggleGroupRoot, 'root')
 
-export const Item = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<"button">, ToggleGroupItemBaseProps>
->(ToggleGroupItem, "indicator");
+export const Item = withContext<typeof ToggleGroupItemElement, ToggleGroupItemProps>(
+  ToggleGroupItem,
+  'item',
+)
 
-export { ToggleGroupContext as Context } from "./toggle-group-context";
+export { ToggleGroupContext as Context } from './toggle-group-context'

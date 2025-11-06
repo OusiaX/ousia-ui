@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseTagsInputReturn
 }
 
-export interface TagsInputRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const TagsInputRootProviderElement = 'div' as const
 export interface TagsInputRootProviderProps
-  extends ComponentProps<'div'>,
-    TagsInputRootProviderBaseProps {}
+  extends ComponentProps<typeof TagsInputRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const TagsInputRootProvider = (props: TagsInputRootProviderProps) => {
   const { ref, ...restProps } = props

@@ -1,12 +1,10 @@
 'use client'
-import type { Ref } from 'react'
 import { IconButton } from '../../icon-button'
 import { Button } from '../button'
 import * as StyledPagination from './pagination'
+export type { RootProps as PaginationProps } from './pagination'
 
-export interface PaginationProps extends StyledPagination.RootProps {}
-
-export const Pagination = (props: PaginationProps & { ref?: Ref<HTMLElement> }) => {
+export const Pagination = (props: StyledPagination.RootProps) => {
   const { ref, ...restProps } = props
   return (
     <StyledPagination.Root ref={ref} {...restProps}>

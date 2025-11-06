@@ -9,8 +9,11 @@ import { useAccordionContext } from './use-accordion-context'
 import { AccordionItemProvider } from './use-accordion-item-context'
 import { AccordionItemPropsProvider } from './use-accordion-item-props-context'
 
-export interface AccordionItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface AccordionItemProps extends ComponentProps<'div'>, AccordionItemBaseProps {}
+export const AccordionItemElement = 'div' as const
+export interface AccordionItemProps
+  extends ComponentProps<typeof AccordionItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const AccordionItem = (props: AccordionItemProps) => {
   const { ref, ...restProps } = props

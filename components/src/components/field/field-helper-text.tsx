@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldHelperTextProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const FieldHelperTextElement = 'span' as const
+export interface FieldHelperTextProps
+  extends ComponentProps<typeof FieldHelperTextElement>,
+    PolymorphicProps {}
 
 export const FieldHelperText = (props: FieldHelperTextProps) => {
   const { ref, ...restProps } = props

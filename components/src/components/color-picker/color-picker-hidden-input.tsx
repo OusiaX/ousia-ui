@@ -3,7 +3,10 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const ColorPickerHiddenInputElement = 'input' as const
+export interface ColorPickerHiddenInputProps
+  extends ComponentProps<typeof ColorPickerHiddenInputElement>,
+    PolymorphicProps {}
 
 export const ColorPickerHiddenInput = (props: ColorPickerHiddenInputProps) => {
   const { ref, ...restProps } = props

@@ -1,12 +1,16 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { SwatchTriggerProps } from '@zag-js/color-picker'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerSwatchTriggerBaseProps extends SwatchTriggerProps, PolymorphicProps {}
+export const ColorPickerSwatchTriggerElement = 'button' as const
 export interface ColorPickerSwatchTriggerProps
-  extends Assign<ComponentProps<'button'>, ColorPickerSwatchTriggerBaseProps> {}
+  extends Assigns<
+    ComponentProps<typeof ColorPickerSwatchTriggerElement>,
+    SwatchTriggerProps,
+    PolymorphicProps
+  > {}
 
 export const ColorPickerSwatchTrigger = (props: ColorPickerSwatchTriggerProps) => {
   const { ref, ...restProps } = props

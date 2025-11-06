@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
-export interface EditablePreviewProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const EditablePreviewElement = 'span' as const
+export interface EditablePreviewProps
+  extends ComponentProps<typeof EditablePreviewElement>,
+    PolymorphicProps {}
 
 export const EditablePreview = (props: EditablePreviewProps) => {
   const { ref, ...restProps } = props

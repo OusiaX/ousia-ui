@@ -5,10 +5,11 @@ import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { FileUploadItemGroupPropsProvider } from './use-file-upload-item-group-props-context'
 
-export interface FileUploadItemGroupBaseProps extends PolymorphicProps, ItemGroupProps {}
+export const FileUploadItemGroupElement = 'div' as const
 export interface FileUploadItemGroupProps
-  extends ComponentProps<'ul'>,
-    FileUploadItemGroupBaseProps {}
+  extends ComponentProps<typeof FileUploadItemGroupElement>,
+    PolymorphicProps,
+    ItemGroupProps {}
 
 export const FileUploadItemGroup = (props: FileUploadItemGroupProps) => {
   const { ref, ...restProps } = props

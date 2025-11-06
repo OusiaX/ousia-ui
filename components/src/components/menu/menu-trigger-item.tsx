@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { MenuItemPropsProvider } from './use-menu-option-item-props-context'
 import { useMenuTriggerItemContext } from './use-menu-trigger-item-context'
 
-export interface MenuTriggerItemProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const MenuTriggerItemElement = 'div' as const
+export interface MenuTriggerItemProps
+  extends ComponentProps<typeof MenuTriggerItemElement>,
+    PolymorphicProps {}
 
 export const MenuTriggerItem = (props: MenuTriggerItemProps) => {
   const { ref, ...restProps } = props

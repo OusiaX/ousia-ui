@@ -5,7 +5,10 @@ import { Collapsible } from '~/components/collapsible'
 import { useTreeViewContext } from './use-tree-view-context'
 import { useTreeViewNodePropsContext } from './use-tree-view-node-props-context'
 
-export interface TreeViewBranchContentProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const TreeViewBranchContentElement = 'div' as const
+export interface TreeViewBranchContentProps
+  extends ComponentProps<typeof TreeViewBranchContentElement>,
+    PolymorphicProps {}
 
 interface VisibilityProps {
   hidden?: boolean | undefined

@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UsePinInputReturn
 }
 
-export interface PinInputRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const PinInputRootProviderElement = 'div' as const
 export interface PinInputRootProviderProps
-  extends ComponentProps<'div'>,
-    PinInputRootProviderBaseProps {}
+  extends ComponentProps<typeof PinInputRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const PinInputRootProvider = (props: PinInputRootProviderProps) => {
   const { ref, ...restProps } = props

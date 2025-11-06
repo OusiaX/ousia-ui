@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useSegmentGroupContext } from './use-segment-group-context'
 import { useSegmentGroupItemPropsContext } from './use-segment-group-item-props-context'
 
-export interface SegmentGroupItemControlProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const SegmentGroupItemControlElement = 'div' as const
+export interface SegmentGroupItemControlProps
+  extends ComponentProps<typeof SegmentGroupItemControlElement>,
+    PolymorphicProps {}
 
 export const SegmentGroupItemControl = (props: SegmentGroupItemControlProps) => {
   const { ref, ...restProps } = props

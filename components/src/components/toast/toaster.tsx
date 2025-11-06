@@ -1,4 +1,4 @@
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assigns, PolymorphicProps } from '@ousia-ui/ark'
 import { ark } from '@ousia-ui/ark'
 import { useEnvironmentContext, useLocaleContext } from '@ousia-ui/ark/providers'
 import { mergeProps, normalizeProps, useMachine } from '@zag-js/react'
@@ -7,12 +7,16 @@ import { type ComponentProps, type ReactNode, useId } from 'react'
 import type { CreateToasterReturn } from './create-toaster'
 import { ToastProvider } from './use-toast-context'
 
-export interface ToasterBaseProps extends PolymorphicProps, Omit<toast.GroupProps, 'store' | 'id'> {
-  toaster: CreateToasterReturn
-  children: (toast: toast.Options<ReactNode>) => ReactNode
-}
-
-export interface ToasterProps extends Assign<ComponentProps<'div'>, ToasterBaseProps> {}
+export const ToasterElement = 'div' as const
+export type ToasterProps = Assigns<
+  ComponentProps<typeof ToasterElement>,
+  PolymorphicProps,
+  Omit<toast.GroupProps, 'store' | 'id'>,
+  {
+    toaster: CreateToasterReturn
+    children: (toast: toast.Options<ReactNode>) => ReactNode
+  }
+>
 
 export const Toaster = (props: ToasterProps) => {
   const { ref, toaster, children, ...localProps } = props

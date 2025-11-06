@@ -1,9 +1,8 @@
 'use client'
 import * as StyledRatingGroup from './rating-group'
+export type { RootProps as RatingGroupProps } from './rating-group'
 
-export interface RatingGroupProps extends StyledRatingGroup.RootProps {}
-
-export const RatingGroup = (props: RatingGroupProps) => {
+export const RatingGroup = (props: StyledRatingGroup.RootProps) => {
   const { ref, ...restProps } = props
   const { children, ...rootProps } = restProps
   return (

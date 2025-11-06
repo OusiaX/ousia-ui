@@ -1,8 +1,7 @@
 import * as StyledNumberInput from './number-input'
+export type { RootProps as NumberInputProps } from './number-input'
 
-export interface NumberInputProps extends StyledNumberInput.RootProps {}
-
-export const NumberInput = (props: NumberInputProps) => {
+export const NumberInput = (props: StyledNumberInput.RootProps) => {
   const { ref, children, ...rootProps } = props
   return (
     <StyledNumberInput.Root ref={ref} {...rootProps}>

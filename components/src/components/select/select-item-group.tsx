@@ -6,7 +6,10 @@ import { useId } from 'react'
 import { useSelectContext } from './use-select-context'
 import { SelectItemGroupPropsProvider } from './use-select-item-group-props'
 
-export interface SelectItemGroupProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const SelectItemGroupElement = 'div' as const
+export interface SelectItemGroupProps
+  extends ComponentProps<typeof SelectItemGroupElement>,
+    PolymorphicProps {}
 
 export const SelectItemGroup = (props: SelectItemGroupProps) => {
   const { ref, ...restProps } = props

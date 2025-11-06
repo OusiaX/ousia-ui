@@ -5,8 +5,11 @@ import type { ComponentProps } from 'react'
 import { useRatingGroupContext } from './use-rating-group-context'
 import { RatingGroupItemProvider } from './use-rating-group-item-context'
 
-export interface RatingGroupItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface RatingGroupItemProps extends ComponentProps<'span'>, RatingGroupItemBaseProps {}
+export const RatingGroupItemElement = 'span' as const
+export interface RatingGroupItemProps
+  extends ComponentProps<typeof RatingGroupItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const RatingGroupItem = (props: RatingGroupItemProps) => {
   const { ref, ...restProps } = props

@@ -1,12 +1,16 @@
-import type { Assign } from '@ousia-ui/ark'
+import type { Assigns } from '@ousia-ui/ark'
 import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UsePinInputProps, usePinInput } from './use-pin-input'
 import { PinInputProvider } from './use-pin-input-context'
 
-export interface PinInputRootBaseProps extends UsePinInputProps, PolymorphicProps {}
-export interface PinInputRootProps extends Assign<ComponentProps<'div'>, PinInputRootBaseProps> {}
+export const PinInputRootElement = 'div' as const
+export type PinInputRootProps = Assigns<
+  ComponentProps<typeof PinInputRootElement>,
+  UsePinInputProps,
+  PolymorphicProps
+>
 
 export const PinInputRoot = (props: PinInputRootProps) => {
   const { ref, ...restProps } = props

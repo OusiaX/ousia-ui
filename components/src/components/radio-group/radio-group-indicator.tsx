@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useRadioGroupContext } from './use-radio-group-context'
 
-export interface RadioGroupIndicatorProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const RadioGroupIndicatorElement = 'div' as const
+export interface RadioGroupIndicatorProps
+  extends ComponentProps<typeof RadioGroupIndicatorElement>,
+    PolymorphicProps {}
 
 export const RadioGroupIndicator = (props: RadioGroupIndicatorProps) => {
   const { ref, ...restProps } = props

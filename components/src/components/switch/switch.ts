@@ -1,42 +1,40 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type SwitchRecipeVariantProps, switchRecipe } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { SwitchControl } from './switch-control'
-import { SwitchLabel } from './switch-label'
-import { SwitchRoot, type SwitchRootBaseProps } from './switch-root'
-import { SwitchRootProvider, type SwitchRootProviderBaseProps } from './switch-root-provider'
-import { SwitchThumb } from './switch-thumb'
+import { SwitchControl, type SwitchControlElement, type SwitchControlProps } from './switch-control'
+import { SwitchLabel, type SwitchLabelElement, type SwitchLabelProps } from './switch-label'
+import { SwitchRoot, type SwitchRootElement, type SwitchRootProps } from './switch-root'
+import {
+  SwitchRootProvider,
+  type SwitchRootProviderElement,
+  type SwitchRootProviderProps,
+} from './switch-root-provider'
+import { SwitchThumb, type SwitchThumbElement, type SwitchThumbProps } from './switch-thumb'
 
 const { withProvider, withContext } = createStyleContext(switchRecipe)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLLabelElement,
-  Assign<Assign<HTMLStyledProps<'label'>, SwitchRootProviderBaseProps>, SwitchRecipeVariantProps>
+  typeof SwitchRootProviderElement,
+  Assign<SwitchRootProviderProps, SwitchRecipeVariantProps>
 >(SwitchRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLLabelElement,
-  Assign<Assign<HTMLStyledProps<'label'>, SwitchRootBaseProps>, SwitchRecipeVariantProps>
+  typeof SwitchRootElement,
+  Assign<SwitchRootProps, SwitchRecipeVariantProps>
 >(SwitchRoot, 'root')
 
-export const Control = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(SwitchControl, 'control')
+export const Control = withContext<typeof SwitchControlElement, SwitchControlProps>(
+  SwitchControl,
+  'control',
+)
 
-export const Label = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(SwitchLabel, 'label')
+export const Label = withContext<typeof SwitchLabelElement, SwitchLabelProps>(SwitchLabel, 'label')
 
-export const Thumb = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(SwitchThumb, 'thumb')
+export const Thumb = withContext<typeof SwitchThumbElement, SwitchThumbProps>(SwitchThumb, 'thumb')
 
 export { SwitchContext as Context } from './switch-context'
 export { SwitchHiddenInput as HiddenInput } from './switch-hidden-input'

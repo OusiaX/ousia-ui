@@ -1,4 +1,3 @@
-import type { Ref } from 'react'
 import { styled } from 'styled-system/jsx'
 import { Spinner as StyledSpinner, type SpinnerProps as StyledSpinnerProps } from './spinner'
 
@@ -11,7 +10,7 @@ export interface SpinnerProps extends StyledSpinnerProps {
   label?: string
 }
 
-export const Spinner = (props: SpinnerProps & { ref?: Ref<HTMLDivElement> }) => {
+export const Spinner = (props: SpinnerProps) => {
   const { ref, label = 'Loading...', ...rest } = props
 
   return (

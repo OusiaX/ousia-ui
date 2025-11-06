@@ -1,14 +1,18 @@
 'use client'
+import type { Assign } from '@ousia-ui/ark'
 import type { ReactNode } from 'react'
 import * as StyledSlider from './slider'
 
-export interface SliderProps extends StyledSlider.RootProps {
-  children?: ReactNode
-  marks?: {
-    value: number
-    label?: ReactNode
-  }[]
-}
+export type SliderProps = Assign<
+  StyledSlider.RootProps,
+  {
+    children?: ReactNode
+    marks?: {
+      value: number
+      label?: ReactNode
+    }[]
+  }
+>
 
 export const Slider = (props: SliderProps) => {
   const { ref, ...restProps } = props

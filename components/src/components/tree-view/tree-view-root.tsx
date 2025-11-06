@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assign, type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   type RenderStrategyProps,
   RenderStrategyPropsProvider,
@@ -10,13 +10,13 @@ import type { ComponentProps, JSX } from 'react'
 import { type UseTreeViewProps, useTreeView } from './use-tree-view'
 import { TreeViewProvider } from './use-tree-view-context'
 
-export interface TreeViewRootBaseProps<T extends TreeNode>
-  extends UseTreeViewProps<T>,
-    RenderStrategyProps,
-    PolymorphicProps {}
-export interface TreeViewRootProps<T extends TreeNode>
-  extends ComponentProps<'div'>,
-    TreeViewRootBaseProps<T> {}
+export const TreeViewRootElement = 'div' as const
+export type TreeViewRootProps<T extends TreeNode> = Assigns<
+  ComponentProps<typeof TreeViewRootElement>,
+  UseTreeViewProps<T>,
+  RenderStrategyProps,
+  PolymorphicProps
+>
 
 const TreeViewImpl = <T extends TreeNode>(props: TreeViewRootProps<T>) => {
   const { ref, ...restProps } = props
@@ -61,4 +61,4 @@ export type TreeViewRootComponent<P = Record<string, unknown>> = <T extends Tree
   props: Assign<TreeViewRootProps<T>, P>,
 ) => JSX.Element
 
-export const TreeViewRoot = TreeViewImpl as TreeViewRootComponent
+export const TreeViewRoot = TreeViewImpl as unknown as TreeViewRootComponent

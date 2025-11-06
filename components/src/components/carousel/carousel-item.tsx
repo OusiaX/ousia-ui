@@ -4,8 +4,11 @@ import type { ItemProps } from '@zag-js/carousel'
 import type { ComponentProps } from 'react'
 import { useCarouselContext } from './use-carousel-context'
 
-export interface CarouselItemBaseProps extends ItemProps, PolymorphicProps {}
-export interface CarouselItemProps extends ComponentProps<'div'>, CarouselItemBaseProps {}
+export const CarouselItemElement = 'div' as const
+export interface CarouselItemProps
+  extends ComponentProps<typeof CarouselItemElement>,
+    ItemProps,
+    PolymorphicProps {}
 
 export const CarouselItem = (props: CarouselItemProps) => {
   const { ref, ...restProps } = props

@@ -1,12 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseRadioGroupProps, useRadioGroup } from './use-radio-group'
 import { RadioGroupProvider } from './use-radio-group-context'
 
-export interface RadioGroupRootBaseProps extends UseRadioGroupProps, PolymorphicProps {}
-export interface RadioGroupRootProps
-  extends Assign<ComponentProps<'div'>, RadioGroupRootBaseProps> {}
+export const RadioGroupRootElement = 'div' as const
+export type RadioGroupRootProps = Assigns<
+  ComponentProps<typeof RadioGroupRootElement>,
+  UseRadioGroupProps,
+  PolymorphicProps
+>
 
 export const RadioGroupRoot = (props: RadioGroupRootProps) => {
   const { ref, ...restProps } = props

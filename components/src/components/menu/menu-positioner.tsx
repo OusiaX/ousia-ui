@@ -3,7 +3,10 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuPositionerProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const MenuPositionerElement = 'div' as const
+export interface MenuPositionerProps
+  extends ComponentProps<typeof MenuPositionerElement>,
+    PolymorphicProps {}
 
 export const MenuPositioner = (props: MenuPositionerProps) => {
   const { ref, ...restProps } = props

@@ -1,4 +1,4 @@
-import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   FieldProvider,
   type UseFieldProps,
@@ -8,8 +8,12 @@ import {
 } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldRootBaseProps extends UseFieldProps, PolymorphicProps {}
-export interface FieldRootProps extends ComponentProps<'div'>, FieldRootBaseProps {}
+export const FieldRootElement = 'div' as const
+export type FieldRootProps = Assigns<
+  ComponentProps<typeof FieldRootElement>,
+  UseFieldProps,
+  PolymorphicProps
+>
 
 export const FieldRoot = (props: FieldRootProps) => {
   const { ref, ...restProps } = props

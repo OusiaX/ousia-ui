@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSwitchContext } from './use-switch-context'
 
-export interface SwitchThumbProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const SwitchThumbElement = 'span' as const
+export interface SwitchThumbProps
+  extends ComponentProps<typeof SwitchThumbElement>,
+    PolymorphicProps {}
 
 export const SwitchThumb = (props: SwitchThumbProps) => {
   const { ref, ...restProps } = props

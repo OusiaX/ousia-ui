@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
-export interface SliderValueTextProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const SliderValueTextElement = 'span' as const
+export interface SliderValueTextProps
+  extends ComponentProps<typeof SliderValueTextElement>,
+    PolymorphicProps {}
 
 export const SliderValueText = (props: SliderValueTextProps) => {
   const { ref, ...restProps } = props

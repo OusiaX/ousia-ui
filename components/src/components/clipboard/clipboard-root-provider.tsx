@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseClipboardReturn
 }
 
-export interface ClipboardRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const ClipboardRootProviderElement = 'div' as const
 export interface ClipboardRootProviderProps
-  extends ComponentProps<'div'>,
-    ClipboardRootProviderBaseProps {}
+  extends ComponentProps<typeof ClipboardRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const ClipboardRootProvider = (props: ClipboardRootProviderProps) => {
   const { ref, ...restProps } = props

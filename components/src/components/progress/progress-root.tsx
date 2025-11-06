@@ -1,11 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseProgressProps, useProgress } from './use-progress'
 import { ProgressProvider } from './use-progress-context'
 
-export interface ProgressRootBaseProps extends UseProgressProps, PolymorphicProps {}
-export interface ProgressRootProps extends Assign<ComponentProps<'div'>, ProgressRootBaseProps> {}
+export const ProgressRootElement = 'div' as const
+export type ProgressRootProps = Assigns<
+  ComponentProps<typeof ProgressRootElement>,
+  UseProgressProps,
+  PolymorphicProps
+>
 
 export const ProgressRoot = (props: ProgressRootProps) => {
   const { ref, ...restProps } = props

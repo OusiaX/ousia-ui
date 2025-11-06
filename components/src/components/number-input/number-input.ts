@@ -1,65 +1,101 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type NumberInputVariantProps, numberInput } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { NumberInputControl } from './number-input-control'
-import { NumberInputDecrementTrigger } from './number-input-decrement-trigger'
-import { NumberInputIncrementTrigger } from './number-input-increment-trigger'
-import { NumberInputInput } from './number-input-input'
-import { NumberInputLabel } from './number-input-label'
-import { NumberInputRoot } from './number-input-root'
-import { NumberInputRootProvider } from './number-input-root-provider'
-import { NumberInputScrubber } from './number-input-scrubber'
-import { NumberInputValueText } from './number-input-value-text'
+import {
+  NumberInputControl,
+  type NumberInputControlElement,
+  type NumberInputControlProps,
+} from './number-input-control'
+import {
+  NumberInputDecrementTrigger,
+  type NumberInputDecrementTriggerElement,
+  type NumberInputDecrementTriggerProps,
+} from './number-input-decrement-trigger'
+import {
+  NumberInputIncrementTrigger,
+  type NumberInputIncrementTriggerElement,
+  type NumberInputIncrementTriggerProps,
+} from './number-input-increment-trigger'
+import {
+  NumberInputInput,
+  type NumberInputInputElement,
+  type NumberInputInputProps,
+} from './number-input-input'
+import {
+  NumberInputLabel,
+  type NumberInputLabelElement,
+  type NumberInputLabelProps,
+} from './number-input-label'
+import {
+  NumberInputRoot,
+  type NumberInputRootElement,
+  type NumberInputRootProps,
+} from './number-input-root'
+import {
+  NumberInputRootProvider,
+  type NumberInputRootProviderElement,
+  type NumberInputRootProviderProps,
+} from './number-input-root-provider'
+import {
+  NumberInputScrubber,
+  type NumberInputScrubberElement,
+  type NumberInputScrubberProps,
+} from './number-input-scrubber'
+import {
+  NumberInputValueText,
+  type NumberInputValueTextElement,
+  type NumberInputValueTextProps,
+} from './number-input-value-text'
 
 const { withProvider, withContext } = createStyleContext(numberInput)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, NumberInputVariantProps>
+  typeof NumberInputRootProviderElement,
+  Assign<NumberInputRootProviderProps, NumberInputVariantProps>
 >(NumberInputRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, PolymorphicProps>, NumberInputVariantProps>
+  typeof NumberInputRootElement,
+  Assign<NumberInputRootProps, NumberInputVariantProps>
 >(NumberInputRoot, 'root')
 
-export const Control = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(NumberInputControl, 'control')
+export const Control = withContext<typeof NumberInputControlElement, NumberInputControlProps>(
+  NumberInputControl,
+  'control',
+)
 
 export const DecrementTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof NumberInputDecrementTriggerElement,
+  NumberInputDecrementTriggerProps
 >(NumberInputDecrementTrigger, 'decrementTrigger')
 
 export const IncrementTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof NumberInputIncrementTriggerElement,
+  NumberInputIncrementTriggerProps
 >(NumberInputIncrementTrigger, 'incrementTrigger')
 
-export const Input = withContext<
-  HTMLInputElement,
-  Assign<HTMLStyledProps<'input'>, PolymorphicProps>
->(NumberInputInput, 'input')
+export const Input = withContext<typeof NumberInputInputElement, NumberInputInputProps>(
+  NumberInputInput,
+  'input',
+)
 
-export const Label = withContext<
-  HTMLLabelElement,
-  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
->(NumberInputLabel, 'label')
+export const Label = withContext<typeof NumberInputLabelElement, NumberInputLabelProps>(
+  NumberInputLabel,
+  'label',
+)
 
-export const Scrubber = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(NumberInputScrubber, 'scrubber')
+export const Scrubber = withContext<typeof NumberInputScrubberElement, NumberInputScrubberProps>(
+  NumberInputScrubber,
+  'scrubber',
+)
 
-export const ValueText = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(NumberInputValueText, 'valueText')
+export const ValueText = withContext<typeof NumberInputValueTextElement, NumberInputValueTextProps>(
+  NumberInputValueText,
+  'valueText',
+)
 
 export { NumberInputContext as Context } from './number-input-context'

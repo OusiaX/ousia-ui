@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { usePopoverContext } from './use-popover-context'
 
-export interface PopoverArrowTipProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const PopoverArrowTipElement = 'div' as const
+export interface PopoverArrowTipProps
+  extends ComponentProps<typeof PopoverArrowTipElement>,
+    PolymorphicProps {}
 
 export const PopoverArrowTip = (props: PopoverArrowTipProps) => {
   const { ref, ...restProps } = props

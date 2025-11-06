@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useRadioGroupContext } from './use-radio-group-context'
 import { useRadioGroupItemPropsContext } from './use-radio-group-item-props-context'
 
-export interface RadioGroupItemHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const RadioGroupItemHiddenInputElement = 'input' as const
+export interface RadioGroupItemHiddenInputProps
+  extends ComponentProps<typeof RadioGroupItemHiddenInputElement>,
+    PolymorphicProps {}
 
 export const RadioGroupItemHiddenInput = (props: RadioGroupItemHiddenInputProps) => {
   const { ref, ...restProps } = props

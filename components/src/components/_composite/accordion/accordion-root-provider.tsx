@@ -14,13 +14,12 @@ interface RootProviderProps {
   value: UseAccordionReturn
 }
 
-export interface AccordionRootProviderBaseProps
-  extends RootProviderProps,
+export const AccordionRootProviderElement = 'div' as const
+export interface AccordionRootProviderProps
+  extends ComponentProps<typeof AccordionRootProviderElement>,
+    RootProviderProps,
     RenderStrategyProps,
     PolymorphicProps {}
-export interface AccordionRootProviderProps
-  extends ComponentProps<'div'>,
-    AccordionRootProviderBaseProps {}
 
 export const AccordionRootProvider = (props: AccordionRootProviderProps) => {
   const { ref, ...restProps } = props

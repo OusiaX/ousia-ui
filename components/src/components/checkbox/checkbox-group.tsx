@@ -1,11 +1,15 @@
-import { type Assign, type PolymorphicProps, ark } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseCheckboxGroupProps, useCheckboxGroup } from './use-checkbox-group'
 import { CheckboxGroupContextProvider } from './use-checkbox-group-context'
 
-export interface CheckboxGroupBaseProps extends UseCheckboxGroupProps, PolymorphicProps {}
-export interface CheckboxGroupProps extends Assign<ComponentProps<'div'>, CheckboxGroupBaseProps> {}
+export const CheckboxGroupElement = 'div' as const
+export type CheckboxGroupProps = Assigns<
+  ComponentProps<typeof CheckboxGroupElement>,
+  UseCheckboxGroupProps,
+  PolymorphicProps
+>
 
 export const CheckboxGroup = (props: CheckboxGroupProps) => {
   const { ref, ...restProps } = props

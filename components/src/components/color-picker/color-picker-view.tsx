@@ -9,8 +9,11 @@ interface FormatOptions {
   format: ColorFormat
 }
 
-export interface ColorPickerViewBaseProps extends FormatOptions, PolymorphicProps {}
-export interface ColorPickerViewProps extends ComponentProps<'div'>, ColorPickerViewBaseProps {}
+export const ColorPickerViewElement = 'div' as const
+export interface ColorPickerViewProps
+  extends ComponentProps<typeof ColorPickerViewElement>,
+    FormatOptions,
+    PolymorphicProps {}
 
 export const ColorPickerView = (props: ColorPickerViewProps) => {
   const { ref, ...restProps } = props

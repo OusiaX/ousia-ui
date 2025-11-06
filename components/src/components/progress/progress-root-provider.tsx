@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseProgressReturn
 }
 
-export interface ProgressRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const ProgressRootProviderElement = 'div' as const
 export interface ProgressRootProviderProps
-  extends ComponentProps<'div'>,
-    ProgressRootProviderBaseProps {}
+  extends ComponentProps<typeof ProgressRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const ProgressRootProvider = (props: ProgressRootProviderProps) => {
   const { ref, ...restProps } = props

@@ -4,7 +4,10 @@ import type { ComponentProps } from 'react'
 import { useMemo } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerRangeTextProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const DatePickerRangeTextElement = 'div' as const
+export interface DatePickerRangeTextProps
+  extends ComponentProps<typeof DatePickerRangeTextElement>,
+    PolymorphicProps {}
 
 export const DatePickerRangeText = (props: DatePickerRangeTextProps) => {
   const { ref, ...restProps } = props

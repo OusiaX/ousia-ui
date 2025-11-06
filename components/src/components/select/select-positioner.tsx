@@ -3,7 +3,10 @@ import { usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useSelectContext } from './use-select-context'
 
-export interface SelectPositionerProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const SelectPositionerElement = 'div' as const
+export interface SelectPositionerProps
+  extends ComponentProps<typeof SelectPositionerElement>,
+    PolymorphicProps {}
 
 export const SelectPositioner = (props: SelectPositionerProps) => {
   const { ref, ...restProps } = props

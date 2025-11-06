@@ -3,8 +3,9 @@ import type { ComponentProps } from 'react'
 import { useTagsInputContext } from './use-tags-input-context'
 import { useTagsInputItemPropsContext } from './use-tags-input-item-props-context'
 
+export const TagsInputItemDeleteTriggerElement = 'button' as const
 export interface TagsInputItemDeleteTriggerProps
-  extends ComponentProps<'button'>,
+  extends ComponentProps<typeof TagsInputItemDeleteTriggerElement>,
     PolymorphicProps {}
 
 export const TagsInputItemDeleteTrigger = (props: TagsInputItemDeleteTriggerProps) => {

@@ -3,12 +3,11 @@ import type { ColorStringFormat } from '@zag-js/color-utils'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerValueTextBaseProps {
+export const ColorPickerValueTextElement = 'span' as const
+export interface ColorPickerValueTextProps
+  extends ComponentProps<typeof ColorPickerValueTextElement> {
   format?: ColorStringFormat | undefined
 }
-export interface ColorPickerValueTextProps
-  extends ComponentProps<'span'>,
-    ColorPickerValueTextBaseProps {}
 
 export const ColorPickerValueText = (props: ColorPickerValueTextProps) => {
   const { ref, children, format, ...localProps } = props

@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseSegmentGroupReturn
 }
 
-export interface SegmentGroupRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const SegmentGroupRootProviderElement = 'div' as const
 export interface SegmentGroupRootProviderProps
-  extends ComponentProps<'div'>,
-    SegmentGroupRootProviderBaseProps {}
+  extends ComponentProps<typeof SegmentGroupRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const SegmentGroupRootProvider = (props: SegmentGroupRootProviderProps) => {
   const { ref, ...restProps } = props

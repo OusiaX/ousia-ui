@@ -3,12 +3,10 @@ import type { ReactNode } from 'react'
 import type { ComponentProps } from 'react'
 import { useClipboardContext } from './use-clipboard-context'
 
-export interface ClipboardIndicatorBaseProps {
+export const ClipboardIndicatorElement = 'div' as const
+export interface ClipboardIndicatorProps extends ComponentProps<typeof ClipboardIndicatorElement> {
   copied?: ReactNode | undefined
 }
-export interface ClipboardIndicatorProps
-  extends ComponentProps<'div'>,
-    ClipboardIndicatorBaseProps {}
 
 export const ClipboardIndicator = (props: ClipboardIndicatorProps) => {
   const { ref, children, copied, ...restProps } = props

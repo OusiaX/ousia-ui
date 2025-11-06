@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxClearTriggerProps extends ComponentProps<'button'>, PolymorphicProps {}
+export const ComboboxClearTriggerElement = 'button' as const
+export interface ComboboxClearTriggerProps
+  extends ComponentProps<typeof ComboboxClearTriggerElement>,
+    PolymorphicProps {}
 
 export const ComboboxClearTrigger = (props: ComboboxClearTriggerProps) => {
   const { ref, ...restProps } = props

@@ -4,8 +4,11 @@ import type { InputProps } from '@zag-js/date-picker'
 import type { ComponentProps } from 'react'
 import { useDatePickerContext } from './use-date-picker-context'
 
-export interface DatePickerInputBaseProps extends InputProps, PolymorphicProps {}
-export interface DatePickerInputProps extends ComponentProps<'input'>, DatePickerInputBaseProps {}
+export const DatePickerInputElement = 'input' as const
+export interface DatePickerInputProps
+  extends ComponentProps<typeof DatePickerInputElement>,
+    InputProps,
+    PolymorphicProps {}
 
 export const DatePickerInput = (props: DatePickerInputProps) => {
   const { ref, ...restProps } = props

@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useEditableContext } from './use-editable-context'
 
-export interface EditableControlProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const EditableControlElement = 'div' as const
+export interface EditableControlProps
+  extends ComponentProps<typeof EditableControlElement>,
+    PolymorphicProps {}
 
 export const EditableControl = (props: EditableControlProps) => {
   const { ref, ...restProps } = props

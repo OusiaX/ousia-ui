@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UsePaginationReturn
 }
 
-export interface PaginationRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const PaginationRootProviderElement = 'nav' as const
 export interface PaginationRootProviderProps
-  extends ComponentProps<'nav'>,
-    PaginationRootProviderBaseProps {}
+  extends ComponentProps<typeof PaginationRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const PaginationRootProvider = (props: PaginationRootProviderProps) => {
   const { ref, ...restProps } = props

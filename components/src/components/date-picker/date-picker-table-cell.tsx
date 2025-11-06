@@ -8,12 +8,11 @@ import {
 } from './use-date-picker-table-cell-props-context'
 import { useDatePickerViewPropsContext } from './use-date-picker-view-props-context'
 
-export interface DatePickerTableCellBaseProps
-  extends UseDatePickerTableCellPropsContext,
-    PolymorphicProps {}
+export const DatePickerTableCellElement = 'td' as const
 export interface DatePickerTableCellProps
-  extends ComponentProps<'td'>,
-    DatePickerTableCellBaseProps {}
+  extends ComponentProps<typeof DatePickerTableCellElement>,
+    UseDatePickerTableCellPropsContext,
+    PolymorphicProps {}
 
 export const DatePickerTableCell = (props: DatePickerTableCellProps) => {
   const { ref, ...restProps } = props

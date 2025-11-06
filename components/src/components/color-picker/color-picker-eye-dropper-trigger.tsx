@@ -2,8 +2,9 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
+export const ColorPickerEyeDropperTriggerElement = 'button' as const
 export interface ColorPickerEyeDropperTriggerProps
-  extends ComponentProps<'button'>,
+  extends ComponentProps<typeof ColorPickerEyeDropperTriggerElement>,
     PolymorphicProps {}
 
 export const ColorPickerEyeDropperTrigger = (props: ColorPickerEyeDropperTriggerProps) => {

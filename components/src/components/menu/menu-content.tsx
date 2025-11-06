@@ -3,7 +3,10 @@ import { composeRefs, usePresenceContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useMenuContext } from './use-menu-context'
 
-export interface MenuContentProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const MenuContentElement = 'div' as const
+export interface MenuContentProps
+  extends ComponentProps<typeof MenuContentElement>,
+    PolymorphicProps {}
 
 export const MenuContent = (props: MenuContentProps) => {
   const { ref, ...restProps } = props

@@ -4,10 +4,11 @@ import type { ChannelInputProps } from '@zag-js/color-picker'
 import type { ComponentProps } from 'react'
 import { useColorPickerContext } from './use-color-picker-context'
 
-export interface ColorPickerChannelInputBaseProps extends ChannelInputProps, PolymorphicProps {}
+export const ColorPickerChannelInputElement = 'input' as const
 export interface ColorPickerChannelInputProps
-  extends ComponentProps<'input'>,
-    ColorPickerChannelInputBaseProps {}
+  extends ComponentProps<typeof ColorPickerChannelInputElement>,
+    ChannelInputProps,
+    PolymorphicProps {}
 
 export const ColorPickerChannelInput = (props: ColorPickerChannelInputProps) => {
   const { ref, ...restProps } = props

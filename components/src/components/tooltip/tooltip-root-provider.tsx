@@ -1,6 +1,11 @@
+import {
+  PresenceProvider,
+  type UsePresenceProps,
+  splitPresenceProps,
+  usePresence,
+} from '@ousia-ui/ark/utils'
 import { mergeProps } from '@zag-js/react'
 import type { ReactNode } from 'react'
-import { type UsePresenceProps, PresenceProvider, usePresence, splitPresenceProps } from '@ousia-ui/ark/utils'
 import type { UseTooltipReturn } from './use-tooltip'
 import { TooltipProvider } from './use-tooltip-context'
 
@@ -8,8 +13,7 @@ interface RootProviderProps {
   value: UseTooltipReturn
 }
 
-export interface TooltipRootProviderBaseProps extends RootProviderProps, UsePresenceProps {}
-export interface TooltipRootProviderProps extends TooltipRootProviderBaseProps {
+export interface TooltipRootProviderProps extends RootProviderProps, UsePresenceProps {
   children?: ReactNode | undefined
 }
 

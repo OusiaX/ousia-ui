@@ -1,50 +1,68 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
+import type { EllipsisProps } from '@zag-js/pagination'
 import { type PaginationVariantProps, pagination } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { PaginationEllipsis, type PaginationEllipsisBaseProps } from './pagination-ellipsis'
-import { PaginationItem, type PaginationItemBaseProps } from './pagination-item'
-import { PaginationNextTrigger } from './pagination-next-trigger'
-import { PaginationPrevTrigger } from './pagination-prev-trigger'
-import { PaginationRoot, type PaginationRootBaseProps } from './pagination-root'
+import { PaginationEllipsis, type PaginationEllipsisElement } from './pagination-ellipsis'
+import {
+  PaginationItem,
+  type PaginationItemElement,
+  type PaginationItemProps,
+} from './pagination-item'
+import {
+  PaginationNextTrigger,
+  type PaginationNextTriggerElement,
+  type PaginationNextTriggerProps,
+} from './pagination-next-trigger'
+import {
+  PaginationPrevTrigger,
+  type PaginationPrevTriggerElement,
+  type PaginationPrevTriggerProps,
+} from './pagination-prev-trigger'
+import {
+  PaginationRoot,
+  type PaginationRootElement,
+  type PaginationRootProps,
+} from './pagination-root'
 import {
   PaginationRootProvider,
-  type PaginationRootProviderBaseProps,
+  type PaginationRootProviderElement,
+  type PaginationRootProviderProps,
 } from './pagination-root-provider'
 
 const { withProvider, withContext } = createStyleContext(pagination)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLElement,
-  Assign<Assign<HTMLStyledProps<'nav'>, PaginationRootProviderBaseProps>, PaginationVariantProps>
+  typeof PaginationRootProviderElement,
+  Assign<PaginationRootProviderProps, PaginationVariantProps>
 >(PaginationRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLElement,
-  Assign<Assign<HTMLStyledProps<'nav'>, PaginationRootBaseProps>, PaginationVariantProps>
+  typeof PaginationRootElement,
+  Assign<PaginationRootProps, PaginationVariantProps>
 >(PaginationRoot, 'root', { forwardProps: ['page'] })
 
-export const Ellipsis = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PaginationEllipsisBaseProps>
->(PaginationEllipsis, 'ellipsis')
+export const Ellipsis = withContext<typeof PaginationEllipsisElement, EllipsisProps>(
+  PaginationEllipsis,
+  'ellipsis',
+)
 
-export const Item = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PaginationItemBaseProps>
->(PaginationItem, 'item')
+export const Item = withContext<typeof PaginationItemElement, PaginationItemProps>(
+  PaginationItem,
+  'item',
+)
 
 export const NextTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof PaginationNextTriggerElement,
+  PaginationNextTriggerProps
 >(PaginationNextTrigger, 'nextTrigger')
 
 export const PrevTrigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
+  typeof PaginationPrevTriggerElement,
+  PaginationPrevTriggerProps
 >(PaginationPrevTrigger, 'prevTrigger')
 
 export { PaginationContext as Context } from './pagination-context'

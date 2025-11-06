@@ -2,7 +2,8 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useTabsContext } from './use-tabs-context'
 
-export interface TabListProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const TabListElement = 'div' as const
+export interface TabListProps extends ComponentProps<typeof TabListElement>, PolymorphicProps {}
 
 export const TabList = (props: TabListProps) => {
   const { ref, ...restProps } = props

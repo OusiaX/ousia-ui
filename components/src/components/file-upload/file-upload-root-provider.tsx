@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseFileUploadReturn
 }
 
-export interface FileUploadRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const FileUploadRootProviderElement = 'div' as const
 export interface FileUploadRootProviderProps
-  extends ComponentProps<'div'>,
-    FileUploadRootProviderBaseProps {}
+  extends ComponentProps<typeof FileUploadRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const FileUploadRootProvider = (props: FileUploadRootProviderProps) => {
   const { ref, ...restProps } = props

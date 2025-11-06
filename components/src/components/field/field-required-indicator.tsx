@@ -2,12 +2,12 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldRequiredIndicatorBaseProps extends PolymorphicProps {
+export const FieldRequiredIndicatorElement = 'span' as const
+export interface FieldRequiredIndicatorProps
+  extends ComponentProps<typeof FieldRequiredIndicatorElement>,
+    PolymorphicProps {
   fallback?: React.ReactNode | undefined
 }
-export interface FieldRequiredIndicatorProps
-  extends ComponentProps<'span'>,
-    FieldRequiredIndicatorBaseProps {}
 
 export const FieldRequiredIndicator = (props: FieldRequiredIndicatorProps) => {
   const { ref, fallback, ...restProps } = props

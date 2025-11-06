@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseCheckboxReturn
 }
 
-export interface CheckboxRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const CheckboxRootProviderElement = 'label' as const
 export interface CheckboxRootProviderProps
-  extends ComponentProps<'label'>,
-    CheckboxRootProviderBaseProps {}
+  extends ComponentProps<typeof CheckboxRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const CheckboxRootProvider = (props: CheckboxRootProviderProps) => {
   const { ref, ...restProps } = props

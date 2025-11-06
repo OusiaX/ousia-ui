@@ -1,12 +1,12 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ItemProps } from '@zag-js/toggle-group'
 import type { ComponentProps } from 'react'
 import { useToggleGroupContext } from './use-toggle-group-context'
 
-export interface ToggleGroupItemBaseProps extends ItemProps, PolymorphicProps {}
+export const ToggleGroupItemElement = 'button' as const
 export interface ToggleGroupItemProps
-  extends Assign<ComponentProps<'button'>, ToggleGroupItemBaseProps> {}
+  extends Assigns<ComponentProps<typeof ToggleGroupItemElement>, ItemProps, PolymorphicProps> {}
 
 export const ToggleGroupItem = (props: ToggleGroupItemProps) => {
   const { ref, ...restProps } = props

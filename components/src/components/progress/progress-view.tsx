@@ -4,8 +4,11 @@ import type { ViewProps } from '@zag-js/progress'
 import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
-export interface ProgressViewBaseProps extends ViewProps, PolymorphicProps {}
-export interface ProgressViewProps extends ComponentProps<'span'>, ProgressViewBaseProps {}
+export const ProgressViewElement = 'div' as const
+export interface ProgressViewProps
+  extends ComponentProps<typeof ProgressViewElement>,
+    ViewProps,
+    PolymorphicProps {}
 
 export const ProgressView = (props: ProgressViewProps) => {
   const { ref, ...restProps } = props

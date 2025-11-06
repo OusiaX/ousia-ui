@@ -1,38 +1,51 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type CollapsibleVariantProps, collapsible } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { CollapsibleContent } from './collapsible-content'
-import { CollapsibleRoot, type CollapsibleRootBaseProps } from './collapsible-root'
+import {
+  CollapsibleContent,
+  type CollapsibleContentElement,
+  type CollapsibleContentProps,
+} from './collapsible-content'
+import {
+  CollapsibleRoot,
+  type CollapsibleRootElement,
+  type CollapsibleRootProps,
+} from './collapsible-root'
 import {
   CollapsibleRootProvider,
-  type CollapsibleRootProviderBaseProps,
+  type CollapsibleRootProviderElement,
+  type CollapsibleRootProviderProps,
 } from './collapsible-root-provider'
-import { CollapsibleTrigger } from './collapsible-trigger'
+import {
+  CollapsibleTrigger,
+  type CollapsibleTriggerElement,
+  type CollapsibleTriggerProps,
+} from './collapsible-trigger'
 
 const { withProvider, withContext } = createStyleContext(collapsible)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, CollapsibleRootProviderBaseProps>, CollapsibleVariantProps>
+  typeof CollapsibleRootProviderElement,
+  Assign<CollapsibleRootProviderProps, CollapsibleVariantProps>
 >(CollapsibleRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, CollapsibleRootBaseProps>, CollapsibleVariantProps>
+  typeof CollapsibleRootElement,
+  Assign<CollapsibleRootProps, CollapsibleVariantProps>
 >(CollapsibleRoot, 'root')
 
-export const Content = withContext<
-  HTMLDivElement,
-  Assign<HTMLStyledProps<'div'>, PolymorphicProps>
->(CollapsibleContent, 'content')
+export const Content = withContext<typeof CollapsibleContentElement, CollapsibleContentProps>(
+  CollapsibleContent,
+  'content',
+)
 
-export const Trigger = withContext<
-  HTMLButtonElement,
-  Assign<HTMLStyledProps<'button'>, PolymorphicProps>
->(CollapsibleTrigger, 'trigger')
+export const Trigger = withContext<typeof CollapsibleTriggerElement, CollapsibleTriggerProps>(
+  CollapsibleTrigger,
+  'trigger',
+)
 
 export { CollapsibleContext as Context } from './collapsible-context'

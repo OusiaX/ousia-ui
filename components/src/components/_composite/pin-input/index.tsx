@@ -1,16 +1,19 @@
-import type { Ref } from 'react'
+import type { Assign } from '@ousia-ui/ark'
 import { Input } from '../../input'
 import * as StyledPinInput from './pin-input'
 
-export interface PinInputProps extends StyledPinInput.RootProps {
-  /**
-   * The number of inputs to render.
-   * @default 4
-   */
-  length?: number
-}
+export type PinInputProps = Assign<
+  StyledPinInput.RootProps,
+  {
+    /**
+     * The number of inputs to render.
+     * @default 4
+     */
+    length?: number
+  }
+>
 
-export const PinInput = (props: PinInputProps & { ref?: Ref<HTMLDivElement> }) => {
+export const PinInput = (props: PinInputProps) => {
   const { ref, children, length = 4, ...rootProps } = props
 
   return (

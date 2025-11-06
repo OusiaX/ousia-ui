@@ -8,8 +8,11 @@ import { MenuItemGroupProvider } from './use-menu-item-group-context'
 
 type OptionalItemGroupProps = Optional<ItemGroupProps, 'id'>
 
-export interface MenuItemGroupBaseProps extends OptionalItemGroupProps, PolymorphicProps {}
-export interface MenuItemGroupProps extends ComponentProps<'div'>, MenuItemGroupBaseProps {}
+export const MenuItemGroupElement = 'div' as const
+export interface MenuItemGroupProps
+  extends ComponentProps<typeof MenuItemGroupElement>,
+    OptionalItemGroupProps,
+    PolymorphicProps {}
 
 export const MenuItemGroup = (props: MenuItemGroupProps) => {
   const { ref, ...restProps } = props

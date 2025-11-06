@@ -14,13 +14,12 @@ interface RootProviderProps {
   value: UseDatePickerReturn
 }
 
-export interface DatePickerRootProviderBaseProps
-  extends RootProviderProps,
+export const DatePickerRootProviderElement = 'div' as const
+export interface DatePickerRootProviderProps
+  extends ComponentProps<typeof DatePickerRootProviderElement>,
+    RootProviderProps,
     UsePresenceProps,
     PolymorphicProps {}
-export interface DatePickerRootProviderProps
-  extends ComponentProps<'div'>,
-    DatePickerRootProviderBaseProps {}
 
 export const DatePickerRootProvider = (props: DatePickerRootProviderProps) => {
   const { ref, ...restProps } = props

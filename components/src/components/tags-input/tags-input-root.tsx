@@ -1,11 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseTagsInputProps, useTagsInput } from './use-tags-input'
 import { TagsInputProvider } from './use-tags-input-context'
 
-export interface TagsInputRootBaseProps extends UseTagsInputProps, PolymorphicProps {}
-export interface TagsInputRootProps extends Assign<ComponentProps<'div'>, TagsInputRootBaseProps> {}
+export const TagsInputRootElement = 'div' as const
+export type TagsInputRootProps = Assigns<
+  ComponentProps<typeof TagsInputRootElement>,
+  UseTagsInputProps,
+  PolymorphicProps
+>
 
 export const TagsInputRoot = (props: TagsInputRootProps) => {
   const { ref, ...restProps } = props

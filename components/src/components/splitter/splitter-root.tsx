@@ -1,11 +1,15 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import { createSplitProps } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { type UseSplitterProps, useSplitter } from './use-splitter'
 import { SplitterProvider } from './use-splitter-context'
 
-export interface SplitterRootBaseProps extends UseSplitterProps, PolymorphicProps {}
-export interface SplitterRootProps extends Assign<ComponentProps<'div'>, SplitterRootBaseProps> {}
+export const SplitterRootElement = 'div' as const
+export type SplitterRootProps = Assigns<
+  ComponentProps<typeof SplitterRootElement>,
+  UseSplitterProps,
+  PolymorphicProps
+>
 
 export const SplitterRoot = (props: SplitterRootProps) => {
   const { ref, ...restProps } = props

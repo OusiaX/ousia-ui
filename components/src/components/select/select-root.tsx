@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   PresenceProvider,
   type UsePresenceProps,
@@ -11,12 +11,13 @@ import type { ComponentProps, JSX } from 'react'
 import { type UseSelectProps, useSelect } from './use-select'
 import { SelectProvider } from './use-select-context'
 
-export interface SelectRootBaseProps<T extends CollectionItem>
-  extends UseSelectProps<T>,
-    UsePresenceProps,
-    PolymorphicProps {}
-export interface SelectRootProps<T extends CollectionItem>
-  extends Assign<ComponentProps<'div'>, SelectRootBaseProps<T>> {}
+export const SelectRootElement = 'div' as const
+export type SelectRootProps<T extends CollectionItem> = Assigns<
+  ComponentProps<typeof SelectRootElement>,
+  UseSelectProps<T>,
+  UsePresenceProps,
+  PolymorphicProps
+>
 
 const SelectImpl = <T extends CollectionItem>(props: SelectRootProps<T>) => {
   const { ref, ...restProps } = props
@@ -66,7 +67,7 @@ const SelectImpl = <T extends CollectionItem>(props: SelectRootProps<T>) => {
 }
 
 export type SelectRootComponent<P = Record<string, unknown>> = <T extends CollectionItem>(
-  props: Assign<SelectRootProps<T>, P>,
+  props: SelectRootProps<T> & P,
 ) => JSX.Element
 
 export const SelectRoot = SelectImpl as SelectRootComponent

@@ -7,12 +7,11 @@ import { MenuItemGroupProvider, type UseMenuItemGroupContext } from './use-menu-
 
 type OptionalUseMenuItemGroupContext = Optional<UseMenuItemGroupContext, 'id'>
 
-export interface MenuRadioItemGroupBaseProps
-  extends OptionalUseMenuItemGroupContext,
-    PolymorphicProps {}
+export const MenuRadioItemGroupElement = 'div' as const
 export interface MenuRadioItemGroupProps
-  extends ComponentProps<'div'>,
-    MenuRadioItemGroupBaseProps {}
+  extends ComponentProps<typeof MenuRadioItemGroupElement>,
+    OptionalUseMenuItemGroupContext,
+    PolymorphicProps {}
 
 export const MenuRadioItemGroup = (props: MenuRadioItemGroupProps) => {
   const { ref, ...restProps } = props

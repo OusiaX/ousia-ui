@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   PresenceProvider,
   type UsePresenceProps,
@@ -10,12 +10,13 @@ import type { ComponentProps } from 'react'
 import { type UseColorPickerProps, useColorPicker } from './use-color-picker'
 import { ColorPickerProvider } from './use-color-picker-context'
 
-export interface ColorPickerRootBaseProps
-  extends UseColorPickerProps,
-    UsePresenceProps,
-    PolymorphicProps {}
-export interface ColorPickerRootProps
-  extends Assign<ComponentProps<'div'>, ColorPickerRootBaseProps> {}
+export const ColorPickerRootElement = 'div' as const
+export type ColorPickerRootProps = Assigns<
+  ComponentProps<typeof ColorPickerRootElement>,
+  UseColorPickerProps,
+  UsePresenceProps,
+  PolymorphicProps
+>
 
 export const ColorPickerRoot = (props: ColorPickerRootProps) => {
   const { ref, ...restProps } = props

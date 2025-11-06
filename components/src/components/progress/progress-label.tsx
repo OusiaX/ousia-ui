@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useProgressContext } from './use-progress-context'
 
-export interface ProgressLabelProps extends ComponentProps<'label'>, PolymorphicProps {}
+export const ProgressLabelElement = 'label' as const
+export interface ProgressLabelProps
+  extends ComponentProps<typeof ProgressLabelElement>,
+    PolymorphicProps {}
 
 export const ProgressLabel = (props: ProgressLabelProps) => {
   const { ref, ...restProps } = props

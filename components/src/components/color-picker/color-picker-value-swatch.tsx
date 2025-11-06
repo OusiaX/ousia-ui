@@ -7,10 +7,11 @@ import { ColorPickerSwatchPropsProvider } from './use-color-picker-swatch-props-
 
 interface ValueSwatchProps extends Omit<SwatchProps, 'value'> {}
 
-export interface ColorPickerValueSwatchBaseProps extends ValueSwatchProps, PolymorphicProps {}
+export const ColorPickerValueSwatchElement = 'div' as const
 export interface ColorPickerValueSwatchProps
-  extends ComponentProps<'div'>,
-    ColorPickerValueSwatchBaseProps {}
+  extends ComponentProps<typeof ColorPickerValueSwatchElement>,
+    ValueSwatchProps,
+    PolymorphicProps {}
 
 export const ColorPickerValueSwatch = (props: ColorPickerValueSwatchProps) => {
   const { ref, ...restProps } = props

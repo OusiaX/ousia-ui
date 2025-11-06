@@ -1,51 +1,60 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { styled } from 'styled-system/jsx'
 import { type FieldVariantProps, field, input, textarea } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { FieldErrorText } from './field-error-text'
-import { FieldHelperText } from './field-helper-text'
+import {
+  FieldErrorText,
+  type FieldErrorTextElement,
+  type FieldErrorTextProps,
+} from './field-error-text'
+import {
+  FieldHelperText,
+  type FieldHelperTextElement,
+  type FieldHelperTextProps,
+} from './field-helper-text'
 import { FieldInput } from './field-input'
-import { FieldLabel } from './field-label'
-import { FieldRoot, type FieldRootBaseProps } from './field-root'
-import { FieldRootProvider, type FieldRootProviderBaseProps } from './field-root-provider'
-import { FieldSelect } from './field-select'
+import { FieldLabel, type FieldLabelElement, type FieldLabelProps } from './field-label'
+import { FieldRoot, type FieldRootElement, type FieldRootProps } from './field-root'
+import {
+  FieldRootProvider,
+  type FieldRootProviderElement,
+  type FieldRootProviderProps,
+} from './field-root-provider'
+import { FieldSelect, type FieldSelectElement, type FieldSelectProps } from './field-select'
 import { FieldTextarea } from './field-textarea'
 
 const { withProvider, withContext } = createStyleContext(field)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, FieldRootProviderBaseProps>, FieldVariantProps>
+  typeof FieldRootProviderElement,
+  Assign<FieldRootProviderProps, FieldVariantProps>
 >(FieldRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, FieldRootBaseProps>, FieldVariantProps>
+  typeof FieldRootElement,
+  Assign<FieldRootProps, FieldVariantProps>
 >(FieldRoot, 'root')
 
-export const ErrorText = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(FieldErrorText, 'errorText')
+export const ErrorText = withContext<typeof FieldErrorTextElement, FieldErrorTextProps>(
+  FieldErrorText,
+  'errorText',
+)
 
-export const HelperText = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(FieldHelperText, 'helperText')
+export const HelperText = withContext<typeof FieldHelperTextElement, FieldHelperTextProps>(
+  FieldHelperText,
+  'helperText',
+)
 
-export const Label = withContext<
-  HTMLLabelElement,
-  Assign<HTMLStyledProps<'label'>, PolymorphicProps>
->(FieldLabel, 'label')
+export const Label = withContext<typeof FieldLabelElement, FieldLabelProps>(FieldLabel, 'label')
 
-export const Select = withContext<
-  HTMLSelectElement,
-  Assign<HTMLStyledProps<'select'>, PolymorphicProps>
->(FieldSelect, 'select')
+export const Select = withContext<typeof FieldSelectElement, FieldSelectProps>(
+  FieldSelect,
+  'select',
+)
 
 export type InputProps = ComponentProps<typeof Input>
 export const Input = styled(FieldInput, input)

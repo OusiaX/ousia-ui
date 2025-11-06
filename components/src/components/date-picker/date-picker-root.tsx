@@ -1,4 +1,4 @@
-import { type Assign, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   PresenceProvider,
   type UsePresenceProps,
@@ -10,12 +10,13 @@ import type { ComponentProps } from 'react'
 import { type UseDatePickerProps, useDatePicker } from './use-date-picker'
 import { DatePickerProvider } from './use-date-picker-context'
 
-export interface DatePickerRootBaseProps
-  extends UseDatePickerProps,
-    UsePresenceProps,
-    PolymorphicProps {}
-export interface DatePickerRootProps
-  extends Assign<ComponentProps<'div'>, DatePickerRootBaseProps> {}
+export const DatePickerRootElement = 'div' as const
+export type DatePickerRootProps = Assigns<
+  ComponentProps<typeof DatePickerRootElement>,
+  UseDatePickerProps,
+  UsePresenceProps,
+  PolymorphicProps
+>
 
 export const DatePickerRoot = (props: DatePickerRootProps) => {
   const { ref, ...restProps } = props

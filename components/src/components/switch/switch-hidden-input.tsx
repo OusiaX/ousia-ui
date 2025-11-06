@@ -3,7 +3,10 @@ import { useFieldContext } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 import { useSwitchContext } from './use-switch-context'
 
-export interface SwitchHiddenInputProps extends ComponentProps<'input'>, PolymorphicProps {}
+export const SwitchHiddenInputElement = 'input' as const
+export interface SwitchHiddenInputProps
+  extends ComponentProps<typeof SwitchHiddenInputElement>,
+    PolymorphicProps {}
 
 export const SwitchHiddenInput = (props: SwitchHiddenInputProps) => {
   const { ref, ...restProps } = props

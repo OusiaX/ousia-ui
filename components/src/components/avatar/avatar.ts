@@ -1,36 +1,41 @@
 'use client'
-import type { Assign, PolymorphicProps } from '@ousia-ui/ark'
+import type { Assign } from '@ousia-ui/ark'
 import { type AvatarVariantProps, avatar } from 'styled-system/recipes'
-import type { ComponentProps, HTMLStyledProps } from 'styled-system/types'
+import type { ComponentProps } from 'styled-system/types'
 import { createStyleContext } from '~/utils/create-style-context'
-import { AvatarFallback } from './avatar-fallback'
-import { AvatarImage } from './avatar-image'
-import { AvatarRoot, type AvatarRootBaseProps } from './avatar-root'
-import { AvatarRootProvider, type AvatarRootProviderBaseProps } from './avatar-root-provider'
+import {
+  AvatarFallback,
+  type AvatarFallbackElement,
+  type AvatarFallbackProps,
+} from './avatar-fallback'
+import { AvatarImage, type AvatarImageElement, type AvatarImageProps } from './avatar-image'
+import { AvatarRoot, type AvatarRootElement, type AvatarRootProps } from './avatar-root'
+import {
+  AvatarRootProvider,
+  type AvatarRootProviderElement,
+  type AvatarRootProviderProps,
+} from './avatar-root-provider'
 
 const { withProvider, withContext } = createStyleContext(avatar)
 
 export type RootProviderProps = ComponentProps<typeof RootProvider>
 export const RootProvider = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, AvatarRootProviderBaseProps>, AvatarVariantProps>
+  typeof AvatarRootProviderElement,
+  Assign<AvatarRootProviderProps, AvatarVariantProps>
 >(AvatarRootProvider, 'root')
 
 export type RootProps = ComponentProps<typeof Root>
 export const Root = withProvider<
-  HTMLDivElement,
-  Assign<Assign<HTMLStyledProps<'div'>, AvatarRootBaseProps>, AvatarVariantProps>
+  typeof AvatarRootElement,
+  Assign<AvatarRootProps, AvatarVariantProps>
 >(AvatarRoot, 'root')
 
-export const Fallback = withContext<
-  HTMLSpanElement,
-  Assign<HTMLStyledProps<'span'>, PolymorphicProps>
->(AvatarFallback, 'fallback')
+export const Fallback = withContext<typeof AvatarFallbackElement, AvatarFallbackProps>(
+  AvatarFallback,
+  'fallback',
+)
 
-export const Image = withContext<
-  HTMLImageElement,
-  Assign<HTMLStyledProps<'img'>, PolymorphicProps>
->(AvatarImage, 'image')
+export const Image = withContext<typeof AvatarImageElement, AvatarImageProps>(AvatarImage, 'image')
 
 export { AvatarContext as Context } from './avatar-context'
 export type { StatusChangeDetails } from '@zag-js/avatar'

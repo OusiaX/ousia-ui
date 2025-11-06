@@ -2,8 +2,9 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useNumberInputContext } from './use-number-input-context'
 
+export const NumberInputIncrementTriggerElement = 'button' as const
 export interface NumberInputIncrementTriggerProps
-  extends ComponentProps<'button'>,
+  extends ComponentProps<typeof NumberInputIncrementTriggerElement>,
     PolymorphicProps {}
 
 export const NumberInputIncrementTrigger = (props: NumberInputIncrementTriggerProps) => {

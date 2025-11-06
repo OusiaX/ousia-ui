@@ -3,7 +3,10 @@ import type { ComponentProps } from 'react'
 import { useRadioGroupContext } from './use-radio-group-context'
 import { useRadioGroupItemPropsContext } from './use-radio-group-item-props-context'
 
-export interface RadioGroupItemTextProps extends ComponentProps<'span'>, PolymorphicProps {}
+export const RadioGroupItemTextElement = 'span' as const
+export interface RadioGroupItemTextProps
+  extends ComponentProps<typeof RadioGroupItemTextElement>,
+    PolymorphicProps {}
 
 export const RadioGroupItemText = (props: RadioGroupItemTextProps) => {
   const { ref, ...restProps } = props

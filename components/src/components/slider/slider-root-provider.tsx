@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseSliderReturn
 }
 
-export interface SliderRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const SliderRootProviderElement = 'div' as const
 export interface SliderRootProviderProps
-  extends ComponentProps<'div'>,
-    SliderRootProviderBaseProps {}
+  extends ComponentProps<typeof SliderRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const SliderRootProvider = (props: SliderRootProviderProps) => {
   const { ref, ...restProps } = props

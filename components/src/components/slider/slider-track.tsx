@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useSliderContext } from './use-slider-context'
 
-export interface SliderTrackProps extends ComponentProps<'div'>, PolymorphicProps {}
+export const SliderTrackElement = 'div' as const
+export interface SliderTrackProps
+  extends ComponentProps<typeof SliderTrackElement>,
+    PolymorphicProps {}
 
 export const SliderTrack = (props: SliderTrackProps) => {
   const { ref, ...restProps } = props

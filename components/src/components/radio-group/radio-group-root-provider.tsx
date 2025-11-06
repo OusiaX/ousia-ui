@@ -8,10 +8,11 @@ interface RootProviderProps {
   value: UseRadioGroupReturn
 }
 
-export interface RadioGroupRootProviderBaseProps extends RootProviderProps, PolymorphicProps {}
+export const RadioGroupRootProviderElement = 'div' as const
 export interface RadioGroupRootProviderProps
-  extends ComponentProps<'div'>,
-    RadioGroupRootProviderBaseProps {}
+  extends ComponentProps<typeof RadioGroupRootProviderElement>,
+    RootProviderProps,
+    PolymorphicProps {}
 
 export const RadioGroupRootProvider = (props: RadioGroupRootProviderProps) => {
   const { ref, ...restProps } = props

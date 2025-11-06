@@ -2,7 +2,10 @@ import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import type { ComponentProps } from 'react'
 import { useDialogContext } from './use-dialog-context'
 
-export interface DialogTitleProps extends ComponentProps<'h2'>, PolymorphicProps {}
+export const DialogTitleElement = 'h2' as const
+export interface DialogTitleProps
+  extends ComponentProps<typeof DialogTitleElement>,
+    PolymorphicProps {}
 
 export const DialogTitle = (props: DialogTitleProps) => {
   const { ref, ...restProps } = props

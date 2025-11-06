@@ -3,16 +3,16 @@ import type { ComponentProps } from 'react'
 import { useFileUploadContext } from './use-file-upload-context'
 import { useFileUploadItemPropsContext } from './use-file-upload-item-props-context'
 
-export interface FileUploadItemPreviewBaseProps extends PolymorphicProps {
+export const FileUploadItemPreviewElement = 'div' as const
+export interface FileUploadItemPreviewProps
+  extends ComponentProps<typeof FileUploadItemPreviewElement>,
+    PolymorphicProps {
   /**
    * The file type to match against. Matches all file types by default.
    * @default '.*'
    */
   type?: string | undefined
 }
-export interface FileUploadItemPreviewProps
-  extends ComponentProps<'div'>,
-    FileUploadItemPreviewBaseProps {}
 
 export const FileUploadItemPreview = (props: FileUploadItemPreviewProps) => {
   const { ref, ...restProps } = props

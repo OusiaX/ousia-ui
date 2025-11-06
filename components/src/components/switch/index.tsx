@@ -1,8 +1,7 @@
 import * as StyledSwitch from './switch'
+export type { RootProps as SwitchProps } from './switch'
 
-export interface SwitchProps extends StyledSwitch.RootProps {}
-
-export const Switch = (props: SwitchProps) => {
+export const Switch = (props: StyledSwitch.RootProps) => {
   const { ref, children, ...rootProps } = props
 
   return (

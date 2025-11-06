@@ -1,4 +1,4 @@
-import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { type Assigns, type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
 import {
   FieldsetProvider,
   type UseFieldsetProps,
@@ -8,8 +8,12 @@ import {
 } from '@ousia-ui/ark/utils'
 import type { ComponentProps } from 'react'
 
-export interface FieldsetRootBaseProps extends UseFieldsetProps, PolymorphicProps {}
-export interface FieldsetRootProps extends ComponentProps<'fieldset'>, FieldsetRootBaseProps {}
+export const FieldsetRootElement = 'fieldset' as const
+export type FieldsetRootProps = Assigns<
+  ComponentProps<typeof FieldsetRootElement>,
+  UseFieldsetProps,
+  PolymorphicProps
+>
 
 export const FieldsetRoot = (props: FieldsetRootProps) => {
   const { ref, ...restProps } = props
@@ -19,7 +23,10 @@ export const FieldsetRoot = (props: FieldsetRootProps) => {
     'invalid',
   ])
   const fieldset = useFieldset(useFieldsetProps)
-  const mergedProps = mergeProps<ComponentProps<'fieldset'>>(fieldset.getRootProps(), localProps)
+  const mergedProps = mergeProps<ComponentProps<typeof FieldsetRootElement>>(
+    fieldset.getRootProps(),
+    localProps,
+  )
 
   return (
     <FieldsetProvider value={fieldset}>

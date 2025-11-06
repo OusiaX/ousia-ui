@@ -4,8 +4,11 @@ import type { TriggerProps } from '@zag-js/combobox'
 import type { ComponentProps } from 'react'
 import { useComboboxContext } from './use-combobox-context'
 
-export interface ComboboxTriggerBaseProps extends TriggerProps, PolymorphicProps {}
-export interface ComboboxTriggerProps extends ComponentProps<'button'>, ComboboxTriggerBaseProps {}
+export const ComboboxTriggerElement = 'button' as const
+export interface ComboboxTriggerProps
+  extends ComponentProps<typeof ComboboxTriggerElement>,
+    TriggerProps,
+    PolymorphicProps {}
 
 export const ComboboxTrigger = (props: ComboboxTriggerProps) => {
   const { ref, ...restProps } = props

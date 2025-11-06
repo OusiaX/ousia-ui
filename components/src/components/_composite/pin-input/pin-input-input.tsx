@@ -4,8 +4,11 @@ import type { InputProps } from '@zag-js/pin-input'
 import type { ComponentProps } from 'react'
 import { usePinInputContext } from './use-pin-input-context'
 
-export interface PinInputInputBaseProps extends InputProps, PolymorphicProps {}
-export interface PinInputInputProps extends ComponentProps<'input'>, PinInputInputBaseProps {}
+export const PinInputInputElement = 'input' as const
+export interface PinInputInputProps
+  extends ComponentProps<typeof PinInputInputElement>,
+    InputProps,
+    PolymorphicProps {}
 
 export const PinInputInput = (props: PinInputInputProps) => {
   const { ref, ...restProps } = props
