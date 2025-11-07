@@ -1,0 +1,39 @@
+{
+  "name": "styled-system",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./index.mjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.mjs"
+    },
+    "./jsx": {
+      "types": "./jsx/index.d.ts",
+      "default": "./jsx/index.mjs"
+    },
+    "./css": {
+      "types": "./css/index.d.ts",
+      "default": "./css/index.mjs"
+    },
+    "./tokens": {
+      "types": "./tokens/index.d.ts",
+      "default": "./tokens/index.mjs"
+    },
+    "./patterns": {
+      "types": "./patterns/index.d.ts",
+      "default": "./patterns/index.mjs"
+    },
+    "./recipes": {
+      "types": "./recipes/index.d.ts",
+      "default": "./recipes/index.mjs"
+    },
+    "./types": {
+      "types": "./types/index.d.ts",
+      "default": "./types/index.d.ts"
+    },
+    "./*": "./*"
+  }
+}
