@@ -1,0 +1,22 @@
+import { type PolymorphicProps, ark, mergeProps } from '@ousia-ui/ark'
+import { usePresenceContext } from '@ousia-ui/ark/utils'
+import type { ComponentProps } from 'react'
+import { useHoverCardContext } from './use-hover-card-context'
+
+export const HoverCardPositionerElement = 'div' as const
+export interface HoverCardPositionerProps
+  extends ComponentProps<typeof HoverCardPositionerElement>,
+    PolymorphicProps {}
+
+export const HoverCardPositioner = (props: HoverCardPositionerProps) => {
+  const { ref, ...restProps } = props
+  const hoverCard = useHoverCardContext()
+  const mergedProps = mergeProps(hoverCard.getPositionerProps(), restProps)
+  const presence = usePresenceContext()
+
+  if (presence.unmounted) {
+    return null
+  }
+
+  return <ark.div {...mergedProps} ref={ref} />
+}

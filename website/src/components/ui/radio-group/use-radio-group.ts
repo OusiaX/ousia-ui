@@ -1,0 +1,25 @@
+import type { Optional } from '@ousia-ui/ark'
+import { useEnvironmentContext, useLocaleContext } from '@ousia-ui/ark/providers'
+import * as radio from '@zag-js/radio-group'
+import { type PropTypes, normalizeProps, useMachine } from '@zag-js/react'
+import { useId } from 'react'
+
+export interface UseRadioGroupProps
+  extends Optional<Omit<radio.Props, 'dir' | 'getRootNode'>, 'id'> {}
+export interface UseRadioGroupReturn extends radio.Api<PropTypes> {}
+
+export const useRadioGroup = (props?: UseRadioGroupProps): UseRadioGroupReturn => {
+  const id = useId()
+  const { getRootNode } = useEnvironmentContext()
+  const { dir } = useLocaleContext()
+
+  const machineProps: radio.Props = {
+    id,
+    dir,
+    getRootNode,
+    ...props,
+  }
+
+  const service = useMachine(radio.machine, machineProps)
+  return radio.connect(service, normalizeProps)
+}
